@@ -33,6 +33,7 @@ def main():
   # though I saw some bad connections so either that's repl or ISS's problem
 
   # TODO: use docstrings to print problem explanation
+  # TODO: provide a nice names for each problem rather than numeric id
   
   # Greetings
   print()
