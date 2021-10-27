@@ -1,5 +1,4 @@
 from pathlib import Path
-from time import sleep
 from problems import problems
 
 def main():
@@ -40,8 +39,9 @@ def main():
   print(main.__doc__)
 
   problem: callable
+  nprob = len(problems)
   exit_strings = {"exit", "close", "stop", "halt", "end", "cease", "no", "back"}
-  inp = input(f"Welcome to Green Book Club! Please select a Problem from 1..{len(problems)} or ask for all <problems>: ").strip().lower()
+  inp = input(f"Welcome to Green Book Club! Please select a Problem from 1..{nprob} or ask for all <problems>: ").strip().lower()
   examples, prev_n = False, None
   
   if Path("./printout.txt").is_file():
@@ -49,11 +49,10 @@ def main():
       printout = [line.rstrip() for line in o]
   
   while inp not in exit_strings:
-    sleep(0.5)
     try:
-      if not examples and inp.isdecimal() and (int(inp) < 1 or int(inp) > len(problems)):
+      if not examples and inp.isdecimal() and (int(inp) < 1 or int(inp) > nprob):
         print()
-        inp = input(f"Please select a Problem from 1..{len(problems)}: ").strip().lower()
+        inp = input(f"Please select a Problem from 1..{nprob}: ").strip().lower()
         continue
       if examples:
         inp = input("Press enter/return to see another example: ").strip().lower()
@@ -91,7 +90,7 @@ def main():
         for line in printout: print(line)
       if not examples:
         print()
-        inp = input(f"Please select a Problem from 1..{len(problems)}: ").strip().lower()
+        inp = input(f"Please select a Problem from 1..{nprob}: ").strip().lower()
     except (KeyboardInterrupt, SystemExit):
       print()
       input("Exiting. Please press enter/return to finalise program exit. ")
