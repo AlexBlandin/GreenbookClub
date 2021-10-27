@@ -12,6 +12,25 @@ def bastr(arr, sep=" "): # Because join only takes arrays of strings
   else: return astr(arr, sep)
 
 def p1(explain=True, n=20):
+  """
+  Problem 1.1
+    Given a list of n numbers, return/print out a new list
+    containing all the even elements of the original list,
+    followed by all the odd elements of the original list.
+    So long as it is <evens> followed by <odds>, they can be in any order.
+
+     51 42 43 67 46
+     > 42 46 51 43 67
+
+  Problem 1.2
+    Extend Problem 1.1, by formatting your outputs, namely
+    the output evens are in ascending order (2, 4, 6),
+    and the output odds are in descending order (5, 3, 1).
+
+     51 42 43 67 46
+     > 42 46 67 51 43
+  """
+  
   biggest_number = 99 # random, so might not see
   numbers = [randint(0, biggest_number) for _ in range(n)]
 
@@ -74,6 +93,12 @@ def p1(explain=True, n=20):
 
 
 def p2(explain=True, n=10):
+  """
+  Problem 2
+    Given a matrix of size n*n, where the elements are either 1 or 0,
+    find the largest "rectangle" where every element is 1.
+  """
+  
   matrix = [[randint(0, 1) for _ in range(n)] for _ in range(n)]
   counter = 0
 
@@ -202,6 +227,14 @@ def p2(explain=True, n=10):
     print(" There was nothing in the matrix")
 
 def p3(explain=True, n=10):
+  """
+  Problem 3
+    Given a list of n integers, find all pairs that sum to zero.
+
+     -9 3 9 0 -3
+     > (9, -9) (3, -3)
+  """
+  
   biggest_number = 9
   numbers = [randint(-biggest_number, biggest_number) for _ in range(n)]
   numbers = numbers + [-x for x in numbers] + [0]*int(n/2)
@@ -245,6 +278,20 @@ def p3(explain=True, n=10):
   print()
 
 def p4(explain=True, n=10):
+  """
+  Problem 4
+    Extend Problem 3 such that you find all sets of 3 integers that sum to zero.
+
+     0 9 0 0 2
+     > (0, 0, 0)
+
+     -5 -4 4 7 0
+     > (-4, 0, 4)
+
+     -9 0 -3 -3 3 -5 0 0 5 2
+     > (-5, 0, 5) (-5, 2, 3) (-3, 0, 3) (0, 0, 0)
+  """
+  
   biggest_number = 9
   numbers = [randint(-biggest_number, biggest_number) for _ in range(n)]
   numbers = numbers + [-x for x in numbers] + [0]*n # get useful examples
@@ -270,6 +317,34 @@ def p4(explain=True, n=10):
   # " ".join((["(0, 0, 0)"] if numbers.count(0) > 3 else []) + [str(c) for c in filter(lambda c: sum(c)==0, combinations(sorted(list(set(numbers))), 3))])
 
 def p5(explain=True, n=7):
+  """
+  Problem 5
+    Given an input containing parenthesis, write a function to decide
+    if the parenthesis are matched. That is, for every opening parenthesis
+    there must be a unique corresponding closing parenthesis and vice versa.
+
+     (()())()
+     ? Yes
+
+     ()(())(())(())()
+     ? True
+
+     (print)((Google())Green)(((Book)))
+     ? Yes
+
+     d)(f(*o')F))r
+     ? No
+
+     print(Book)()(())
+     ? Yes
+
+     (Hello)(()(m)ain)))
+     ? No
+
+     (Hello)(((int))(H)ello)(print)(())((()))
+     ? Yes
+  """
+  
   s = ""
   lexicon = ["Hello", "world", "main", "int", "print", "lithp", "Google", "Green", "Book"]
 
@@ -336,6 +411,11 @@ def p5(explain=True, n=7):
   print(f" {'Yes' if stack == 0 and matching else 'No'}")
 
 def p6(explain=True, n=100):
+  """
+  Problem 6
+    Given 100 open doors, how many doors are left open if you were to close every other door, then open/close (toggle) every third door, then every fourth door, and so on until you open/close the final door?
+  """
+  
   print()
   print("Problem 6")
   print()
@@ -347,6 +427,11 @@ def p6(explain=True, n=100):
   print(f" {floor(sqrt(100))} left open")
 
 def p7(explain=True, n=100):
+  """
+  Problem 7
+    Given any n doors, how many would be left open? Can you express this as an equation of d(n) = ???
+  """
+  
   print()
   print("Problem 7")
   print()
@@ -358,6 +443,11 @@ def p7(explain=True, n=100):
   print(f" {floor(sqrt(n))} left open")
 
 def p8(explain=True, n=10):
+  """
+  Problem 8
+    Given a full stack and an empty stack, how can you sort the first stack (smallest items on top) using only standard operations and the second stack? How fast can you go?
+  """
+  
   biggest_number = 9
   numbers = [randint(0, biggest_number) for _ in range(n)]
   numbers = sample(numbers, n)
@@ -377,6 +467,11 @@ def p8(explain=True, n=10):
   print(" []")
 
 def p9(explain=True, n=10):
+  """
+  Problem 9
+    Sort your full stack, but this time you can have as many additional stacks as you want. Can you go faster?
+  """
+  
   biggest_number = 9
   numbers = [randint(0, biggest_number) for _ in range(n)]
   numbers = sample(numbers, n)
@@ -402,6 +497,11 @@ def p9(explain=True, n=10):
   print(" []")
 
 def p10(explain=True, n=5):
+  """
+  Problem 10
+    Given a positive integer, print the next smallest and next largest numbers that have the same number of 1 bits in their binary representation. Assume it is even.
+  """
+  
   number = [1]*n + [0]*int(n*0.5) # optional fudge factor for num 0s != 1s
   number = "".join([str(c) for c in (sample(number, len(number)) + [0])])
   number = int(number, 2) # base-2
@@ -422,6 +522,11 @@ def p10(explain=True, n=5):
   print(f"  {lower(number):b} < {number:b} < {higher(number):b}")
 
 def p11(explain=True, n=5):
+  """
+  Problem 11
+    What if you only assume it is a positive integer?
+  """
+  
   number = [1]*n + [0]*int(n*0.5) # optional fudge factor for num 0s != 1s
   number = "".join([str(c) for c in (sample(number, len(number)))])
   number = int(number, 2) # base-2
@@ -444,25 +549,161 @@ def p11(explain=True, n=5):
   print(f" {lower(number)} < {number} < {higher(number)}")
   print(f" {lower(number):b} < {number:b} < {higher(number):b}")
 
-# # from num2words import num2words
-# def p12(explain=True, n=None):
-#   if n == None:
-#     n = randint(-2 * 10**9, 2 * 10**9)
-#
-#   print()
-#   print("Problem 12")
-#   if explain:
-#     print(f"For example, given: ")
-#   print()
-#   print(f" {n}")
-#   print()
-#   input("Press enter/return to see the result: ")
-#   print()
-#
-#   print(num2words(n, lang="en_GB").replace(" and ", ", and "))
+# from num2words import num2words
+def p12(explain=True, n=None):
+  """
+  Problem 12
+    Given any number in the range ± 2 Billion, represent it as a string of natural written/spoken English.
 
+      1234
+      > one thousand, two hundred, and thirty-four
 
-def p19(explain=True, n=15):
+      -92435
+      > minus ninety-two thousand, four hundred, and thirty-five
+  """
+
+  if n == None:
+    n = randint(-2 * 10**9, 2 * 10**9)
+
+  print()
+  print("Problem 12")
+  if explain:
+    print(f"For example, given: ")
+  print()
+  print(f" {n}")
+  print()
+  input("Press enter/return to see the result: ")
+  print()
+
+  # print(num2words(n, lang="en_GB").replace(" and ", ", and "))
+
+def p13(explain=True, n=None):
+  """
+  Problem 13
+    You have a calculator that only has working addition and negation buttons (not subtraction, as in 4 to -4, and -4 to 4).
+
+      A: Define subtraction using any or all of those two operations.
+
+      B: Define multiplication using any or all of those two operations and subtraction.
+
+      C: Define division using any or all of of those two operations, as well as multiplication and subtraction.
+
+      (Hint, you may not need every available operations for each part.)
+  """
+  return
+
+def p14(explain=True, n=10):
+  """
+  Problem 14.1
+    An array a[] might have "magix indices", which is when a[i] == i. If it is unsorted, what is the most efficient algorithm?
+
+  Problem 14.2
+    And if a[] was sorted?
+  """
+  return
+
+def p15(explain=True, n=5):
+  """
+  Problem 15
+    Given a matrix of sizes NxM, create a new matrix of the same size where all rows and columns containing a 0 in the original matrix are themselves now all 0s.
+
+    What's the complexity in both time and space of your algorithm? Can you go faster, or use less space?
+    Can you do it without copying the matrix? (Don't try to be cheeky either.)
+
+      1,2,3,4
+      1,0,8,7
+      4,4,0,2
+      6,7,8,9
+      1,2,3,4
+
+    > 1,0,0,4
+      0,0,0,0
+      0,0,0,0
+      6,0,0,9
+      1,0,0,4
+  """
+  return
+
+def p16(explain=True, n=5):
+  """
+  Problem 16
+    Given an NxM matrix, describe an algorithm to search for a given value. The following properties hold for the matrix:
+
+      1. Each row is comprised of integers sorted in ascending order (left to right)
+      2. The first value on a given row is strictly greater than the last value of the row before it.
+
+      For example, given
+
+        1,   3,  5,  7
+        10, 11, 16, 20
+        23, 30, 34, 50
+
+        ? 3
+        > true
+
+      How fast can you go? Why?
+  """
+  return
+
+def p17(explain=True, n=5):
+  """
+  Problem 17.1
+    Given the positive integer n, determine how many 2s appear in the numbers between 0 and n.
+
+      25
+      > 9
+      ? 2, 12, 20, 21, 22, 23, 24, 25
+
+    Assuming n < 10000, how fast can you go?
+
+  Problem 17.2
+    n is simply a positive integer. How fast can you go?
+  """
+  return
+
+def p18(explain=True, n=5):
+  """
+  Problem 18.1
+    Given a list of daily temperatures, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature.
+
+    If there are no future days for which this is possible, that day is assigned the value 0.
+
+      73, 74, 75, 71, 69, 72, 76, 73
+     > 1,  1,  4,  2,  1,  1,  0,  0
+
+  Problem 18.2
+    Can you do this in linear time?
+    How much space does this require? Can you reduce that asymptotically?
+  """
+  return
+
+def p19(explain=True, n=5):
+  """
+  Problem 19
+    Given a matrix consisting of 0s and 1s, we may choose any number of columns in the matrix and flip every cell in that column.
+
+    Flipping a cell changes the value of that cell from 0 to 1 or from 1 to 0.
+
+    Return the maximum number of rows that have all values equal (all 1s or all 0s) for any number of flips.
+
+      0, 1
+      1, 1
+      > 1
+      ? No flips required, the bottom row is the only one with equal values.
+
+      0, 1
+      1, 0
+      > 2
+      ? Flip the first column, both rows now count.
+
+      0, 0, 0
+      0, 0, 1
+      1, 1, 0
+      > 2
+      ? Flip the first two columns, the last two rows now count.
+  """
+
+def p20(explain=True, n=15):
   # temperature is in Kelvin (max necessary for randint gen.)
   max_temp = 100
 
@@ -490,3 +731,5 @@ def p19(explain=True, n=15):
     tbs |= 2**t
 
   print(f" {astr(out)}")
+
+problems = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p20]

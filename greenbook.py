@@ -1,8 +1,27 @@
 from pathlib import Path
 from time import sleep
-import problems
+from problems import problems
 
 def main():
+  """
+   ██████╗ ██████╗ ███████╗███████╗███╗   ██╗  ██████╗  ██████╗  ██████╗ ██╗  ██╗
+  ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║  ██╔══██╗██╔═══██╗██╔═══██╗██║ ██╔╝
+  ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║  ██████╔╝██║   ██║██║   ██║█████╔╝
+  ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║  ██╔══██╗██║   ██║██║   ██║██╔═██╗
+  ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║  ██████╔╝╚██████╔╝╚██████╔╝██║  ██╗
+   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+  
+   ██████╗██╗     ██╗   ██╗██████╗
+  ██╔════╝██║     ██║   ██║██╔══██╗
+  ██║     ██║     ██║   ██║██████╔╝
+  ██║     ██║     ██║   ██║██╔══██╗
+  ╚██████╗███████╗╚██████╔╝██████╔╝
+   ╚═════╝╚══════╝ ╚═════╝ ╚═════╝
+  
+  Source @ https://replit.com/@alexblandin/Greenbook-Club
+  (But I don't recommend using 'em for your solutions.)
+  """
+  
   #
   # I do not recommend looking at this for optimal algorithms,
   # they're likely whatever I could write quickly to solve it.
@@ -13,26 +32,27 @@ def main():
   # doesn't need to be on repl, though that would likely be easiest for me
   # though I saw some bad connections so either that's repl or ISS's problem
 
+  # TODO: use docstrings to print problem explanation
   
   # Greetings
   print()
-  if Path("./printout.txt").is_file():
-    with open("printout.txt") as o:
-      for line in o:
-        print(line.rstrip())
-    print()
+  print(main.__doc__)
 
   problem: callable
-  ps = [problems.p1, problems.p2, problems.p3, problems.p4, problems.p5, problems.p6, problems.p7, problems.p8, problems.p9, problems.p10, problems.p11, problems.p19]
   exit_strings = {"exit", "close", "stop", "halt", "end", "cease", "no", "back"}
-  inp = input(f"Welcome to Green Book Club! Please select a Problem from 1..{len(ps)}: ").strip().lower()
+  inp = input(f"Welcome to Green Book Club! Please select a Problem from 1..{len(problems)} or ask for all <problems>: ").strip().lower()
   examples, prev_n = False, None
+  
+  if Path("./printout.txt").is_file():
+    with open("printout.txt") as o:
+      printout = [line.rstrip() for line in o]
+  
   while inp not in exit_strings:
     sleep(0.5)
     try:
-      if not examples and inp.isdecimal() and (int(inp) < 1 or int(inp) > len(ps)):
+      if not examples and inp.isdecimal() and (int(inp) < 1 or int(inp) > len(problems)):
         print()
-        inp = input(f"Please select a Problem from 1..{len(ps)}: ").strip().lower()
+        inp = input(f"Please select a Problem from 1..{len(problems)}: ").strip().lower()
         continue
       if examples:
         inp = input("Press enter/return to see another example: ").strip().lower()
@@ -48,7 +68,7 @@ def main():
           inp = input("Press enter/return to see another example: ").strip().lower()
         examples = False
       if inp.isdecimal():
-        problem = ps[int(inp)-1]
+        problem = problems[int(inp)-1]
         inp = input("Please choose a value for n. If you press enter it will pick a reasonable default: ").strip().lower()
         prev_n = None
         if inp != "" and inp.isdecimal():
@@ -63,12 +83,14 @@ def main():
         print()
         examples = True
       elif inp == "" and problem == None:
-        for p in ps: p()
+        for p in problems: p()
       elif inp == "" and problem != None:
         problem()
+      elif inp in {"problems", "all", "explain", "help"}:
+        for line in printout: print(line)
       if not examples:
         print()
-        inp = input(f"Please select a Problem from 1..{len(ps)}: ").strip().lower()
+        inp = input(f"Please select a Problem from 1..{len(problems)}: ").strip().lower()
     except (KeyboardInterrupt, SystemExit):
       print()
       input("Exiting. Please press enter/return to finalise program exit. ")
