@@ -8,21 +8,19 @@ def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
 
 def p1(explain=True, n=20):
   """
-  Problem 1.1:
+  Odds and Evens  
   
   Given a list of n numbers, return a new list containing all the even elements
   of the original list, followed by all the odd elements of the original list.
   So long as it is <evens> followed by <odds>, they can be in any order.
-
+  
     ? 51 42 43 67 46
     = 42 46 51 43 67
-
-  Problem 1.2:
   
-  Extend Problem 1.1 by formatting your outputs, namely the output evens are in
+  Now, extend this by formatting your outputs, namely the output evens are in
   ascending order `(2, 4, 6)`, and the output odds are in descending order
   `(5, 3, 1)`.
-
+  
     ? 51 42 43 67 46
     = 42 46 67 51 43
   """

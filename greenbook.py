@@ -1,4 +1,3 @@
-from pathlib import Path
 from problems import problems
 
 def main():
@@ -18,7 +17,7 @@ def main():
    ╚═════╝╚══════╝ ╚═════╝ ╚═════╝
   
   Source @ https://replit.com/@alexblandin/Greenbook-Club
-  (But I don't recommend using 'em for your solutions.)
+  (But I don't recommend using it for your solutions.)
   """
   
   #
@@ -31,7 +30,7 @@ def main():
   # doesn't need to be on repl, though that would likely be easiest for me
   # though I saw some bad connections so either that's repl or ISS's problem
 
-  # TODO: use docstrings to print problem explanation
+  # TODO: use docstrings to print nice problem explanations inline
   # TODO: provide a nice names for each problem rather than numeric id
   
   # Greetings
@@ -41,18 +40,14 @@ def main():
   problem: callable
   nprob = len(problems)
   exit_strings = {"exit", "close", "stop", "halt", "end", "cease", "no", "back"}
-  inp = input(f"Welcome to Green Book Club! Please select a Problem from 1..{nprob} or ask for all <problems>: ").strip().lower()
+  inp = input(f"Welcome to Green Book Club! Please select a Problem or ask for all <problems>: ").strip().lower()
   examples, prev_n = False, None
-  
-  if Path("./printout.txt").is_file():
-    with open("printout.txt") as o:
-      printout = [line.rstrip() for line in o]
   
   while inp not in exit_strings:
     try:
       if not examples and inp.isdecimal() and (int(inp) < 1 or int(inp) > nprob):
         print()
-        inp = input(f"Please select a Problem from 1..{nprob}: ").strip().lower()
+        inp = input(f"Please select a Problem: ").strip().lower()
         continue
       if examples:
         inp = input("Press enter/return to see another example: ").strip().lower()
@@ -87,10 +82,10 @@ def main():
       elif inp == "" and problem != None:
         problem()
       elif inp in {"problems", "all", "explain", "help"}:
-        for line in printout: print(line)
+        for p in problems: print(p.__doc__)
       if not examples:
         print()
-        inp = input(f"Please select a Problem from 1..{nprob}: ").strip().lower()
+        inp = input(f"Please select a Problem: ").strip().lower()
     except (KeyboardInterrupt, SystemExit):
       print()
       input("Exiting. Please press enter/return to finalise program exit. ")
