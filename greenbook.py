@@ -1,4 +1,4 @@
-from problems import problems
+from problems import problems, name
 
 def main():
   """

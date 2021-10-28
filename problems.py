@@ -6,9 +6,27 @@ def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
   if blocky: return "".join(["█" if a else " " for a in arr])
   else: return sep.join([str(a) for a in arr])
 
+def name(p: callable):
+  return p.__doc__.splitlines()[0]
+
+def desc(p: callable, extended = False):
+  return p.__doc__.split("---")[int(extended)]
+
+def main_p(p: callable, explain=True):
+  if explain:
+    print(desc(p))
+  else:
+    print(name(p))
+    
+def extended_p(p: callable, explain=True):
+  if explain:
+    print(desc(p, extended=True))
+  else:
+    print(name(p), "extended")
+
 def p1(explain=True, n=20):
   """
-  Odds and Evens  
+  Odds and Evens
   
   Given a list of n numbers, return a new list containing all the even elements
   of the original list, followed by all the odd elements of the original list.
@@ -16,7 +34,7 @@ def p1(explain=True, n=20):
   
     ? 51 42 43 67 46
     = 42 46 51 43 67
-  
+  ---
   Now, extend this by formatting your outputs, namely the output evens are in
   ascending order `(2, 4, 6)`, and the output odds are in descending order
   `(5, 3, 1)`.
@@ -28,66 +46,34 @@ def p1(explain=True, n=20):
   biggest_number = 99 # random, so might not see
   numbers = [randint(0, biggest_number) for _ in range(n)]
 
+  main_p(p1, explain)
+  print(f"For example, a list of {n} elements might be: ")
+  print(f" {join(numbers)}")
   print()
-  print("Problem 1.1")
-  if explain:
-    print(f"For example, a list of {n} elements might be: ")
+  input("Press enter/return to see the result: ")
+  odd, even = lambda x: not x%2, lambda x: x%2
+  odds, evens = filter(odd, numbers), filter(even, numbers)
+  print("", " ".join(evens), " ".join(odds))
   print()
+  input("Press enter/return to see the extended problem: ")
+  
+  extended_p(p1, explain)
+  print(f"For example, a list of {n} elements might be: ")
   print(f" {join(numbers)}")
   print()
   input("Press enter/return to see the result: ")
   
-  print()
-  odds = {}
-  for num in numbers:
-    if num % 2:
-      odds[num] = odds.get(num, 0) + 1 # not using setdefault, :shrug:
-    else:
-      print(num, end="")
-
-  for num in odds:
-    for _ in range(odds[num]):
-      print(num, end="")
-  print()
-  print()
-  input("Press enter/return to see Problem 1.2 ")
-
-  print()
-  print("Problem 1.2")
-  if explain:
-    print(f"For example, a list of {n} elements might be: ")
-  print()
-  print(f" {join(numbers)}")
-  print()
-  input("Press enter/return to see the result: ")
-  
-  # Timsort is O(n log n) at worst (merge), O(n) at best (insertion/reverse)
-  # So we have best case O(n), average O(n log n/2), and worst case O(n log n)
+  # Timsort is O(n log n) at worst (merge), O(n) at best (insertion/reverse) So
+  # we have best case O(n), average O(n log n/2), and worst case O(n log n)
   # Where roughly exact is O(n log nr) where r is the ratio odds & evens >= 0.5
   # We can intuitively see the speedup, as we don't "merge" back together for
-  # that final step, which is the benefit of having two disjoint halves on average.
-  # Otherwise, we are bound to the larger of the two, so the "significant portion"
-  # of the ratio between odds and evens (the 7 of 7:3 as 0.7) gives O(n log nr).
-  odds, evens = {}, {}
-  for num in numbers:
-    if num % 2:
-      odds[num] = odds.get(num, 0) + 1
-    else:
-      evens[num] = evens.get(num, 0) + 1
-
-  print()
-  for num in sorted(evens):
-    for _ in range(evens[num]):
-      print(num, end=" ")
-
-  for num in sorted(odds, reverse=True):
-    for _ in range(odds[num]):
-      print(num, end=" ")
-  print()
-
-
-
-
+  # that final step, which is the benefit of having two disjoint halves on
+  # average. Otherwise, we are bound to the larger of the two, so the
+  # "significant portion" of the ratio between odds and evens (the 7 of 7:3 as
+  # 0.7) gives O(n log nr).
+  odds, evens = sorted(odds, reverse=True), sorted(evens)
+  print("", " ".join(evens), " ".join(odds))
+  
 def p3(explain=True, n=10):
   """
   Problem 3:
