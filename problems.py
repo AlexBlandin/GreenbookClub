@@ -2,14 +2,9 @@ from math import log10, log2, ceil, floor, sqrt
 from random import randint, sample
 from itertools import combinations
 
-BLOCKY_ASTR = True
-
-def astr(arr, sep=" "): # Because join only takes arrays of strings
-  return sep.join([str(a) for a in arr])
-
-def bastr(arr, sep=" "): # Because join only takes arrays of strings
-  if BLOCKY_ASTR: return "".join(["█" if a == 1 else " " for a in arr])
-  else: return astr(arr, sep)
+def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
+  if blocky: return "".join(["█" if a else " " for a in arr])
+  else: return sep.join([str(a) for a in arr])
 
 def p1(explain=True, n=20):
   """
@@ -40,7 +35,7 @@ def p1(explain=True, n=20):
   if explain:
     print(f"For example, a list of {n} elements might be: ")
   print()
-  print(f" {astr(numbers)}")
+  print(f" {join(numbers)}")
   print()
   input("Press enter/return to see the result: ")
   
@@ -64,7 +59,7 @@ def p1(explain=True, n=20):
   if explain:
     print(f"For example, a list of {n} elements might be: ")
   print()
-  print(f" {astr(numbers)}")
+  print(f" {join(numbers)}")
   print()
   input("Press enter/return to see the result: ")
   
@@ -115,7 +110,7 @@ def p3(explain=True, n=10):
   if explain:
     print(f"For example, a list of {n} elements might be: ")
   print()
-  print(f" {astr(numbers)}")
+  print(f" {join(numbers)}")
   print()
   input("Press enter/return to see the result: ")
   print()
@@ -173,7 +168,7 @@ def p4(explain=True, n=10):
   if explain:
     print(f"For example, a list of {n} elements might be: ")
   print()
-  print(f" {astr(numbers)}")
+  print(f" {join(numbers)}")
   print()
   input("Press enter/return to see the result: ")
   print()
@@ -580,7 +575,7 @@ def p18(explain=True, n=15):
   if explain:
     print(f"For example, a list of {n} elements might be: ")
   print()
-  print(f" {astr(sam)}")
+  print(f" {join(sam)}")
   print()
   input("Press enter/return to see the result: ")
 
@@ -595,7 +590,7 @@ def p18(explain=True, n=15):
     mrs[t] = i
     tbs |= 2**t
 
-  print(f" {astr(out)}")
+  print(f" {join(out)}")
 
 def p19(explain=True, n=5):
   """
@@ -663,7 +658,7 @@ def p2(explain=True, n=10):
   above, rects, graveyard = [set() for _ in range(n)], {}, set()
   for j, row in enumerate(matrix):
     print("  " + str(j).zfill(ceil(log10(max(n, 1)))), end="")
-    print(bastr(row), end=" ")
+    print(join(row, blocky=True), end=" ")
     if no_point(0, j):
       print()
       continue # finish early, we have the largest
@@ -756,7 +751,7 @@ def p2(explain=True, n=10):
     print("  #" + "".join([str(i) for i in range(start[0],finish[0]+1)]))
     for i, row in enumerate(matrix[start[1]:finish[1]+1], start=start[1]): # just to make sure we're not crazy
       print("  " + str(i).zfill(ceil(log10(max(finish[1], 1)))), end="")
-      print(bastr(row[start[0]:finish[0]+1])) # visually inspect
+      print(join(row[start[0]:finish[0]+1], blocky=True)) # visually inspect
   else:
     print(" There was nothing in the matrix")
 
