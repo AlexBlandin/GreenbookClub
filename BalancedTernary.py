@@ -97,4 +97,5 @@ def main():
     r = a * (b - c)
     print("a * (b - c):", r.to_int(), r)
  
-main()
+if __name__ == "__main__":
+  main()

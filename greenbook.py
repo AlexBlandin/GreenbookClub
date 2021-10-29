@@ -36,11 +36,12 @@ class Greenbook(Cmd):
   to make a messy printout with large n.
   """
   prompt = "greenbook >"
-  explain, problems = {}, [do_odds_and_evens, do_submatrix, do_zerosum_game, do_lispy_business, do_door_problem, do_sorted_stacking, do_binary_pals, do_say_a_word, do_calculate, do_magic_indices, do_zero_the_matrix, do_matrix_search, do_matrix_revolve, do_too_many_twos, do_top_temps, do_matrix_flip]
+  explain, problems = {}, []
   
   def preloop(self):
     for problem in self.problems:
       self.explain[problem] = True # We only set once, so if you want an explanation after, use help
+    self.problems = [self.do_odds_and_evens, self.do_submatrix, self.do_zerosum_game, self.do_lispy_business, self.do_door_problem, self.do_sorted_stacking, self.do_binary_pals, self.do_say_a_word, self.do_calculate, self.do_magic_indices, self.do_zero_the_matrix, self.do_matrix_search, self.do_matrix_revolve, self.do_too_many_twos, self.do_top_temps, self.do_matrix_flip]
   
   # def precmd(self, line):
   #   pass
