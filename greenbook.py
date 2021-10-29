@@ -35,7 +35,7 @@ class Greenbook(Cmd):
   "problem 15"... I recommend you don't go too large, since the terminals tend
   to make a messy printout with large n.
   """
-  prompt = "greenbook >"
+  prompt = "📗 "
   explain, problems = {}, []
   
   def preloop(self):
@@ -52,6 +52,7 @@ class Greenbook(Cmd):
   # TODO: use docstrings to print nice problem explanations inline
   
   def do_exit(self, *_):
+    """What do you think it does?"""
     return True
   
   def do_odds_and_evens(self, n=20):
