@@ -11,20 +11,8 @@ def name(p: callable): return p.__doc__.splitlines()[0]
 
 def desc(p: callable, extended = False): return p.__doc__.split("---")[int(extended)]
 
-def main_p(p: callable, explain=True):
-  if explain:
-    print(desc(p))
-  else:
-    print(name(p))
-    
-def extended_p(p: callable, explain=True):
-  if explain:
-    print(desc(p, extended=True))
-  else:
-    print(name(p), "extended")
-
 class Greenbook(Cmd):
-  prompt = """
+  intro = """
    ██████╗ ██████╗ ███████╗███████╗███╗   ██╗  ██████╗  ██████╗  ██████╗ ██╗  ██╗
   ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║  ██╔══██╗██╔═══██╗██╔═══██╗██║ ██╔╝
   ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║  ██████╔╝██║   ██║██║   ██║█████╔╝
@@ -39,24 +27,28 @@ class Greenbook(Cmd):
   ╚██████╗███████╗╚██████╔╝██████╔╝
    ╚═════╝╚══════╝ ╚═════╝ ╚═════╝
   
-  Source @ https://replit.com/@alexblandin/Greenbook-Club
-  (But I don't recommend using it for your solutions.)
+  Welcome to Green Book Club! Please select a problem or type "help" or "?" for the list of problems.
   """
+  prompt = "greenbook >"
+  explain, problems = {}, [do_p1, do_p2, do_p3, do_p4, do_p5, do_p6, do_p8, do_p10, do_p12, do_p13, do_p14, do_p15, do_p16, do_p17, do_p18, do_p19]
   
-  #
-  # I do not recommend looking at this for optimal algorithms,
-  # they're likely whatever I could write quickly to solve it.
-  #
-
-  # @greenbook and @greenbookclub seem to be available
-  # post as Week-3.GreenBookClub.repl.run or something?
-  # doesn't need to be on repl, though that would likely be easiest for me
-  # though I saw some bad connections so either that's repl or ISS's problem
+  def preloop(self):
+    for problem in self.problems:
+      self.explain[problem] = True
+  
+  # def precmd(self, line):
+  #   pass
+  
+  # def postcmd(self, stop, line):
+  #   return stop
 
   # TODO: use docstrings to print nice problem explanations inline
   # TODO: provide a nice names for each problem rather than numeric id
-
-  def p1(self, n=20):
+  
+  def do_exit(self, *_):
+    return True
+  
+  def do_p1(self, n=20):
     """
     Odds and Evens
     
@@ -78,7 +70,7 @@ class Greenbook(Cmd):
     biggest_number = 99 # random, so might not see
     numbers = [randint(0, biggest_number) for _ in range(n)]
 
-    main_p(p1, explain)
+    print(name(self.do_p1))
     print(f"For example, a list of {n} elements might be: ")
     print(f" {join(numbers)}")
     print()
@@ -89,7 +81,7 @@ class Greenbook(Cmd):
     print()
     input("Press enter/return to see the extended problem: ")
     
-    extended_p(p1, explain)
+    print(name(self.do_p1), "extended")
     print(f"For example, a list of {n} elements might be: ")
     print(f" {join(numbers)}")
     print()
@@ -106,7 +98,9 @@ class Greenbook(Cmd):
     odds, evens = sorted(odds, reverse=True), sorted(evens)
     print("", " ".join(evens), " ".join(odds))
     
-  def p3(self, n=10):
+    self.explain[self.do_p1] = False
+    
+  def do_p3(self, n=10):
     """
     Problem 3:
     
@@ -122,9 +116,8 @@ class Greenbook(Cmd):
     numbers = sample(sample(numbers, 2*n), n)
 
     print()
-    print("Problem 3")
-    if explain:
-      print(f"For example, a list of {n} elements might be: ")
+    print(name(self.do_p3))
+    print(f"For example, a list of {n} elements might be: ")
     print()
     print(f" {join(numbers)}")
     print()
@@ -157,8 +150,10 @@ class Greenbook(Cmd):
     else:
       print("No pairs in the list", end="")
     print()
+    
+    self.explain[self.do_p3] = False
 
-  def p4(self, n=10):
+  def do_p4(self, n=10):
     """
     Problem 4:
     
@@ -180,9 +175,8 @@ class Greenbook(Cmd):
     numbers = sample(sample(numbers, 2*n), n) # oversample, then get n, for more repeats
 
     print()
-    print("Problem 4")
-    if explain:
-      print(f"For example, a list of {n} elements might be: ")
+    print(name(self.do_p4))
+    print(f"For example, a list of {n} elements might be: ")
     print()
     print(f" {join(numbers)}")
     print()
@@ -197,8 +191,10 @@ class Greenbook(Cmd):
 
     # ([print("(0, 0, 0)", end = " ") if numbers.count(0) > 3 else None]+[print(c, end = " ") for c in combinations(sorted(list(set(numbers))), 3) if sum(c) == 0]+[print()]) * 0
     # " ".join((["(0, 0, 0)"] if numbers.count(0) > 3 else []) + [str(c) for c in filter(lambda c: sum(c)==0, combinations(sorted(list(set(numbers))), 3))])
+    
+    self.explain[self.do_p4] = False
 
-  def p5(self, n=7):
+  def do_p5(self, n=7):
     """
     Problem 5:
     
@@ -292,8 +288,10 @@ class Greenbook(Cmd):
     print()
     print(f" {s}")
     print(f" {'Yes' if stack == 0 and matching else 'No'}")
+    
+    self.explain[self.do_p5] = False
 
-  def p6(self, n=100):
+  def do_p6(self, n=100):
     """
     Problem 6:
 
@@ -308,7 +306,7 @@ class Greenbook(Cmd):
     """
     
     print()
-    print("Problem 6")
+    print(name(self.do_p6))
     print()
     print(f" 100 doors")
     print()
@@ -319,7 +317,7 @@ class Greenbook(Cmd):
     
     
     print()
-    print("Problem 6.5")
+    print(name(self.do_p6), "extended")
     print()
     print(f" {n} doors")
     print()
@@ -327,8 +325,10 @@ class Greenbook(Cmd):
     print()
 
     print(f" {floor(sqrt(n))} left open")
+    
+    self.explain[self.do_p6] = False
 
-  def p8(self, n=10):
+  def do_p8(self, n=10):
     """
     Problem 8:
 
@@ -347,9 +347,8 @@ class Greenbook(Cmd):
     numbers = sample(numbers, n)
 
     print()
-    print("Problem 8")
-    if explain:
-      print(f"For example, a stack of {n} items might be: ")
+    print(name(self.do_p8))
+    print(f"For example, a stack of {n} items might be: ")
     print()
     print(f" {numbers}")
     print(" []")
@@ -361,9 +360,8 @@ class Greenbook(Cmd):
     print(" []")
     
     print()
-    print("Problem 8.5")
-    if explain:
-      print(f"For example, a stack of {n} items might be: ")
+    print(name(self.do_p8), "extended")
+    print(f"For example, a stack of {n} items might be: ")
     print()
     print(f" {numbers}")
     print(" []")
@@ -379,8 +377,10 @@ class Greenbook(Cmd):
     print(" []")
     print(" []")
     print(" []")
+    
+    self.explain[self.do_p8] = False
 
-  def p10(self, n=5):
+  def do_p10(self, n=5):
     """
     Problem 10:
 
@@ -396,9 +396,8 @@ class Greenbook(Cmd):
     number = "".join([str(c) for c in (sample(number, len(number)) + [0])])
     number = int(number, 2) # base-2
     print()
-    print("Problem 10")
-    if explain:
-      print(f"For example, a number with {n} true/1 bits might be: ")
+    print(name(self.do_p10))
+    print(f"For example, a number with {n} true/1 bits might be: ")
     print()
     print(f" {number} ({number:b})")
     print()
@@ -417,9 +416,8 @@ class Greenbook(Cmd):
     # number = int(number, 2) # base-2
 
     print()
-    print("Problem 10.5")
-    if explain:
-      print(f"For example, a number with {n} true/1 bits might be: ")
+    print(name(self.do_p10), "extended")
+    print(f"For example, a number with {n} true/1 bits might be: ")
     print()
     print(f" {number} ({number:b})")
     print()
@@ -431,9 +429,11 @@ class Greenbook(Cmd):
 
     print(f" {lower(number)} < {number} < {higher(number)}")
     print(f" {lower(number):b} < {number:b} < {higher(number):b}")
+    
+    self.explain[self.do_p10] = False
 
   # from num2words import num2words
-  def p12(self, n=None):
+  def do_p12(self, n=None):
     """
     Problem 12:
     
@@ -451,9 +451,8 @@ class Greenbook(Cmd):
       n = randint(-2 * 10**9, 2 * 10**9)
 
     print()
-    print("Problem 12")
-    if explain:
-      print(f"For example, given: ")
+    print(name(self.do_p12))
+    print(f"For example, given: ")
     print()
     print(f" {n}")
     print()
@@ -461,8 +460,10 @@ class Greenbook(Cmd):
     print()
 
     # print(num2words(n, lang="en_GB").replace(" and ", ", and "))
+    
+    self.explain[self.do_p12] = False
 
-  def p13(self, n=None):
+  def do_p13(self, n=None):
     """
     Problem 13:
 
@@ -477,9 +478,10 @@ class Greenbook(Cmd):
 
     (Hint, you may not need every available operations for each part.)
     """
-    return
+    
+    self.explain[self.do_p13] = False
 
-  def p14(self, n=10):
+  def do_p14(self, n=10):
     """
     Problem 14.1:
 
@@ -490,9 +492,10 @@ class Greenbook(Cmd):
 
     What if a[] was sorted?
     """
-    return
+    
+    self.explain[self.do_p14] = False
 
-  def p15(self, n=5):
+  def do_p15(self, n=5):
     """
     Problem 15:
     
@@ -516,9 +519,10 @@ class Greenbook(Cmd):
         6,0,0,9
         1,0,0,4
     """
-    return
+    
+    self.explain[self.do_p15] = False
 
-  def p16(self, n=5):
+  def do_p16(self, n=5):
     """
     Problem 16:
     
@@ -542,9 +546,10 @@ class Greenbook(Cmd):
 
     How fast can you go? Why?
     """
-    return
+    
+    self.explain[self.do_p16] = False
 
-  def p17(self, n=5):
+  def do_p17(self, n=5):
     """
     Problem 17.1:
     Given the positive integer n, determine how many 2s appear in the numbers between 0 and n.
@@ -558,9 +563,10 @@ class Greenbook(Cmd):
     
     If n is simply a positive integer. How fast can you go?
     """
-    return
+    
+    self.explain[self.do_p17] = False
 
-  def p18(self, n=15):
+  def do_p18(self, n=15):
     """
     Problem 18.1:
     
@@ -587,9 +593,8 @@ class Greenbook(Cmd):
     sam = [randint(0, max_temp) for _ in range(n)] # our temperature samples
 
     print()
-    print("Problem 18")
-    if explain:
-      print(f"For example, a list of {n} elements might be: ")
+    print(name(self.do_p18))
+    print(f"For example, a list of {n} elements might be: ")
     print()
     print(f" {join(sam)}")
     print()
@@ -607,8 +612,10 @@ class Greenbook(Cmd):
       tbs |= 2**t
 
     print(f" {join(out)}")
+    
+    self.explain[self.do_p18] = False
 
-  def p19(self, n=5):
+  def do_p19(self, n=5):
     """
     Problem 19:
     
@@ -634,9 +641,9 @@ class Greenbook(Cmd):
       = 2 (Flip the first two columns, the last two rows now are consistent.)
     """
     
-    return
+    self.explain[self.do_p19] = False
 
-  def p2(self, n=10):
+  def do_p2(self, n=10):
     """
     Problem 2:
 
@@ -648,9 +655,8 @@ class Greenbook(Cmd):
     counter = 0
 
     print()
-    print("Problem 2")
-    if explain:
-      print(f"For example, a matrix of size {n}*{n} might be: ")
+    print(name(self.do_p2))
+    print(f"For example, a matrix of size {n}*{n} might be: ")
     print()
 
     largest, largest_size = None, None
@@ -770,14 +776,15 @@ class Greenbook(Cmd):
         print(join(row[start[0]:finish[0]+1], blocky=True)) # visually inspect
     else:
       print(" There was nothing in the matrix")
+    self.explain[self.do_p2] = False
 
-problems = [p1, p2, p3, p4, p5, p6, p8, p10, p18]
+problems = []
 
 def main():
   problem: callable
   nprob = len(problems)
   exit_strings = {"exit", "close", "stop", "halt", "end", "cease", "no", "back"}
-  inp = input(f"Welcome to Green Book Club! Please select a Problem or ask for all <problems>: ").strip().lower()
+  inp = input(f"Welcome to Green Book Club! Please select a problem or ask for help (?): ").strip().lower()
   examples, prev_n = False, None
   
   while inp not in exit_strings:
