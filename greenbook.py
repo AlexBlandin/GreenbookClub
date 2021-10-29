@@ -9,8 +9,6 @@ def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
 
 def name(p: callable): return p.__doc__.splitlines()[0]
 
-def desc(p: callable, extended = False): return p.__doc__.split("---")[int(extended)]
-
 class Greenbook(Cmd):
   intro = """
    ██████╗ ██████╗ ███████╗███████╗███╗   ██╗  ██████╗  ██████╗  ██████╗ ██╗  ██╗
@@ -30,11 +28,11 @@ class Greenbook(Cmd):
   Welcome to Green Book Club! Please select a problem or type "help" or "?" for the list of problems.
   """
   prompt = "greenbook >"
-  explain, problems = {}, [do_p1, do_p2, do_p3, do_p4, do_p5, do_p6, do_p8, do_p10, do_p12, do_p13, do_p14, do_p15, do_p16, do_p17, do_p18, do_p19]
+  explain, problems = {}, [do_odds_and_evens, do_p2, do_zerosum_game, do_lispy_business, do_p6, do_p8, do_p10, do_p12, do_p13, do_p14, do_p15, do_p16, do_p17, do_p18, do_p19]
   
   def preloop(self):
     for problem in self.problems:
-      self.explain[problem] = True
+      self.explain[problem] = True # We only set once, so if you want an explanation after, use help
   
   # def precmd(self, line):
   #   pass
@@ -48,9 +46,9 @@ class Greenbook(Cmd):
   def do_exit(self, *_):
     return True
   
-  def do_p1(self, n=20):
+  def do_odds_and_evens(self, n=20):
     """
-    Odds and Evens
+    Odds and Evens!
     
     Given a list of n numbers, return a new list containing all the even elements
     of the original list, followed by all the odd elements of the original list.
@@ -58,7 +56,7 @@ class Greenbook(Cmd):
     
       ? 51 42 43 67 46
       = 42 46 51 43 67
-    ---
+    
     Now, extend this by formatting your outputs, namely the output evens are in
     ascending order `(2, 4, 6)`, and the output odds are in descending order
     `(5, 3, 1)`.
@@ -70,7 +68,7 @@ class Greenbook(Cmd):
     biggest_number = 99 # random, so might not see
     numbers = [randint(0, biggest_number) for _ in range(n)]
 
-    print(name(self.do_p1))
+    print(name(self.do_odds_and_evens))
     print(f"For example, a list of {n} elements might be: ")
     print(f" {join(numbers)}")
     print()
@@ -81,42 +79,53 @@ class Greenbook(Cmd):
     print()
     input("Press enter/return to see the extended problem: ")
     
-    print(name(self.do_p1), "extended")
+    print(name(self.do_odds_and_evens), "extended")
     print(f"For example, a list of {n} elements might be: ")
     print(f" {join(numbers)}")
     print()
     input("Press enter/return to see the result: ")
     
-    # Timsort is O(n log n) at worst (merge), O(n) at best (insertion/reverse) So
-    # we have best case O(n), average O(n log n/2), and worst case O(n log n)
-    # Where roughly exact is O(n log nr) where r is the ratio odds & evens >= 0.5
-    # We can intuitively see the speedup, as we don't "merge" back together for
-    # that final step, which is the benefit of having two disjoint halves on
+    # Timsort is O(n log n) at worst (merge), O(n) at best (insertion/reverse)
+    # So we have best case O(n), average O(n log n/2), and worst case O(n log n)
+    # Where roughly exact is O(n log nr) where r is the ratio odds : evens >=
+    # 0.5 we can intuitively see the speedup, as we don't "merge" back together
+    # for that final step, which is the benefit of having two disjoint halves on
     # average. Otherwise, we are bound to the larger of the two, so the
     # "significant portion" of the ratio between odds and evens (the 7 of 7:3 as
     # 0.7) gives O(n log nr).
     odds, evens = sorted(odds, reverse=True), sorted(evens)
     print("", " ".join(evens), " ".join(odds))
     
-    self.explain[self.do_p1] = False
-    
-  def do_p3(self, n=10):
+    self.explain[self.do_odds_and_evens] = False
+  
+  def do_zerosum_game(self, n=10):
     """
-    Problem 3:
+    Zero-Sum Game!
     
     Given a list of n integers, find all pairs that sum to zero.
 
       ? -9 3 9 0 -3
       = (9, -9) (3, -3)
+    
+    Now we extend this problem, finding all sets of 3 integers that sum to zero.
+
+      ? 0 9 0 0 2
+      = (0, 0, 0)
+
+      ? -5 -4 4 7 0
+      = (-4, 0, 4)
+
+      ? -9 0 -3 -3 3 -5 0 0 5 2
+      = (-5, 0, 5) (-5, 2, 3) (-3, 0, 3) (0, 0, 0)
     """
     
     biggest_number = 9
     numbers = [randint(-biggest_number, biggest_number) for _ in range(n)]
-    numbers = numbers + [-x for x in numbers] + [0]*int(n/2)
+    numbers = numbers + [-x for x in numbers] + [0]*randint(0,3) # bias for more 0s
     numbers = sample(sample(numbers, 2*n), n)
 
     print()
-    print(name(self.do_p3))
+    print(name(self.do_zerosum_game))
     print(f"For example, a list of {n} elements might be: ")
     print()
     print(f" {join(numbers)}")
@@ -150,32 +159,9 @@ class Greenbook(Cmd):
     else:
       print("No pairs in the list", end="")
     print()
+    input("Press enter/return to see the extended problem: ")
     
-    self.explain[self.do_p3] = False
-
-  def do_p4(self, n=10):
-    """
-    Problem 4:
-    
-    Given a list of n integers, find all sets of 3 integers that sum to zero.
-
-      ? 0 9 0 0 2
-      = (0, 0, 0)
-
-      ? -5 -4 4 7 0
-      = (-4, 0, 4)
-
-      ? -9 0 -3 -3 3 -5 0 0 5 2
-      = (-5, 0, 5) (-5, 2, 3) (-3, 0, 3) (0, 0, 0)
-    """
-    
-    biggest_number = 9
-    numbers = [randint(-biggest_number, biggest_number) for _ in range(n)]
-    numbers = numbers + [-x for x in numbers] + [0]*n # get useful examples
-    numbers = sample(sample(numbers, 2*n), n) # oversample, then get n, for more repeats
-
-    print()
-    print(name(self.do_p4))
+    print(name(self.do_zerosum_game), "extended")
     print(f"For example, a list of {n} elements might be: ")
     print()
     print(f" {join(numbers)}")
@@ -183,20 +169,15 @@ class Greenbook(Cmd):
     input("Press enter/return to see the result: ")
     print()
 
-    if numbers.count(0) > 3: print("(0, 0, 0)", end = " ") # set(numbers) eliminates extra 0s so test here
-    for a, b, c in [tuple(combo) for combo in combinations(sorted(list(set(numbers))), 3)]:
-      if a + b + c == 0:
-        print(f"({a}, {b}, {c})", end = " ")
-    print()
-
-    # ([print("(0, 0, 0)", end = " ") if numbers.count(0) > 3 else None]+[print(c, end = " ") for c in combinations(sorted(list(set(numbers))), 3) if sum(c) == 0]+[print()]) * 0
-    # " ".join((["(0, 0, 0)"] if numbers.count(0) > 3 else []) + [str(c) for c in filter(lambda c: sum(c)==0, combinations(sorted(list(set(numbers))), 3))])
+    matches = [f"({a}, {b}, {c})" for a, b, c in [tuple(combo) for combo in combinations(sorted(list(set(numbers))), 3)] if a + b + c == 0]
+    if numbers.count(0) > 3: matches.append("(0, 0, 0)")
+    print(" ".join(matches))
     
-    self.explain[self.do_p4] = False
+    self.explain[self.do_zerosum_game] = False
 
-  def do_p5(self, n=7):
+  def do_lispy_business(self, n=7):
     """
-    Problem 5:
+    Lispy Business!
     
     Given an input containing parenthesis, write a function to decide if the
     parenthesis are matched. That is, for every opening parenthesis `(` there must
@@ -206,7 +187,7 @@ class Greenbook(Cmd):
       = Yes
 
       ? ()(())(())(())()
-      = True
+      = Yes
 
       ? (print)((Google())Green)(((Book)))
       = Yes
@@ -221,6 +202,9 @@ class Greenbook(Cmd):
       = No
 
       ? (Hello)(((int))(H)ello)(print)(())((()))
+      = Yes
+      
+      ? ("Neaff" . ("Porth albot" . ("Brishtol Parkway" . ("Cardiff Shentral" . nil))))
       = Yes
     """
     
@@ -289,7 +273,7 @@ class Greenbook(Cmd):
     print(f" {s}")
     print(f" {'Yes' if stack == 0 and matching else 'No'}")
     
-    self.explain[self.do_p5] = False
+    self.explain[self.do_lispy_business] = False
 
   def do_p6(self, n=100):
     """
