@@ -3,6 +3,8 @@ from random import randint, sample
 from itertools import combinations
 from cmd import Cmd
 
+from BalancedTernary import BalancedTernary as tern
+
 def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
   if blocky: return "".join(["█" if a else " " for a in arr])
   else: return sep.join([str(a) for a in arr])
@@ -25,10 +27,16 @@ class Greenbook(Cmd):
   ╚██████╗███████╗╚██████╔╝██████╔╝
    ╚═════╝╚══════╝ ╚═════╝ ╚═════╝
   
-  Welcome to Green Book Club! Please select a problem or type "help" or "?" for the list of problems.
+  Welcome to Greenbook Club!
+  
+  Please select a problem by typing its name, type "help" or "?" for the list of
+  problems, or type "help problem" for a specific problem to get its description
+  and any examples. You can add a value n for the size of the problem, such as
+  "problem 15"... I recommend you don't go too large, since the terminals tend
+  to make a messy printout with large n.
   """
   prompt = "greenbook >"
-  explain, problems = {}, [do_odds_and_evens, do_p2, do_zerosum_game, do_lispy_business, do_p6, do_p8, do_p10, do_p12, do_p13, do_p14, do_p15, do_p16, do_p17, do_p18, do_p19]
+  explain, problems = {}, [do_odds_and_evens, do_submatrix, do_zerosum_game, do_lispy_business, do_door_problem, do_sorted_stacking, do_binary_pals, do_say_a_word, do_calculate, do_magic_indices, do_zero_the_matrix, do_matrix_search, do_matrix_revolve, do_too_many_twos, do_top_temps, do_matrix_flip]
   
   def preloop(self):
     for problem in self.problems:
@@ -76,9 +84,9 @@ class Greenbook(Cmd):
     odd, even = lambda x: not x%2, lambda x: x%2
     odds, evens = filter(odd, numbers), filter(even, numbers)
     print("", " ".join(evens), " ".join(odds))
+    
     print()
     input("Press enter/return to see the extended problem: ")
-    
     print(name(self.do_odds_and_evens), "extended")
     print(f"For example, a list of {n} elements might be: ")
     print(f" {join(numbers)}")
@@ -158,9 +166,9 @@ class Greenbook(Cmd):
           print(" ".join([f"({x}, {-x})"]*m), end=" ")
     else:
       print("No pairs in the list", end="")
+    
     print()
     input("Press enter/return to see the extended problem: ")
-    
     print(name(self.do_zerosum_game), "extended")
     print(f"For example, a list of {n} elements might be: ")
     print()
@@ -275,55 +283,50 @@ class Greenbook(Cmd):
     
     self.explain[self.do_lispy_business] = False
 
-  def do_p6(self, n=100):
+  def do_door_problem(self, n=100):
     """
-    Problem 6:
+    The Legendary Door Problem!
 
-    Given 100 open doors, how many doors are left open if you were to close every
-    other door, then open/close (toggle) every third door, then every fourth door,
-    and so on until you open/close the final door?
-    
-    Problem 6.5:
+    Given 100 open doors, how many doors are left open if you were to close
+    every other door, then open/close (toggle) every third door, then every
+    fourth door, and so on until you open/close the final door?
 
-    Given any n doors, how many would be left open? Can you express this as an
-    equation of d(n) = ???
+    Now, given any n doors, how many would be left open? Can you express this as
+    an equation d(n) = ???
     """
     
     print()
-    print(name(self.do_p6))
+    print(name(self.do_door_problem))
     print()
     print(f" 100 doors")
     print()
     input("Press enter/return to see the result: ")
     print()
-
     print(f" {floor(sqrt(100))} left open")
     
-    
     print()
-    print(name(self.do_p6), "extended")
+    input("Press enter/return to see the extended problem: ")
+    print()
+    print(name(self.do_door_problem), "extended")
     print()
     print(f" {n} doors")
     print()
     input("Press enter/return to see the result: ")
     print()
-
     print(f" {floor(sqrt(n))} left open")
     
-    self.explain[self.do_p6] = False
+    self.explain[self.do_door_problem] = False
 
-  def do_p8(self, n=10):
+  def do_sorted_stacking(self, n=10):
     """
-    Problem 8:
+    Stacking Sorted! Wait, other way around...
 
     Given a full stack and an empty stack, how can you sort the first stack
     (smallest items on top) using only standard operations and the second stack?
     How fast can you go?
 
-    Problem 8.5:
-
-    Sort your full stack, but this time you can have as many additional stacks as
-    you want. Can you go faster?
+    Now, sort your full stack again, but this time you can have as many
+    additional stacks as you want. Can you go faster?
     """
     
     biggest_number = 9
@@ -331,7 +334,7 @@ class Greenbook(Cmd):
     numbers = sample(numbers, n)
 
     print()
-    print(name(self.do_p8))
+    print(name(self.do_sorted_stacking))
     print(f"For example, a stack of {n} items might be: ")
     print()
     print(f" {numbers}")
@@ -344,7 +347,8 @@ class Greenbook(Cmd):
     print(" []")
     
     print()
-    print(name(self.do_p8), "extended")
+    input("Press enter/return to see the extended problem: ")
+    print(name(self.do_sorted_stacking), "extended")
     print(f"For example, a stack of {n} items might be: ")
     print()
     print(f" {numbers}")
@@ -362,25 +366,27 @@ class Greenbook(Cmd):
     print(" []")
     print(" []")
     
-    self.explain[self.do_p8] = False
+    self.explain[self.do_sorted_stacking] = False
 
-  def do_p10(self, n=5):
+  def do_binary_pals(self, n=5):
     """
-    Problem 10:
+    (Non-)Binary Pals!
 
     Given an even positive integer, print the next smallest and next largest
     numbers that have the same number of 1 bits in their binary representation.
-    
-    Problem 10.5:
-    
-    What if you only assume it is a positive integer? (So not only even?)
+
+    Now, what if you only assume it is a positive integer? (So not only even?)
+
+    ...Now, do you want to try this in ternary? Same number of 1s as before, but
+    now you have 2s or -1s if you want --- balanced or unbalanced, you choose!
+    (I recommend balanced, it's the nicer system...)
     """
     
     number = [1]*n + [0]*int(n*0.5) # optional fudge factor for num 0s != 1s
     number = "".join([str(c) for c in (sample(number, len(number)) + [0])])
     number = int(number, 2) # base-2
     print()
-    print(name(self.do_p10))
+    print(name(self.do_binary_pals))
     print(f"For example, a number with {n} true/1 bits might be: ")
     print()
     print(f" {number} ({number:b})")
@@ -394,13 +400,11 @@ class Greenbook(Cmd):
     print(f"  {lower(number)} < {number} < {higher(number)}")
     print(f"  {lower(number):b} < {number:b} < {higher(number):b}")
 
-    number = number // 2
-    # number = [1]*n + [0]*int(n*0.5) # optional fudge factor for num 0s != 1s
-    # number = "".join([str(c) for c in (sample(number, len(number)))])
-    # number = int(number, 2) # base-2
+    number = number // 2 # since we added a 0 to number, this always works!
 
     print()
-    print(name(self.do_p10), "extended")
+    input("Press enter/return to see the extended problem: ")
+    print(name(self.do_binary_pals), "extended")
     print(f"For example, a number with {n} true/1 bits might be: ")
     print()
     print(f" {number} ({number:b})")
@@ -414,14 +418,27 @@ class Greenbook(Cmd):
     print(f" {lower(number)} < {number} < {higher(number)}")
     print(f" {lower(number):b} < {number:b} < {higher(number):b}")
     
-    self.explain[self.do_p10] = False
+    # Do Arctic Terns prefer Balanced Ternary? I hope so.
+    print()
+    input("Press enter/return to see the extra extended problem: ")
+    print(name(self.do_binary_pals), "extra extended!")
+    print(f"For example, a number with {n} 1 trits might be: ")
+    print()
+    print(f" {number} ({tern(number)}, balanced)")
+    print()
+    input("Press enter/return to see the result: ")
+    print()
+    
+    # TODO: actually do :lul:
+    
+    self.explain[self.do_binary_pals] = False
 
   # from num2words import num2words
-  def do_p12(self, n=None):
+  def do_say_a_word(self, n=None):
     """
-    Problem 12:
+    Say a word, any word!
     
-    Given any number in the range ± 2 Billion, represent it as a string of natural
+    Given any number in the range ±2 Billion, represent it as a string of natural
     written/spoken English.
 
       ? 1234
@@ -435,7 +452,7 @@ class Greenbook(Cmd):
       n = randint(-2 * 10**9, 2 * 10**9)
 
     print()
-    print(name(self.do_p12))
+    print(name(self.do_say_a_word))
     print(f"For example, given: ")
     print()
     print(f" {n}")
@@ -445,11 +462,11 @@ class Greenbook(Cmd):
 
     # print(num2words(n, lang="en_GB").replace(" and ", ", and "))
     
-    self.explain[self.do_p12] = False
+    self.explain[self.do_say_a_word] = False
 
-  def do_p13(self, n=None):
+  def do_calculate(self, n=None):
     """
-    Problem 13:
+    (Shut up and) Calculate!
 
     You have a calculator that only has working addition and negation buttons (not
     subtraction, as in 4 to -4, and -4 to 4).
@@ -463,25 +480,23 @@ class Greenbook(Cmd):
     (Hint, you may not need every available operations for each part.)
     """
     
-    self.explain[self.do_p13] = False
+    self.explain[self.do_calculate] = False
 
-  def do_p14(self, n=10):
+  def do_magic_indices(self, n=10):
     """
-    Problem 14.1:
+    Magic Indices! (Not beans...)
 
     An array a[] might have "magix indices", which is when `a[i] == i`. If it is
     unsorted, what is the most efficient algorithm?
 
-    Problem 14.2:
-
-    What if a[] was sorted?
+    Now, what if a[] was sorted?
     """
     
-    self.explain[self.do_p14] = False
+    self.explain[self.do_magic_indices] = False
 
-  def do_p15(self, n=5):
+  def do_zero_the_matrix(self, n=5):
     """
-    Problem 15:
+    (Zero) The Matrix!
     
     Given a matrix of sizes NxM, create a new matrix of the same size where all
     rows and columns containing a 0 in the original matrix are themselves now all
@@ -504,11 +519,11 @@ class Greenbook(Cmd):
         1,0,0,4
     """
     
-    self.explain[self.do_p15] = False
+    self.explain[self.do_zero_the_matrix] = False
 
-  def do_p16(self, n=5):
+  def do_matrix_search(self, n=5):
     """
-    Problem 16:
+    The Matrix: Searchurrections!
     
     Given an NxM matrix, describe an algorithm to search for a given value. The
     following properties hold for the matrix:
@@ -531,43 +546,46 @@ class Greenbook(Cmd):
     How fast can you go? Why?
     """
     
-    self.explain[self.do_p16] = False
+    self.explain[self.do_matrix_search] = False
 
-  def do_p17(self, n=5):
+  def do_matrix_revolve(self, n=5):
     """
-    Problem 17.1:
-    Given the positive integer n, determine how many 2s appear in the numbers between 0 and n.
+    The Matrix: Revolutions!
+    
+    
+    """# the rotate 90 degrees / transpose one
+    
+    self.explain[self.do_matrix_revolve] = False
+
+  def do_too_many_twos(self, n=5):
+    """
+    Too Many Twos!
+    
+    Given the positive integer n < 10000, determine how many 2s appear in the
+    numbers between 0 and n.
 
       ? 25
       = 9 (2, 12, 20, 21, 22, 23, 24, 25)
 
-    Assuming n < 10000, how fast can you go?
-
-    Problem 17.2:
+    Now, what if n is any positive integer? How fast can you go?
+    """ # TODO: uhhh what is this even
     
-    If n is simply a positive integer. How fast can you go?
+    self.explain[self.do_too_many_twos] = False
+
+  def do_top_temps(self, n=15):
     """
+    Top Temperatures!
     
-    self.explain[self.do_p17] = False
-
-  def do_p18(self, n=15):
-    """
-    Problem 18.1:
-    
-    Given a list of daily temperatures, return a list such that, for each day in
-    the input, tells you how many days you would have to wait until a warmer
-    temperature.
-
-    If there are no future days for which this is possible, that day is assigned
-    the value 0.
+    Given a list of daily temperatures, return a list that, for each day in the
+    input, tells you how many days you would have to wait until a warmer
+    temperature. If there are no future days for which this is possible, that
+    day is assigned the value 0.
 
       ? 73, 74, 75, 71, 69, 72, 76, 73
       = 1,  1,  4,  2,  1,  1,  0,  0
 
-    Problem 18.2:
-    
-    Can you do this in linear time? How much space does this require? Can you
-    reduce that asymptotically?
+    Now, can you do this in linear time? How much space does this require? Can
+    you reduce that asymptotically?
     """
     
     # temperature is in Kelvin (max necessary for randint gen.)
@@ -577,7 +595,7 @@ class Greenbook(Cmd):
     sam = [randint(0, max_temp) for _ in range(n)] # our temperature samples
 
     print()
-    print(name(self.do_p18))
+    print(name(self.do_top_temps))
     print(f"For example, a list of {n} elements might be: ")
     print()
     print(f" {join(sam)}")
@@ -597,11 +615,11 @@ class Greenbook(Cmd):
 
     print(f" {join(out)}")
     
-    self.explain[self.do_p18] = False
+    self.explain[self.do_top_temps] = False
 
-  def do_p19(self, n=5):
+  def do_matrix_flip(self, n=5):
     """
-    Problem 19:
+    The Matrix: Flipurrections
     
     Given a matrix consisting of 0s and 1s, we may choose any number of columns in
     the matrix and flip every cell in that column.
@@ -625,21 +643,21 @@ class Greenbook(Cmd):
       = 2 (Flip the first two columns, the last two rows now are consistent.)
     """
     
-    self.explain[self.do_p19] = False
+    self.explain[self.do_matrix_flip] = False
 
-  def do_p2(self, n=10):
+  def do_submatrix(self, n=10):
     """
-    Problem 2:
+    The Submatrix
 
     Given a matrix of size n*n, where the elements are either 1 or 0, find the
-    largest "rectangle" where every element is 1.
+    largest rectangle within (submatrix) where every element is 1.
     """
     
     matrix = [[randint(0, 1) for _ in range(n)] for _ in range(n)]
     counter = 0
 
     print()
-    print(name(self.do_p2))
+    print(name(self.do_submatrix))
     print(f"For example, a matrix of size {n}*{n} might be: ")
     print()
 
@@ -760,72 +778,7 @@ class Greenbook(Cmd):
         print(join(row[start[0]:finish[0]+1], blocky=True)) # visually inspect
     else:
       print(" There was nothing in the matrix")
-    self.explain[self.do_p2] = False
-
-problems = []
-
-def main():
-  problem: callable
-  nprob = len(problems)
-  exit_strings = {"exit", "close", "stop", "halt", "end", "cease", "no", "back"}
-  inp = input(f"Welcome to Green Book Club! Please select a problem or ask for help (?): ").strip().lower()
-  examples, prev_n = False, None
-  
-  while inp not in exit_strings:
-    try:
-      if not examples and inp.isdecimal() and (int(inp) < 1 or int(inp) > nprob):
-        print()
-        inp = input(f"Please select a Problem: ").strip().lower()
-        continue
-      if examples:
-        inp = input("Press enter/return to see another example: ").strip().lower()
-        while inp not in exit_strings:
-          if inp != "" and inp.isdecimal():
-            prev_n = int(inp)
-            problem(False, prev_n)
-          elif inp == "" and prev_n != None: problem(False, prev_n)
-          elif inp == "": problem(False)
-          elif inp in exit_strings: break
-          else: continue
-          print()
-          inp = input("Press enter/return to see another example: ").strip().lower()
-        examples = False
-      if inp.isdecimal():
-        problem = problems[int(inp)-1]
-        inp = input("Please choose a value for n. If you press enter it will pick a reasonable default: ").strip().lower()
-        prev_n = None
-        if inp != "" and inp.isdecimal():
-          if int(inp) >= 500:
-            print("Please only choose REASONABLE values for n. While the program can handle it, the printout will just be messy.")
-            continue
-          prev_n = int(inp)
-          problem(n = prev_n)
-        elif inp == "": problem()
-        elif inp in exit_strings: break
-        else: continue
-        print()
-        examples = True
-      elif inp == "" and problem == None:
-        for p in problems: p()
-      elif inp == "" and problem != None:
-        problem()
-      elif inp in {"problems", "all", "explain", "help"}:
-        for p in problems: print(p.__doc__)
-      if not examples:
-        print()
-        inp = input(f"Please select a Problem: ").strip().lower()
-    except (KeyboardInterrupt, SystemExit):
-      print()
-      input("Exiting. Please press enter/return to finalise program exit. ")
-      break
-    except Exception as err:
-      import traceback
-      trace = traceback.format_exc()
-      print()
-      print(f"Let me know about {err}:")
-      print()
-      for line in str(trace).splitlines():
-        print(f"   {line}")
+    self.explain[self.do_submatrix] = False
 
 if __name__ == "__main__":
   Greenbook().cmdloop()
