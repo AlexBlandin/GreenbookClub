@@ -606,7 +606,7 @@ def p19(explain=True, n=5):
 
 def p2(explain=True, n=10):
   """
-  Problem 2
+  Problem 2:
 
   Given a matrix of size n*n, where the elements are either 1 or 0, find the
   largest "rectangle" where every element is 1.
