@@ -50,7 +50,6 @@ class Greenbook(Cmd):
   #   return stop
 
   # TODO: use docstrings to print nice problem explanations inline
-  # TODO: provide a nice names for each problem rather than numeric id
   
   def do_exit(self, *_):
     return True
