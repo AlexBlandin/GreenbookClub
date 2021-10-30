@@ -20,7 +20,7 @@ def printout(p: callable, example_text: str, example: str, *result):
   print(f" {example}")
   print()
   input("Press enter/return to see the result: ")
-  print(*result)
+  print("", *result)
   print()
 
 def ext_printout(p: callable, extension: str, example_text: str, example: str, *result):
@@ -417,7 +417,7 @@ class Greenbook(Cmd):
     
     printout(self.do_say_a_word,
               f"For example, given: ", n,
-              "" # TODO: this
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_calculate(self, arg):
@@ -440,8 +440,8 @@ class Greenbook(Cmd):
       pass # generate our own equation string
     
     printout(self.do_calculate,
-              f"", "",
-              "" # TODO: this
+              f"Sorry, this is still on my TODO list", "",
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_magic_indices(self, arg):
@@ -456,8 +456,8 @@ class Greenbook(Cmd):
     
     # n = parse(arg, 10)
     printout(self.do_magic_indices,
-              f"", "",
-              "" # TODO: this
+              f"Sorry, this is still on my TODO list", "",
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_zero_the_matrix(self, arg):
@@ -487,8 +487,8 @@ class Greenbook(Cmd):
     
     # n = parse(arg, 5)
     printout(self.do_zero_the_matrix,
-              f"", "",
-              "" # TODO: this
+              f"Sorry, this is still on my TODO list", "",
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_matrix_search(self, arg):
@@ -518,8 +518,8 @@ class Greenbook(Cmd):
     
     # n = parse(arg, 5)
     printout(self.do_matrix_search,
-              f"", "",
-              "" # TODO: this
+              f"Sorry, this is still on my TODO list", "",
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_matrix_revolve(self, arg):
@@ -541,8 +541,8 @@ class Greenbook(Cmd):
     
     # n = parse(arg, 5)
     printout(self.do_matrix_revolve,
-              f"", "",
-              "" # TODO: this
+              f"Sorry, this is still on my TODO list", "",
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_too_many_twos(self, arg):
@@ -560,8 +560,8 @@ class Greenbook(Cmd):
     
     # n = parse(arg, 5)
     printout(self.do_too_many_twos,
-              f"", "",
-              "" # TODO: this
+              f"Sorry, this is still on my TODO list", "",
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_top_temps(self, arg):
@@ -629,8 +629,8 @@ class Greenbook(Cmd):
     
     # n = parse(arg, 5)
     printout(self.do_matrix_flip,
-              f"", "",
-              "" # TODO: this
+              f"Sorry, this is still on my TODO list", "",
+              "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_submatrix(self, arg):
