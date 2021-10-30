@@ -492,8 +492,6 @@ The list of integers is sorted in the array. Repeat Part A.
 Write a program to swap sequential pairs of odd and even bits in an integer with
 as few operations as possible.
 
-Examples
-
     Input:  01010101
     Output: 10101010
 
