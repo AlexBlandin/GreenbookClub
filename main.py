@@ -63,14 +63,6 @@ class Greenbook(Cmd):
   make a messy printout with large n.
   """
   prompt = "📗 " if os.name != "nt" else "📗  "
-  explain, problems = {}, []
-  
-  def preloop(self):
-    for problem in self.problems:
-      self.explain[problem] = True # We only set once, so if you want an explanation after, use help
-    self.problems = [self.do_odds_and_evens, self.do_submatrix, self.do_zerosum_game, self.do_lispy_business, self.do_door_problem, self.do_sorted_stacking, self.do_binary_pals, self.do_say_a_word, self.do_calculate, self.do_magic_indices, self.do_zero_the_matrix, self.do_matrix_search, self.do_matrix_revolve, self.do_too_many_twos, self.do_top_temps, self.do_matrix_flip]
-  
-  # TODO: use docstrings to print nice problem explanations inline
   
   def do_exit(self, *_):
     """What do you think it does?"""
