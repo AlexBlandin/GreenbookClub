@@ -1,8 +1,10 @@
 Problem 1:
-	Given a positive integer, print the next smallest and next largest numbers that have the same number of 1 bits in their binary representation. Assume it is even.
+
+Given a positive integer, print the next smallest and next largest numbers that
+have the same number of 1 bits in their binary representation. Assume it is
+even.
 
 Problem 1 (extended):
-	If you want to have a really really tough problem, try it for any positive integer.
 
-Problem 2:
-	Start your own project!
+If you want to have a really really tough problem, try it for any positive
+integer.

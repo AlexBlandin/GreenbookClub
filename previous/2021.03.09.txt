@@ -1,53 +1,47 @@
 Problem 1:
-You are given a string containing multiple words. Your output is the same string, except that each word has had its characters sorted.
+
+You are given a string containing multiple words. Your output is the same
+string, except that each word has had its characters sorted.
 
 Examples:
-Input: "hello world"
-Output: "ehllo dlorw"
-
- 
-
-Input: "welcome back to green book club"
-Output: "ceelmow abck ot eegnr bkoo bclu"
-
- 
+  Input: "hello world"
+  Output: "ehllo dlorw"
+  
+  Input: "welcome back to green book club"
+  Output: "ceelmow abck ot eegnr bkoo bclu"
 
 Extensions: 
-How fast can you do this?
-What about if you are constrained to at-most 4 different letters per word? Any number of repetitions are allowed, such as:
-Input: "green book club is so much fun"
-Output: "eegnr bkoo bclu is os chmu fnu"
- 
+  How fast can you do this? What about if you are constrained to at-most 4
+  different letters per word? Any number of repetitions are allowed, such as:
+  
+  Input: "green book club is so much fun"
+  Output: "eegnr bkoo bclu is os chmu fnu"
 
 Problem 2:
-Given an M*N matrix of random integers some of which will be zero, zero-out any row and column where a cell contains a zero. 
-Try to do it in O(M*N) space and O(M*N) time
+
+Given an M*N matrix of random integers some of which will be zero, zero-out any
+row and column where a cell contains a zero. Try to do it in O(M*N) space and
+O(M*N) time.
 
 Extension:
 Can you do this in O(1) space and O(M*N) time?
 
 Examples:
-Input:
 
-1	3	0	7	1	90
-7	8	3	1	3	17
-3	21	2	8	0	3
-1	14	11	3	4	8
-Output:
-
-0	0	0	0	0	0
-7	8	0	1	0	17
-0	0	0	0	0	0
-1	14	0	3	0	8
- 
-
-Input:
-
-14	0	7
-8	0	31
-1	4	9
-Output:
-
-0	0	0
-0	0	0
-1	0	9
+  Input:  1 3 0 7 1 90
+          7 8 3 1 3 17
+          3 21 2 8 0 3
+          1 14 11 3 4 8
+  
+  Output: 0 0 0 0 0 0
+          7 8 0 1 0 17
+          0 0 0 0 0 0
+          1 14 0 3 0 8
+  
+  Input:  14 0 7
+          8 0 31
+          1 4 9
+  
+  Output: 0 0 0
+          0 0 0
+          1 0 9

@@ -1,16 +1,34 @@
-Problem 1: 
-	A bunch of people are living on an island, when a visitor comes with a strange order: all blue-eyed people must leave the island as soon as possible. 
-	There will be a flight of unlimited capacity out at 8:00pm every evening. Each person can see everyone else's eye color, but they do not know their own (nor can they find out through someone or something else).
-	Additionally, they do not know how many people have blue eyes, although they do know that at least one person does. How many days will it take the blue-eyed people to leave?
+Problem 1:
 
-	Hint: You can assume the people are all equally intelligent, and if one can think in a specific way, then all of them can. 
+A bunch of people are living on an island, when a visitor comes with a strange
+order: all blue-eyed people must leave the island as soon as possible. There
+will be a flight of unlimited capacity out at 8:00pm every evening. Each person
+can see everyone else's eye color, but they do not know their own (nor can they
+find out through someone or something else). Additionally, they do not know how
+many people have blue eyes, although they do know that at least one person does.
+How many days will it take the blue-eyed people to leave?
 
-	Note: Solutions via proxy, i.e. "Invent a reflective surface to look at yourself" or "Invent a machine that tells you your eye colour" are not acceptable. This is a logic riddle!
+Hint: You can assume the people are all equally intelligent, and if one can
+think in a specific way, then all of them can. 
+
+Note: Solutions via proxy, i.e. "Invent a reflective surface to look at
+yourself" or "Invent a machine that tells you your eye colour" are not
+acceptable. This is a logic riddle!
 
 Problem 2:
-	In the new post-apocalyptic world, the world queen is desperately concerned about the birth rate. Therefore, she decrees that all families should ensure that they have one girl or else they face massive fines. If all families abide by this policy -that is, they continue to have children until they have one girl, at which point they immediately stop- what will the sex ratio of the new generation be? (Assume that the odds of someone having a boy or a girl on any given pregnancy is equal.) 
 
-	Note: This problem can be solved logically, and by computer simulation. It is up to you to decide how you choose to solve it, but we recomend you try writing the simulation first, and then try to logically reason about the result. 
+In the new post-apocalyptic world, the world queen is desperately concerned
+about the birth rate. Therefore, she decrees that all families should ensure
+that they have one girl or else they face massive fines. If all families abide
+by this policy -that is, they continue to have children until they have one
+girl, at which point they immediately stop- what will the sex ratio of the new
+generation be? (Assume that the odds of someone having a boy or a girl on any
+given pregnancy is equal.) 
 
-	Side-note: 
-		If you are unsure how to program the simulation, or if you are just starting with programming in Java and you need some help let us know! If you are confident with programming, look out for others you can help :-)
+Note: This problem can be solved logically, and by computer simulation. It is up
+to you to decide how you choose to solve it, but we recomend you try writing the
+simulation first, and then try to logically reason about the result. 
+
+Side-note: If you are unsure how to program the simulation, or if you are just
+starting with programming in Java and you need some help let us know! If you are
+confident with programming, look out for others you can help :-)

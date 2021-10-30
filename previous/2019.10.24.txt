@@ -1,32 +1,32 @@
 Problem 1:
-	Given an array nums of n integers, find all pairs that sum to zero.
 
-	Example:
-		nums = [-1, 0, 1, 2, -2, -4]
-		Solution:
-			[[-1, 1], [2, -2]]
+Given an array nums of n integers, find all pairs that sum to zero.
 
-Problem 2:
-	Extend problem 1 such that you find triples that sum to zero :-)
-	
-	Example:
-		nums = [-1, 0, 1, 2, -2, 2, -4]
-		Solution:
-			[[-1, 0, 1],[-2, 0, 2], [-4, 2, 2]] 
-	
+Example:
+  Input:  [-1, 0, 1, 2, -2, -4]
+  Output: [[-1, 1], [2, -2]]
+
+Part B:
+
+Extend this such that you find triples that sum to zero :-)
+ 
+Example:
+  Input:  [-1, 0, 1, 2, -2, 2, -4]
+  Output: [[-1, 0, 1],[-2, 0, 2], [-4, 2, 2]] 
+ 
 
 Problem 3:
-	Given an input containing parenthesies, write a function to decide
-	if the parentesies are matched. That is, for every opening parenethesis 
-	there must be a respective closing parentesis and vise versa.
-	
-	Example:
-		input = "((Hello) world))"
-		output = false;
-		
-		input2 = "((((((HELLO))))))World"
-		output = true;
-		
-		input3 = "()()()()()()()123()()()()))(("
-		output = true;
-		
+
+Given an input containing parenthesies, write a function to decide if the
+parentesies are matched. That is, for every opening parenethesis there must be a
+respective closing parentesis and vise versa.
+ 
+Example:
+  Input:  "((Hello) world))"
+  Output: false
+  
+  Input:  "((((((HELLO))))))World"
+  Output: true
+  
+  Input:  "()()()()()()()123()()()()))(("
+  Output: true

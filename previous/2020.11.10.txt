@@ -1,30 +1,30 @@
-Problem 1
-Given two strings s1, s2 where length(s1) < length(s2) find the index of the first instance where s1 is a substring of s2.
+Problem 1:
+
+Given two strings s1, s2 where length(s1) < length(s2) find the index of the
+first instance where s1 is a substring of s2.
 
 Example 1:
-  Input:
-    s1 = "abCd"
-    s2 = "ffffabCdCOVID"
+  Input: s1 = "abCd", s2 = "ffffabCdCOVID"
   Output: 4
 
 Extension task:
   Extend this to return the index of all substrings of s1 in s2.
- 
 
-Problem 2
-Given two strings: s1, s2 and a third string s3 such that length(s1) + length(s2) = length(s3) determine if you can interleave the characters in s1 and s2 to get to s3.
+Problem 2:
+
+Given the strings s1, s2, and s3, where length(s1) + length(s2) = length(s3),
+determine if you can interleave the characters in s1 and s2 to get to s3.
 
 Example 1:
-   Input: s1 = "aadcc", s2 = "beebt", s3 = "aabeedcbtc"
-   Output: true
+  Input: s1 = "aadcc", s2 = "beebt", s3 = "aabeedcbtc"
+  Output: true
 
 Example 2:
-   Input: s1 = "aadcc", s2 = "xeebt", s3 = "aabeedcbtc"
-   Output: false
+  Input: s1 = "aadcc", s2 = "xeebt", s3 = "aabeedcbtc"
+  Output: false
 
 This is a 2-part problem:
-   Part A:
-      No character in s1 appears in s2 and vise-versa
-
-   Part B:
-      No such restriction applies (i.e. s1 = "aabc", s2 = "aabf")
+  Part A:
+    No character in s1 appears in s2 and vise-versa
+  Part B:
+    No such restriction applies (i.e. s1 = "aabc", s2 = "aabf")

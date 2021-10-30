@@ -1,18 +1,25 @@
-Problem 1
-A magic index in an array of n integers (index from 0 to n-1) is defined to be an index such that array[i] = i.
+Problem 1:
+
+A magic index in an array of n integers (index from 0 to n-1) is defined to be
+an index such that array[i] = i.
 
 Part A:
-  The array is unsorted, what is the most efficient algorithm that can be written (i.e. write an algorithm that takes O(_) time, and provide an argument why you can't go faster than O(_))
+  The array is unsorted, what is the most efficient algorithm that can be
+  written (i.e. write an algorithm that takes O(_) time, and provide an argument
+  why you can't go faster than O(_))
 
 Part B:
   The list of integers is sorted in the array. Repeat Part A.
-Problem 2
-Write a program to swap sequential pairs of odd and even bits in an integer with as few operations as possible.
 
-Example 1:
-   Input:  01010101
-   Output: 10101010
+Problem 2:
 
-Example 2:
-   Input:  1011110100
-   Output: 0111111000
+Write a program to swap sequential pairs of odd and even bits in an integer with
+as few operations as possible.
+
+Examples
+
+  Input:  01010101
+  Output: 10101010
+
+  Input:  1011110100
+  Output: 0111111000
