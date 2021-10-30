@@ -9,7 +9,7 @@ You may return any answer array that satisfies this condition.
     Input:  [3,1,2,4]
     Output: [4,2,1,3]
 
-## Extension 1:
+## Extension:
 
 Your output array must now be composed of the even array in ascending order, and
 the odd array in descending order.
@@ -301,7 +301,7 @@ values/labels equal to the given sum.
               [5,8,4,5]
             ]
 
-## Extension 1:
+## Extension:
 
 If this was a binary search tree would this make a difference?
 
@@ -336,27 +336,7 @@ in it.
     Output: 1
 
 
-# Problem 1: (Last seen 2020-10-20)
-
-There are 100 closed lockers in a hallway. Behind the lockers are monsters. On
-round 1, you go through the lockers and open every single one. On round 2, you
-go through the lockers and shut every second. On round 3, you go through the
-lockers and toggle every third. On round `N`, you go through the lockers and
-toggle every `N`th. After 100 rounds, the monsters will exit the open lockers and
-attack. How many monsters will there be attacking you?
-
-## Extension 1:
-
-Instead of 100 lockers, you now have `N` lockers and `N` rounds. Solve the same
-problem :-)
-
-## Extension 2:
-
-Now, you have `N` lockers and `M` rounds, where `N` and `M` are not necessarily
-the same number. Solve the same problem once more.
-
-
-# Problem 2: (Last seen 2020-10-20)
+# Deadly Soda (Last seen 2020-10-20)
 
 You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
 strips which can be used to detect poison.
@@ -371,10 +351,10 @@ a result.
 How would you figure out the poisoned bottle in as few days as possible? 
 
 
-# Problem 1: (Last seen 2020-10-27)
+# Island of Paradise (Last seen 2020-10-27)
 
 A bunch of people are living on an island, when a visitor comes with a strange
-order: all blue-eyed people must leave the island as soon as possible. There
+request: all blue-eyed people must leave the island as soon as possible. There
 will be a flight of unlimited capacity out at 8:00pm every evening. Each person
 can see everyone else's eye colour, but they do not know their own (nor can they
 find out through someone or something else). Additionally, they do not know how
@@ -386,10 +366,10 @@ think in a specific way, then all of them can.
 
 Note: Solutions via proxy, i.e. "Invent a reflective surface to look at
 yourself" or "Invent a machine that tells you your eye colour" are not
-acceptable. This is a logic riddle!
+acceptable. This is a logic puzzle!
 
 
-# Problem 2: (Last seen 2020-10-27)
+# Baby Boom (Last seen 2020-10-27)
 
 In the new post-apocalyptic world, the world queen is desperately concerned
 about the birth rate. Therefore, she decrees that all families should ensure
@@ -408,7 +388,7 @@ starting with programming in Java and you need some help let us know! If you are
 confident with programming, look out for others you can help :-)
 
 
-# Problem 1: (Last seen 2020-11-03)
+# Legally Distinct Minty Hill Problem (Last seen 2020-11-03)
 
 You're on a game show and there are 3 doors, which are all shut.
 
@@ -424,7 +404,7 @@ Or, are the two strategies leading to the same result? Try writing a simulation
 for this problem and report on the results :-)
 
 
-# Problem 2: (Last seen 2020-11-03)
+# L A M P (Last seen 2020-11-03)
 
 You're outside a room with the door shut. There are three light switches on the
 wall next to you and three antique lamps inside.
@@ -436,7 +416,7 @@ allowed to play with the light switches as much as you like.
 Your task is to determine which light switch corresponds to which lamp.
 
 
-# Problem 3: (Last seen 2020-11-03)
+# Array Sort You! (Last seen 2020-11-03)
 
 You want to sort an array of numbers. However, you have a problem. You are a
 dictator and your philosophy is: if something doesn't follow your rules, kill
@@ -456,7 +436,7 @@ for each dead number.**
     Output: [4, 5, 6, 9, -1, -1, -1]
 
 
-# Problem 1: (Last seen 2020-11-10)
+# Substring (Last seen 2020-11-10)
 
 Given two strings `s1` and `s2`, where `length(s1) < length(s2)`, find the index
 of the first instance where s1 is a substring of s2.
@@ -464,12 +444,12 @@ of the first instance where s1 is a substring of s2.
     Input: s1 = "abCd", s2 = "ffffabCdCefg"
     Output: 4
 
-## Extension task:
+## Extension:
 
-Extend this to return the index of all substrings of s1 in s2.
+Return the index of all substrings of s1 in s2.
 
 
-# Problem 2: (Last seen 2020-11-10)
+# Interleaved Intermission (Last seen 2020-11-10)
 
 Given strings `s1`, `s2`, and `s3`, where `length(s1) + length(s2) = length(s3)`,
 determine if you can interleave the characters in `s1` and `s2` to get `s3`.
@@ -482,11 +462,11 @@ determine if you can interleave the characters in `s1` and `s2` to get `s3`.
 
 ## Part A:
 
-No character in `s1` appears in `s2` and vice-versa.
+The strings `s1` and `s2` do not share any characters.
 
 ## Part B:
 
-No such restriction applies (i.e. `s1 = "aabc"`, `s2 = "aabf"`).
+The strings `s1` and `s2` can contain any characters (i.e. `s1 = "aabc"`, `s2 = "aabf"`).
 
 
 # Say a Word, Any Word (Last seen 2020-11-17)
