@@ -34,8 +34,8 @@ def ext_printout(p: callable, extension: str, example_text: str, example: str, *
   print("", *result)
   print()
 
-def parse(n: str, default: int):
-  n = n.strip()
+def parse(arg: str, default: int):
+  n = arg.strip()
   return int(n) if len(n) else default
 
 class Greenbook(Cmd):
@@ -374,6 +374,36 @@ class Greenbook(Cmd):
     ext_printout(self.do_binary_pals, "extra extended!",
                   f"For example, a number with {n} 1 trits might be: ", f"{number} ({tern(number)}, balanced)",
                   "" # TODO: this
+    )
+  
+  def do_water_trap(self, arg):
+    """
+    Water Trap!
+    
+    
+    """ # TODO: fill in
+    
+    # n is the number of samples, height is ints>=0, max used for sample generation
+    n, max_height = parse(arg, 1000000), 255 # use 10,8 for plot demo
+
+    s = [randint(0, max_height) for i in range(n)] # our heightmap
+    t = [0]*n # minimum of the tallest on either side of a point
+    r = 0 # how much water we trap
+    peak = 0 # highest point we've seen so far
+
+    for i, h in enumerate(s): # go over forwards
+      t[i] = peak
+      if h > peak: peak = h
+
+    peak = 0 # resetting because now we're going the other way
+    for i, h in enumerate(s[::-1]): # go over backwards
+      if t[i] > peak: t[i] = peak
+      if h > peak: peak = h
+      if h < t[i]: r += t[i] - h # add any water trapped "above" this point
+
+    printout(self.do_water_trap,
+              f"For example, a water trap {n} long with heights:", join(s),
+              f"Trapped {r} water"
     )
   
   # from num2words import num2words
