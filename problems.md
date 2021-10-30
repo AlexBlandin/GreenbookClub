@@ -1,3 +1,4 @@
+
 # Odds and Evens (Last seen 2019-10-17)
 
 Given an array A of non-negative integers, return an array consisting of all the
@@ -8,13 +9,14 @@ You may return any answer array that satisfies this condition.
     Input:  [3,1,2,4]
     Output: [4,2,1,3]
 
-Extension 1:
+## Extension 1:
 
-Your output array must now be composed of the even array in ascending order, 
-and the odd array in decending order
+Your output array must now be composed of the even array in ascending order, and
+the odd array in decending order
 
     Input:  [3,1,2,4,8,3,4,1]
     Output: [2,4,4,8,3,3,1,1]
+
 
 # Submatrix (Last seen 2019-10-17)
 
@@ -29,6 +31,7 @@ containing only 1's and return its area.
     Explanation: A 3*2 rectangle is formed starting at row 1, column 2 and ending
     in row 2 column 4.
 
+
 # Zero-Sum Game (Last seen 2019-10-24)
 
 Given an array nums of n integers, find all pairs that sum to zero.
@@ -36,12 +39,13 @@ Given an array nums of n integers, find all pairs that sum to zero.
     Input:  [-1, 0, 1, 2, -2, -4]
     Output: [[-1, 1], [2, -2]]
 
-Part B:
+## Part B:
 
 Extend this such that you find triples that sum to zero :-)
 
     Input:  [-1, 0, 1, 2, -2, 2, -4]
     Output: [[-1, 0, 1],[-2, 0, 2], [-4, 2, 2]] 
+
 
 # Lispy Business (Last seen 2019-10-24)
 
@@ -58,6 +62,7 @@ respective closing parentesis and vise versa.
     Input:  "()()()()()()()123()()()()))(("
     Output: true
 
+
 # The Legendary Door Problem (Last Seen 2019-10-31)
 
 There are 100 doors in a dungeon. A prisoner, to survive, must execute the
@@ -71,16 +76,17 @@ The process continues, for 100 passes, such that for each pass n, the prisoner
 toggles every nth door; When the algorithm completes, the evil genius releases
 her monsters. The monsters will come out of every open door. 
 
-Question A:
+## Part A:
 
 How many monsters attack her poor prisoner?
 
-Question B:
+## Part B:
 
 Our evil genius likes to make abstract maths a reality. She instead creates d
 many doors (where d is any natural number she pleases). Given d many doors, and
 d many passes of the algorithm, express the number of monsters that attack their
 poor prisoner as a function f(d)
+
 
 # Sorted Stacking (Last Seen 2019-10-31)
 
@@ -89,12 +95,13 @@ program to sort a stack with the smallest items on top.
 
 Recall that the allowed operations on a stack are: Push, Pop, Peek and isEmpty. 
 
-Question A:
+## Part A:
 You are allowed to use exactly one aditional stack. How fast can you go?
 
-Question B:
+## Part B:
 You are allowed to use as many additional stacks as you like. How fast can you
 go?
+
 
 # Binary Neighbours (Last seen 2019-11-07)
 
@@ -102,20 +109,22 @@ Given a positive integer, print the next smallest and next largest numbers that
 have the same number of 1 bits in their binary representation. Assume it is
 even.
 
-Part B:
+## Part B:
 If you want to have a really, really tough problem, try it for any positive
 integer.
 
+
 # Say a Word, Any Word (Last seen 2019-11-14)
 
-Given any integer n in range (-2000000000,2000000000) (That is -2 bilion to +2 bilion), 
-produce a string that represents it in natural English language.
+Given any integer n in range (-2000000000,2000000000) (That is -2 bilion to +2
+bilion), produce a string that represents it in natural English language.
 
     Input:  1234
     Output: One Thousaind Two Hundred (and) Thirty Four
     
     Input:  -92435
     Output: Minus Ninety-two Thousaind Four Hundred (and) Thirty Five
+
 
 # (Shut up and) Calculate (Last seen 2019-11-14)
 
@@ -128,21 +137,27 @@ can turn -4 to 4 and 4 to -4). Do each of these in turn:
 
 Hint: You may not need all available operations for each part.
 
+
 # Magic Indices (Last seen 2019-11-21)
 
-A magic index in an array of n integers (index from 0 to n-1) is defined to be an index such that a[i] = i.
+A magic index in an array of n integers (index from 0 to n-1) is defined to be
+an index such that a[i] = i.
 
-Part A:
+## Part A:
 
-The array is unsorted, what is the most efficient algorithm that can be written (i.e. write an algorithm that takes O(_) time, and provide an argument why you can't go faster than O(_) time)
+The array is unsorted, what is the most efficient algorithm that can be written
+(i.e. write an algorithm that takes O(_) time, and provide an argument why you
+can't go faster than O(_) time)
 
-Part B:
+## Part B:
 
 The list of integers is sorted in the array. Repeat Part A.
 
+
 # Zero the Matrix (Last seen 2019-11-21)
 
-Write an algorithm such that if an element is in an N by M matrix is zero, the entire row and column are set to zero.
+Write an algorithm such that if an element is in an N by M matrix is zero, the
+entire row and column are set to zero.
 
     Input:   [[1,2,3,4]
               [1,0,8,7]
@@ -156,13 +171,14 @@ Write an algorithm such that if an element is in an N by M matrix is zero, the e
               [6,0,0,9]
               [1,0,0,4]]
 
-Part B:
+## Part B:
 
 What is the time and space complexity of your algorithm?
 
-Part C:
+## Part C:
 
 Can you do this without copying the matrix?
+
 
 # Problem 1: (Last seen 2019-11-28)
 
@@ -170,15 +186,14 @@ Write an efficient algorithm that searches for a value in an m x n matrix. This
 matrix has the following properties:
 
 1. Integers in each row are sorted from left to right.
-2. The first integer of each row is greater than the last integer of the previous row.
+2. The first integer of each row is greater than the last integer of the
+   previous row.
 
-    Matrix = [[1,   3,  5,  7],
-              [10, 11, 16, 20],
-              [23, 30, 34, 50]]
-    Target = 3
-    Output: true
+    Matrix = [[1,   3,  5,  7], [10, 11, 16, 20], [23, 30, 34, 50]] Target = 3
+              Output: true
 
 How fast can you go, and why?
+
 
 
 # Problem 2: (Last seen 2019-11-28)
@@ -190,13 +205,14 @@ and n (For a given n).
     Output: 9
     Why?: 2, 12, 20, 21, 22, 23, 24, 25
 
-Part A:
+## Part A:
 
 Assume n < 10000. How fast can you go?
 
-Part B:
+## Part B:
 
 Now there are no restrictions on the value of n. How fast can you go?
+
 
 # Problem 1: (Last seen 2019-12-05)
 
@@ -208,9 +224,10 @@ instead.
      Input:  [73, 74, 75, 71, 69, 72, 76, 73]
      Output: [ 1,  1,  4,  2,  1,  1,  0,  0]
 
-Part B:
+## Part B:
 
 Can you do this in linear time?
+
 
 # Problem 2: (Last seen 2019-12-05)
 
@@ -231,6 +248,7 @@ have all values equal after some number of flips.
     Output: 2
     Explanation: After flipping values in the first two columns, the last two rows have equal values.
 
+
 # Problem 1: (Last seen 2020-02-27)
 
 Write code to partition a linked list around a value X s.t. all nodes less than
@@ -240,6 +258,7 @@ preserve their order.
      Input:  3->5->8->5->10->2->1
      Parititon on: 5
      Output: 3->2->1->5->8->5->10
+
 
 # Problem 2: (Last seen 2020-02-27)
 
@@ -255,6 +274,7 @@ make a loop.
     Output: c
 
 This problem has many possible methods. Try to come up with a few :-)
+
 
 # Problem 1: (Last seen 2020-03-12)
 
@@ -274,9 +294,10 @@ equals the given sum.
               [5,8,4,5]
             ]
 
-Extension 1:
+## Extension 1:
 
 If this was a binary search tree would this make a difference?
+
 
 # Problem 2: (Last seen 2020-03-12)
 
@@ -293,6 +314,7 @@ Hint: CS115 has already given you two very useful algorithms for this ;)
         / \    / \
       -10 -1  2   9
 
+
 # Problem 3: (Last seen 2020-03-12)
 
 Given a binary search tree, write a function kthSmallest to find the kth
@@ -306,28 +328,31 @@ smallest element in it.
           2
     Output: 1
 
+
 # Problem 1: (Last seen 2020-10-20)
 
-There are 100 closed lockers in a hallway. Behind the lockers are mosnters.
-On round 1, you go through the lockers and open every single one.
-On round 2, you go through the lockers and shut every second.
-On round 3, you go through the lockers and toggle every thrid.
-On round N, you go through the lockers and toggle every Nth.
-After 100 rounds, the monsters will exit the open lockers and attack. 
-How many monsters will there be attacking you?
+There are 100 closed lockers in a hallway. Behind the lockers are mosnters. On
+round 1, you go through the lockers and open every single one. On round 2, you
+go through the lockers and shut every second. On round 3, you go through the
+lockers and toggle every thrid. On round N, you go through the lockers and
+toggle every Nth. After 100 rounds, the monsters will exit the open lockers and
+attack. How many monsters will there be attacking you?
 
-Extension 1:
+## Extension 1:
 
-Instead of 100 lockers, you now have N lockers and N rounds. Solve the same problem :-)
+Instead of 100 lockers, you now have N lockers and N rounds. Solve the same
+problem :-)
 
-Extension 2:
+## Extension 2:
 
-Now, you have N lockers and M rounds, where N and M are not nessesarily the same number. Solve the same problem once more.
+Now, you have N lockers and M rounds, where N and M are not nessesarily the same
+number. Solve the same problem once more.
+
 
 # Problem 2: (Last seen 2020-10-20)
 
-You have 1000 bottles of soda, and exactly one is poisoned.
-You have 10 test strips which can be used to detect poison.
+You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
+strips which can be used to detect poison.
 
 A single drop of poison will turn the test strip positive permanently. 
 
@@ -337,6 +362,7 @@ However, you can only run tests once per day, and it takes seven days to return
 a result.
 
 How would you figure out the poisoned bottle in as few days as possible? 
+
 
 # Problem 1: (Last seen 2020-10-27)
 
@@ -354,6 +380,7 @@ think in a specific way, then all of them can.
 Note: Solutions via proxy, i.e. "Invent a reflective surface to look at
 yourself" or "Invent a machine that tells you your eye colour" are not
 acceptable. This is a logic riddle!
+
 
 # Problem 2: (Last seen 2020-10-27)
 
@@ -373,6 +400,7 @@ Side-note: If you are unsure how to program the simulation, or if you are just
 starting with programming in Java and you need some help let us know! If you are
 confident with programming, look out for others you can help :-)
 
+
 # Problem 1: (Last seen 2020-11-03)
 
 You're on a game show and there's 3 doors, which are all shut.
@@ -385,8 +413,9 @@ is a luxurious car". What is the best strategy to win the car?
 1. Hold on to the door you selected originally
 2. Switch and select the other door
 
-Or, are the two strategies leading to the same result?
-Try writing a simulation for this problem and report on the results :-)
+Or, are the two strategies leading to the same result? Try writing a simulation
+for this problem and report on the results :-)
+
 
 # Problem 2: (Last seen 2020-11-03)
 
@@ -397,6 +426,7 @@ the lamps. Before you open the door you are allowed to play with the light
 switches as much as you like. Your task is to determine which light switch
 corresponds to which lamp.
 
+
 # Problem 3: (Last seen 2020-11-03)
 
 You want to sort an array of numbers. However, you have a problem. You are a
@@ -405,15 +435,17 @@ it! Let's introduce Stalin Sort:
 
 1. You have an array of random positive integers. 
 2. In this array, if a number is 'out of order' it shall be deleted (killed).
-3. At the end of the algorithm, all numbers should appear consecutively with any open spaces appearing at the end of the array.
+3. At the end of the algorithm, all numbers should appear consecutively with any
+   open spaces appearing at the end of the array.
 
-What's the fast implementation of Stalin Sort?
-**Automatic weapons are not allowed and since cloning technology is not
-available, you must perform it in-place. Stalin is merciful, and allows you to
-place a tombstone value of -1 for each dead number.**
+What's the fast implementation of Stalin Sort? **Automatic weapons are not
+allowed and since cloning technology is not available, you must perform it
+in-place. Stalin is merciful, and allows you to place a tombstone value of -1
+for each dead number.**
 
     Input:  [4, 17, 5, 6, 12, 1, 9]
     Output: [4, 5, 6, 9, -1, -1, -1]
+
 
 # Problem 1: (Last seen 2020-11-10)
 
@@ -423,9 +455,10 @@ first instance where s1 is a substring of s2.
     Input: s1 = "abCd", s2 = "ffffabCdCefg"
     Output: 4
 
-Extension task:
+## Extension task:
 
 Extend this to return the index of all substrings of s1 in s2.
+
 
 # Problem 2: (Last seen 2020-11-10)
 
@@ -438,13 +471,14 @@ determine if you can interleave the characters in s1 and s2 to get to s3.
     Input: s1 = "aadcc", s2 = "xeebt", s3 = "aabeedcbtc"
     Output: false
 
-Part A:
+## Part A:
 
 No character in s1 appears in s2 and vise-versa
 
-Part B:
+## Part B:
 
 No such restriction applies (i.e. s1 = "aabc", s2 = "aabf")
+
 
 # Problem 1: (Last seen 2020-11-17)
 
@@ -459,6 +493,7 @@ Note: The "and" is optional but preferred.
     Input : -92435
     Output: Minus Ninety-two Thousand Four Hundred (and) Thirty Five
 
+
 # Problem 2: (Last seen 2020-11-17)
 
 Given a matrix NxN write a method to rotate the matrix by 90 degrees (i.e.
@@ -472,20 +507,22 @@ transpose the matrix).
              [8,5,2],
              [9,6,3]]
 
+
 # Magic Indices (Last seen 2020-11-24)
 
 A magic index in an array of n integers (index from 0 to n-1) is defined to be
 an index such that `array[i] == i`.
 
-Part A:
+## Part A:
 
-The array is unsorted, what is the most efficient algorithm that can be
-written (i.e. write an algorithm that takes O(_) time, and provide an argument
-why you can't go faster than O(_))
+The array is unsorted, what is the most efficient algorithm that can be written
+(i.e. write an algorithm that takes O(_) time, and provide an argument why you
+can't go faster than O(_))
 
-Part B:
+## Part B:
 
 The list of integers is sorted in the array. Repeat Part A.
+
 
 # Problem 2: (Last seen 2020-11-24)
 
@@ -498,6 +535,7 @@ as few operations as possible.
     Input:  1011110100
     Output: 0111111000
 
+
 # Problem 1: (Last seen 2020-12-01)
 
 Given a list of daily temperatures, return a list such that, for each day in the
@@ -508,8 +546,9 @@ instead.
     Input:  [73, 74, 75, 71, 69, 72, 76, 73]
     Output: [ 1,  1,  4,  2,  1,  1,  0,  0]
 
-Part B:
+## Part B:
     Can you do this in linear time?
+
 
 # Minesweeper (Last seen 2020-12-08)
 
@@ -529,6 +568,7 @@ gameplay, other than to block the user from accidentally clicking a cell that is
 thought to have a bomb. (Tip: if you're not familiar with this game, please play
 a few rounds online first.)
 
+
 # Problem 1: (Last seen 2021-03-09)
 
 You are given a string containing multiple words. Your output is the same
@@ -540,13 +580,14 @@ string, except that each word has had its characters sorted.
     Input: "welcome back to green book club"
     Output: "ceelmow abck ot eegnr bkoo bclu"
 
-Extension:
+## Extension:
 
 How fast can you do this? What about if you are constrained to at-most 4
 different letters per word? Any number of repetitions are allowed, such as:
     
     Input: "green book club is so much fun"
     Output: "eegnr bkoo bclu is os chmu fnu"
+
 
 # Problem 2: (Last seen 2021-03-09)
 
@@ -572,13 +613,15 @@ O(M*N) time.
             0 0 0
             1 0 9
 
-Extension:
+## Extension:
 
 Can you do this in O(1) space and O(M*N) time?
 
+
 # Problem 1: (Last seen 2021-03-16)
 
-Given a sorted array of integers that contains only the values 1,2 or 3 write a function to compute the sum of the array.
+Given a sorted array of integers that contains only the values 1,2 or 3 write a
+function to compute the sum of the array.
 
     Input:  [1,1,1,1,1,1,2,2,3,3,3,3,3,3]
     Output: 28
@@ -592,9 +635,10 @@ Given a sorted array of integers that contains only the values 1,2 or 3 write a 
     Input:  [1,1,1,1,3,3]
     Output: 10
 
-Extension:
+## Extension:
 
 Can you solve this problem in less than O(n) time?
+
 
 # Problem 2: (Last seen 2021-03-16)
 
