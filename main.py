@@ -34,9 +34,7 @@ def ext_printout(p: callable, extension: str, example_text: str, example: str, *
   print("", *result)
   print()
 
-def parse(arg: str, default: int):
-  n = arg.strip()
-  return int(n) if len(n) else default
+def parse(arg: str, default: int): return int(arg) if arg.isdecimal() else default
 
 class Greenbook(Cmd):
   intro = """

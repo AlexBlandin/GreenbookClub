@@ -73,8 +73,8 @@ following algorithm:
 3. They toggle every third door, 
 
 The process continues, for 100 passes, such that for each pass n, the prisoner
-toggles every nth door; When the algorithm completes, the evil genius releases
-her monsters. The monsters will come out of every open door. 
+toggles every nth door. When the algorithm completes, the evil genius releases
+her monsters. The monsters will come out of every open door.
 
 ## Part A:
 
@@ -206,7 +206,6 @@ signifying it was not found (`None`, `Nothing`, `null`, etc.)
 How fast can you go, and why?
 
 
-
 # Too Many Twos (Last seen 2019-11-28)
 
 Write a method to count the number of twos (`2`) that appear between the number
@@ -240,27 +239,31 @@ instead.
 Can you do this in linear time?
 
 
-# Problem 2: (Last seen 2019-12-05)
+# Matrix Flipper (Last seen 2019-12-05)
 
 Given a matrix consisting of `0`s and `1`s, we may choose any number of columns
 in the matrix and flip every cell in that column. Flipping a cell changes the
 value of that cell from `0` to `1` or from `1` to `0`. Return the maximum number
 of rows that have all values equal after some number of flips.
 
-    Input: [[0,1],[1,1]]
+    Input: [[0,1],
+            [1,1]]
     Output: 1
     Explanation: After flipping no values, 1 row has all values equal.
 
-    Input: [[0,1],[1,0]]
+    Input: [[0,1],
+            [1,0]]
     Output: 2
     Explanation: After flipping values in the first column, both rows have equal values.
 
-    Input: [[0,0,0],[0,0,1],[1,1,0]]
+    Input: [[0,0,0],
+            [0,0,1],
+            [1,1,0]]
     Output: 2
     Explanation: After flipping values in the first two columns, the last two rows have equal values.
 
 
-# Problem 1: (Last seen 2020-02-27)
+# Partition Petition (Last seen 2020-02-27)
 
 Write code to partition a linked list around a value `X` such that all nodes
 less than `X` come before all nodes greater than or equal to `X`. The two
@@ -271,7 +274,7 @@ partitions should preserve their order.
      Output: 3->2->1->5->8->5->10
 
 
-# Problem 2: (Last seen 2020-02-27)
+# Around and Around and (Last seen 2020-02-27)
 
 Given a circular linked list, implement an algorithm that returns the node at
 the beginning of the loop. A circular linked list is a corrupted linked list in
@@ -287,7 +290,7 @@ make a loop.
 This problem has many possible methods. Try to come up with a few :-)
 
 
-# Problem 1: (Last seen 2020-03-12)
+# Path Sums (Last seen 2020-03-12)
 
 Given a binary tree and a sum, find all root-to-leaf paths where have a sum of
 values/labels equal to the given sum.
@@ -300,17 +303,15 @@ values/labels equal to the given sum.
       11  13  4
      /  \    / \
     7    2  5   1
-    Output: [
-              [5,4,11,2],
-              [5,8,4,5]
-            ]
+    Output: [[5,4,11,2],
+             [5,8,4,5]]
 
 ## Extension:
 
 If this was a binary search tree would this make a difference?
 
 
-# Problem 2: (Last seen 2020-03-12)
+# Balancing Lists (Last seen 2020-03-12)
 
 Given an array where elements are sorted in ascending order, convert it to a
 balanced binary search tree (as balanced as possible, at least).
@@ -326,7 +327,7 @@ Hint: CS115 has already given you two very useful algorithms for this ;)
       -10 -1  2   9
 
 
-# Problem 3: (Last seen 2020-03-12)
+# Searching the Search Tree (Last seen 2020-03-12)
 
 Given a binary search tree, write a function to find the `N`th smallest element
 in it.
