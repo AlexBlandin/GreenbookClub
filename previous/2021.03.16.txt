@@ -1,7 +1,8 @@
-Problem 1
+Problem 1:
+
 Given a sorted array of integers that contains only the values 1,2 or 3 write a function to compute the sum of the array.
 
-Example:
+Examples:
   Input:  [1,1,1,1,1,1,2,2,3,3,3,3,3,3]
   Output: 28
 
@@ -17,7 +18,8 @@ Example:
 Extension:
   Can you solve this problem in less than O(n) time?
 
-Problem 2
+Problem 2:
+
 Given an unsorted integer array 'nums', find the smallest missing integer >0
 
 Examples:
