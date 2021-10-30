@@ -59,8 +59,8 @@ class Greenbook(Cmd):
   Please select a problem by typing its name, type "help" or "?" for the list of
   problems, or type "help problem" for a specific problem to get its description
   and any examples. You can add a value n for the size of the problem, such as
-  "problem 15"... I recommend you don't go too large, since the terminals tend
-  to make a messy printout with large n.
+  "problem 15"... I recommend you don't go too large, since terminals tend to
+  make a messy printout with large n.
   """
   prompt = "📗 " if os.name != "nt" else "📗  "
   explain, problems = {}, []
