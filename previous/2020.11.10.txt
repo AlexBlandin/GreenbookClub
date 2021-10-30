@@ -4,7 +4,7 @@ Given two strings s1, s2 where length(s1) < length(s2) find the index of the
 first instance where s1 is a substring of s2.
 
 Example 1:
-  Input: s1 = "abCd", s2 = "ffffabCdCOVID"
+  Input: s1 = "abCd", s2 = "ffffabCdCefg"
   Output: 4
 
 Extension task:
