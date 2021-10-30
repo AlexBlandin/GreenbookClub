@@ -256,8 +256,8 @@ class Greenbook(Cmd):
         c += x
     if c < o: s += ")" * (o-c)
     
-    if randint(0, 2) == 1 and len(s) > 1: # corrupt that string
-      if randint(0, 3) == 1: # generate a real garbled string
+    if randint(1, 3) == 1 and len(s) > 1: # corrupt that string
+      if randint(1, 4) == 1: # generate a real garbled string
         s = "".join(sample("".join([chr(ord(c) + randint(-1, 1)) for c in s]), len(s)))
       else: # drop some random parens and/or add new ones in
         what_to_do = randint(0, 4)
