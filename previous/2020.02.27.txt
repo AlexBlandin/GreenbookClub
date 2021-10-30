@@ -5,9 +5,9 @@ X come before all nodes greater than or equal to X. The two partitions should
 preserve their order.
  
  Example:
-   Input:   3->5->8->5->10->2->1
+   Input:  3->5->8->5->10->2->1
    Parititon on: 5
-   Output:  3->2->1->5->8->5->10
+   Output: 3->2->1->5->8->5->10
 
 Problem 2:
 
@@ -17,10 +17,10 @@ which a node's next pointer points to an earlier node in the linked list as to
 make a loop.
  
  Example:
-  Input:   a->b->c->d->e-+
-                 ^       |
-           |       |
-        +-------+
-  Loop at node: c
+  Input:  a->b->c->d->e-+
+                ^       |
+                |       |
+                +-------+
+  Output: c
 
 This problem has many different solutions. Try to come up with a few :-)

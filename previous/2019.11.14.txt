@@ -4,12 +4,12 @@ Given any integer n in range (-2000000000,2000000000) (That is -2 bilion to +2 b
 produce a string that represents it in natural English language.
 
 Example 1:
-  input  := 1234
-  output := One Thousaind Two Hundred (and) Thirty Four
+  Input  := 1234
+  Output := One Thousaind Two Hundred (and) Thirty Four
   
 Example 2:
-  input  := -92435
-  output := Minus Ninety-two Thousaind Four Hundred (and) Thirty Five
+  Input  := -92435
+  Output := Minus Ninety-two Thousaind Four Hundred (and) Thirty Five
 
 Problem 2:
 

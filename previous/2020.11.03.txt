@@ -29,7 +29,7 @@ dictator and your philosophy is: if something doesn't follow your rules, kill
 it! Let's introduce Stalin Sort:
 
   1. You have an array of random positive integers. 
-  2. In this array, if a number is 'out of order' it shall be deleted (i.e. killed).
+  2. In this array, if a number is 'out of order' it shall be deleted (killed).
   3. At the end of the algorithm, all numbers should appear consecutively with
   any open spaces appearing at the end of the array.
 
