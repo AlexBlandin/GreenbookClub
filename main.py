@@ -528,7 +528,17 @@ class Greenbook(Cmd):
     """
     The Matrix: Revolutions!
     
+    Given an N x N matrix, write a method to rotate the matrix by 90 degrees.
+
+      ? [[1,2,3],
+         [4,5,6],
+         [7,8,9]]
+
+      = [[7,4,1],
+         [8,5,2],
+         [9,6,3]]
     
+    How fast can you go? Can you do this with O(1) space?
     """# the rotate 90 degrees / transpose one
     
     # n = parse(arg, 5)

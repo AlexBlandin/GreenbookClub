@@ -127,10 +127,10 @@ can turn -4 to 4 and 4 to -4). Do each of these in turn:
 Hint: You may not need all available operations for each part.
 
 
-# Magic Indices (Last seen 2019-11-21)
+# Magic Indices (Last seen 2020-11-24)
 
 A magic index in an array of `n` integers (index from `0` to `n-1`) is defined
-to be an index such that `a[i] = i`.
+to be an index such that `array[i] == i`.
 
 ## Part A:
 
@@ -138,9 +138,13 @@ The array is unsorted, what is the most efficient algorithm that can be written
 (i.e. write an algorithm that takes `O(_)` time, and provide an argument why you
 can't go faster than `O(_)` time)
 
+The array is unsorted, what is the most efficient algorithm that can be written
+(i.e. write an algorithm that takes `O(_)` time, and provide an argument why you
+can't go faster than `O(_)`)
+
 ## Part B:
 
-The list of integers is sorted in the array. Repeat Part A.
+The list of integers is now sorted in the array. How fast can you go?
 
 
 # Zero the Matrix (Last seen 2021-03-09)
@@ -221,7 +225,7 @@ Assume `n` < 10000. How fast can you go?
 Now there are no restrictions on the value of `n`. How fast can you go?
 
 
-# Top Temperatures (Last seen 2019-12-05)
+# Top Temperatures (Last seen 2020-12-01)
 
 Given a list of daily temperatures, return a list such that, for each day in the
 input, tells you how many days you would have to wait until a warmer
@@ -483,9 +487,9 @@ Note: The "and" is optional but preferred.
     Output: Minus Ninety-two Thousand Four Hundred (and) Thirty Five
 
 
-# Problem 2: (Last seen 2020-11-17)
+# Matrix Revolutions (Last seen 2020-11-17)
 
-Given a matrix `N x N` write a method to rotate the matrix by 90 degrees.
+Given an `N x N` matrix, write a method to rotate the matrix by 90 degrees.
 
     Input: [[1,2,3],
             [4,5,6],
@@ -499,23 +503,8 @@ Given a matrix `N x N` write a method to rotate the matrix by 90 degrees.
 
 How fast can you go? Can you do this with `O(1)` space?
 
-# Magic Indices (Last seen 2020-11-24)
 
-A magic index in an array of `n` integers (index from `0` to `n-1`) is defined
-to be an index such that `array[i] == i`.
-
-## Part A:
-
-The array is unsorted, what is the most efficient algorithm that can be written
-(i.e. write an algorithm that takes `O(_)` time, and provide an argument why you
-can't go faster than `O(_)`)
-
-## Part B:
-
-The list of integers is sorted in the array. Repeat Part A.
-
-
-# Problem 2: (Last seen 2020-11-24)
+# Odd Bitswap Even (Last seen 2020-11-24)
 
 Write a program to swap sequential pairs of odd and even bits in an integer with
 as few operations as possible.
@@ -525,20 +514,6 @@ as few operations as possible.
 
     Input:  1011110100
     Output: 0111111000
-
-
-# Problem 1: (Last seen 2020-12-01)
-
-Given a list of daily temperatures, return a list such that, for each day in the
-input, tells you how many days you would have to wait until a warmer
-temperature. If there is no future day for which this is possible, put 0
-instead.
-
-    Input:  [73, 74, 75, 71, 69, 72, 76, 73]
-    Output: [ 1,  1,  4,  2,  1,  1,  0,  0]
-
-## Part B:
-    Can you do this in linear time?
 
 
 # Minesweeper (Last seen 2020-12-08)
@@ -561,7 +536,7 @@ thought to have a bomb. (Tip: if you're not familiar with this game, please play
 a few rounds online first.)
 
 
-# Problem 1: (Last seen 2021-03-09)
+# Word Sort (Last seen 2021-03-09)
 
 You are given a string containing multiple words. Your output is the same
 string, except that each word has had its characters sorted.
@@ -581,7 +556,7 @@ different letters per word? Any number of repetitions are allowed, such as:
     Output: "eegnr bkoo bclu is os chmu fnu"
 
 
-# Problem 1: (Last seen 2021-03-16)
+# Sum 123s (Last seen 2021-03-16)
 
 Given a sorted array of integers that contains only the values 1, 2, or 3, write
 a function to compute the sum of the array.
@@ -603,7 +578,7 @@ a function to compute the sum of the array.
 Can you solve this problem in less than O(n) time?
 
 
-# Problem 2: (Last seen 2021-03-16)
+# A Little Missing Something (Last seen 2021-03-16)
 
 Given an array of integers, find the smallest missing integer greater than 0.
 
