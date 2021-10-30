@@ -1,0 +1,38 @@
+Problem 1:
+	Given any integer n in range (-2000000000,2000000000) (That is -2 bilion to +2 bilion), 
+	produce a string that represents it in natural English language.
+	
+	Example 1:
+		input  := 1234
+		output := One Thousaind Two Hundred (and) Thirty Four
+		
+	Example 2:
+		input  := -92435
+		output := Minus Ninety-two Thousaind Four Hundred (and) Thirty Five
+
+
+Problem 2:
+	You have a computer that only 'knows' addition and negation of integers (E.g. can turn -4 to 4 and 4 to -4)
+	
+	Part A:
+		Define subtraction using only the above two operations
+	
+	Part B:
+		Define multiplication using the above three operations
+	
+	Part C:
+		Define division using the above four operations.
+	
+	Hint: You may not need all available operations for each part.
+	
+Problem 3:
+	Have you started the project yet?
+				/\
+			   /  \
+			  /    \
+			 /      \
+		   Yes!    No...
+		    |        |
+			|     &^%$!!!!
+			|
+	   Good Student!

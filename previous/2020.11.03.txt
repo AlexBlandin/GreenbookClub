@@ -1,0 +1,25 @@
+Problem 1:
+ You're on a game show and there's 3 doors that are all shut. 
+ The game show host asks you to pick a door. You pick a door and then the game show host opens a door other than the one you picked, to reveal a pair of goats. She says: "Behind one of the remaining doors is a goat and behind the other door is a luxurious car". What is the best strategy to win the car?
+     1. Hold on to the door you selected originally
+     2. Switch and select the other door
+ Or, are the two strategies leading to the same result?
+ Try writing a simulation for this problem and report on the results :-)
+
+
+Problem 2:
+ You're outside a room with the door shut. There are three light switches on the wall next to you and three antique lamps inside. You're allowed to open the door and walk into the room exactly once. That is the only time when you can observe the lamps. Before you open the door you are allowed to play with the light switches as much as you like. Your task is to determine which light switch corresponds to which lamp.
+
+
+Problem 3:
+ You want to sort an array of numbers. However, you have a problem. You are a dictator and your philosophy is: if something doesn't follow your rules, kill it! 
+ Let's introduce Stalin Sort. 
+     1. You have an array of random positive integers. 
+     2. In this array, if a number is 'out of order' it shall be deleted (i.e. killed).
+     3. At the end of the algorithm, all numbers should appear consecutively with any open spaces appearing at the end of the array.
+ What's the fast implementation of Stalin Sort?
+ **Automatic weapons are not allowed and since cloning technology is not available, you must perform it in-place**
+
+ Example:
+      Before: [4, 17, 5, 6, 12, 1, 9]
+      After:   [4, 5, 6, 9, -1, -1, -1]

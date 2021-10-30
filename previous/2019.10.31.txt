@@ -1,0 +1,37 @@
+<Boo>
+	Problem 1:
+		There is 100 doors in a dungeon. A prisoner, to survive, must execute the following algorithm:
+			1. They open all doors. 
+			2. They close every second door. 
+			3. They toggle every third door, 
+
+		The process continues, for 100 passes, such that for each pass n, the prisoner toggles every nth door;
+		When the algorithm completes, the evil genius releases her monsters. 
+		The monsters will come out of every open door. 
+
+		Question A:
+			How many monsters attack her poor prisoner?
+	
+		Question B:
+			Our evil genius, likes to make abstract math a reality. She instead creates d many doors
+			(where d is any natural number she pleases). 
+			Given d many doors, and d many passes of the algorithm, express the number of monsters that
+			attack their poor prisoner as a function f(d)
+		
+		Question C:
+			Why is she tourchering the prisoner? (Feel free to elaborate, scary halloween storries welcome)
+
+	Problem 2:
+		Mix up in groups of first, second and third years (as possible) and tackle the following:
+		Write a program to sort a stack with the smallest items on top.
+		Recall that the allowed operations on a stack are: Push, Pop, Peek and isEmpty. 
+	
+		Question A:
+			You are allowed to use exactly one aditional stack. How fast can you go?
+		
+		Question B:
+			You are allowed to use as many additional stacks as you like. How fast can you go?
+
+
+	Happy Haloween :-) Hopefully you won't be captured by the evil genious on your way out.
+</Boo>

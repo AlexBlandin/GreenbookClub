@@ -1,0 +1,51 @@
+Problem 1:
+	Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+	
+	Example:
+		Sum: 22
+		Input: 
+		      5
+		     / \
+		    4   8
+		   /   / \
+		  11  13  4
+		 /  \    / \
+		7    2  5   1
+		
+		Output: [
+				   [5,4,11,2],
+				   [5,8,4,5]
+				]
+	
+	Extention 1:
+		If this was a binary search tree would this make a difference?
+
+
+Problem 2:
+	Given an array where elements are sorted in ascending order, convert it to a balanced (as possible) BST.
+	Hint: CS115 has already given you two very useful algorithms for this ;)
+	
+	Input: [-10,-3,-1,0,2,5,9]
+	Output:
+					0
+				   / \
+				  /   \
+			    -3     5
+			    / \   / \
+             -10 -1  2   9
+			 
+	
+Problem 3:
+	Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+	
+	Example:
+		Input: 
+	        k = 1
+			
+			   3
+			  / \
+			 1   4
+			  \
+			   2
+	
+		Output: 1

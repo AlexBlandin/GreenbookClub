@@ -1,0 +1,33 @@
+Problem 1
+	A magic index in an array of n integers (index from 0 to n-1) is defined to be an index such that a[i] = i.
+
+	Part A
+		The array is unsorted, what is the most efficient algorithm that can be written (i.e. write an algoirthm that takes O(_) time, and provide an argument why you can't go faster than O(_) time)
+
+	Part B
+		The list of integers is sorted in the array. Repeat Part A.
+
+
+Problem 2
+	Write an algorithm such that if an element is in an N by M matrix is zero, the entire row and column are set to zero.
+
+	Example:
+		[
+			[1,2,3,4]
+			[1,0,8,7]
+			[4,4,0,2]
+			[6,7,8,9]
+			[1,2,3,4]
+		]
+	
+		Output:
+		[
+			[1,0,0,4]
+			[0,0,0,0]
+			[0,0,0,0]
+			[6,0,0,9]
+			[1,0,0,4]
+		]
+	Question 1: What is the time and space complexity of your algorithm?
+	Question 2: Can you do this without copying the matrix?
+

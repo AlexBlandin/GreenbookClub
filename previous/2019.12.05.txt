@@ -1,0 +1,38 @@
+Problem 1:
+	Given a list of daily temperatures, return a list such that, for each day in the input,
+	tells you how many days you would have to wait until a warmer temperature. 
+	If there is no future day for which this is possible, put 0 instead.
+
+	Example:
+		 Input:  [73, 74, 75, 71, 69, 72, 76, 73]
+		 Output: [ 1,  1,  4,  2,  1,  1,  0,  0]
+
+	Part B (AMENDED):
+		Can you do this in linear time?
+
+Problem 2:
+	Given a matrix consisting of 0s and 1s, we may choose any number of columns in the matrix and flip every cell in that column.
+	Flipping a cell changes the value of that cell from 0 to 1 or from 1 to 0.
+	Return the maximum number of rows that have all values equal after some number of flips.
+
+	Example 1:
+		Input: [[0,1],[1,1]]
+		Output: 1
+		Explanation: After flipping no values, 1 row has all values equal.
+
+	Example 2:
+		Input: [[0,1],[1,0]]
+		Output: 2
+		Explanation: After flipping values in the first column, both rows have equal values.
+
+	Example 3:
+		Input: [[0,0,0],[0,0,1],[1,1,0]]
+		Output: 2
+		Explanation: After flipping values in the first two columns, the last two rows have equal values.
+	
+     __
+   _|==|_  
+    ('')___/
+>--(`^^')
+  (`^'^'`)
+  `======'  
