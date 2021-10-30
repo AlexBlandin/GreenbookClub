@@ -27,13 +27,13 @@ balanced (as possible) BST.
 
 Hint: CS115 has already given you two very useful algorithms for this ;)
 
- Input: [-10,-3,-1,0,2,5,9]
- Output:  0
-         / \
-        /   \
-      -3     5
-     / \    / \
-   -10 -1  2   9
+  Input: [-10,-3,-1,0,2,5,9]
+  Output:  0
+          / \
+         /   \
+       -3     5
+      / \    / \
+    -10 -1  2   9
 
 Problem 3:
 
