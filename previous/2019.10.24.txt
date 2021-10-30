@@ -7,15 +7,13 @@ Example:
   Output: [[-1, 1], [2, -2]]
 
 Part B:
-
-Extend this such that you find triples that sum to zero :-)
+  Extend this such that you find triples that sum to zero :-)
  
 Example:
   Input:  [-1, 0, 1, 2, -2, 2, -4]
   Output: [[-1, 0, 1],[-2, 0, 2], [-4, 2, 2]] 
- 
 
-Problem 3:
+Problem 2:
 
 Given an input containing parenthesies, write a function to decide if the
 parentesies are matched. That is, for every opening parenethesis there must be a
