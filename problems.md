@@ -20,8 +20,8 @@ the odd array in descending order.
 
 # Submatrix (Last seen 2019-10-17)
 
-Given a 2-dimension array filled with 0's and 1's (a binary matrix), find the
-largest rectangle containing only 1's and return its area.
+Given a 2-dimension array filled with `0`s and `1`s (a binary matrix), find the
+largest rectangle containing only `1`s and return its area.
 
     Input: [[1,0,1,0,0],
             [1,0,1,1,1],
@@ -143,22 +143,33 @@ can't go faster than `O(_)` time)
 The list of integers is sorted in the array. Repeat Part A.
 
 
-# Zero the Matrix (Last seen 2019-11-21)
+# Zero the Matrix (Last seen 2021-03-09)
 
 Write an algorithm such that if an element is in an `N x M` matrix is zero, the
 entire row and column of that element are set to zero.
 
-    Input:   [[1,2,3,4]
-              [1,0,8,7]
-              [4,4,0,2]
-              [6,7,8,9]
-              [1,2,3,4]]
+Given an `N x M` matrix of random integers, some of which will be zero, zero-out
+any row and column where a cell contains a zero.
+
+    Input:  1 2 3 4
+            1 0 8 7
+            4 4 0 2
+            6 7 8 9
+            1 2 3 4
     
-    Output:  [[1,0,0,4]
-              [0,0,0,0]
-              [0,0,0,0]
-              [6,0,0,9]
-              [1,0,0,4]]
+    Output: 1 0 0 4
+            0 0 0 0
+            0 0 0 0
+            6 0 0 9
+            1 0 0 4
+    
+    Input:  14 0  7
+             8 0 31
+             1 4  9
+    
+    Output: 0 0 0
+            0 0 0
+            1 0 9
 
 ## Part B:
 
@@ -166,7 +177,7 @@ What is the time and space complexity of your algorithm?
 
 ## Part C:
 
-Can you do this without copying the matrix?
+Can you do this in `O(1)` space and `O(N x M)` time?
 
 
 # Matrix Search (Last seen 2019-11-28)
@@ -590,35 +601,6 @@ different letters per word? Any number of repetitions are allowed, such as:
     Output: "eegnr bkoo bclu is os chmu fnu"
 
 
-# Problem 2: (Last seen 2021-03-09)
-
-Given an `M*N` matrix of random integers some of which will be zero, zero-out any
-row and column where a cell contains a zero. Try to do it in `O(M*N)` space and
-`O(M*N)` time.
-
-    Input:  1 3 0 7 1 90
-            7 8 3 1 3 17
-            3 21 2 8 0 3
-            1 14 11 3 4 8
-    
-    Output: 0 0 0 0 0 0
-            7 8 0 1 0 17
-            0 0 0 0 0 0
-            1 14 0 3 0 8
-    
-    Input:  14 0 7
-            8 0 31
-            1 4 9
-    
-    Output: 0 0 0
-            0 0 0
-            1 0 9
-
-## Extension:
-
-Can you do this in `O(1)` space and `O(M*N)` time?
-
-
 # Problem 1: (Last seen 2021-03-16)
 
 Given a sorted array of integers that contains only the values 1, 2, or 3, write
@@ -643,7 +625,7 @@ Can you solve this problem in less than O(n) time?
 
 # Problem 2: (Last seen 2021-03-16)
 
-Given an unsorted integer array `nums`, find the smallest missing integer `> 0`
+Given an array of integers, find the smallest missing integer greater than 0.
 
     Input: [1,2,0]
     Output: 3
@@ -653,7 +635,3 @@ Given an unsorted integer array `nums`, find the smallest missing integer `> 0`
 
     Input: [7,8,9,11,12]
     Output: 1
-
-Constraints:
-- The input array length will never exceed 300
-- Array elements are in the range of a 32-bit signed integer
