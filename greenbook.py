@@ -2,6 +2,7 @@ from math import log10, log2, ceil, floor, sqrt
 from random import randint, sample
 from itertools import combinations
 from cmd import Cmd
+import os
 
 from BalancedTernary import BalancedTernary as tern
 
@@ -61,7 +62,7 @@ class Greenbook(Cmd):
   "problem 15"... I recommend you don't go too large, since the terminals tend
   to make a messy printout with large n.
   """
-  prompt = "📗 "
+  prompt = "📗 " if os.name != "nt" else "📗  "
   explain, problems = {}, []
   
   def preloop(self):
