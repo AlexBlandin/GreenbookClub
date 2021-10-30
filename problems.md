@@ -313,10 +313,10 @@ Hint: CS115 has already given you two very useful algorithms for this ;)
 
 # Problem 3: (Last seen 2020-03-12)
 
-Given a binary search tree, write a function to find the `k`th smallest element
+Given a binary search tree, write a function to find the `N`th smallest element
 in it.
 
-    k: 1
+    N: 1
     Tree: 3
          / \
         1   4
