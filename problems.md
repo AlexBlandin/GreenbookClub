@@ -4,7 +4,7 @@ Given an array A of non-negative integers, return an array consisting of all the
 even elements of A, followed by all the odd elements of A.
 
 You may return any answer array that satisfies this condition.
- 
+
 Example:
   Input:  [3,1,2,4]
   Output: [4,2,1,3]
@@ -12,7 +12,7 @@ Example:
 Extension 1:
   Your output array must now be composed of the even array in ascending order, 
   and the odd array in decending order
- 
+
 Example:
   Input:  [3,1,2,4,8,3,4,1]
   Output: [2,4,4,8,3,3,1,1]
@@ -21,7 +21,7 @@ Example:
 
 Given a 2D (binary) matrix filled with 0's and 1's, find the largest rectangle
 containing only 1's and return its area.
- 
+
 Example:
   Input: [[1,0,1,0,0],
           [1,0,1,1,1],
@@ -41,7 +41,7 @@ Example:
 
 Part B:
   Extend this such that you find triples that sum to zero :-)
- 
+
 Example:
   Input:  [-1, 0, 1, 2, -2, 2, -4]
   Output: [[-1, 0, 1],[-2, 0, 2], [-4, 2, 2]] 
@@ -51,7 +51,7 @@ Example:
 Given an input containing parenthesies, write a function to decide if the
 parentesies are matched. That is, for every opening parenethesis there must be a
 respective closing parentesis and vise versa.
- 
+
 Example:
   Input:  "((Hello) world))"
   Output: false
@@ -124,18 +124,18 @@ Example 2:
 
 You have a computer that only 'knows' addition and negation of integers (E.g.
 can turn -4 to 4 and 4 to -4)
- 
+
 Part A:
   Define subtraction using only the above two operations
- 
+
 Part B:
   Define multiplication using the above three operations
- 
+
 Part C:
   Define division using the above four operations.
- 
+
 Hint: You may not need all available operations for each part.
- 
+
 # Magic Indices (Last seen 2019-11-21)
 
 A magic index in an array of n integers (index from 0 to n-1) is defined to be an index such that a[i] = i.
@@ -175,7 +175,7 @@ Write an efficient algorithm that searches for a value in an m x n matrix. This
 matrix has the following properties:
   1. Integers in each row are sorted from left to right.
   2. The first integer of each row is greater than the last integer of the previous row.
- 
+
 Example:
   Matrix = [[1,   3,  5,  7],
             [10, 11, 16, 20],
@@ -185,7 +185,7 @@ Example:
   
  How fast can you go, and why?
 
- 
+
 # Problem 2: (Last seen 2019-11-28)
 
 Write a method to count the number of twos (2) that appear between the number 0
@@ -195,7 +195,7 @@ Example:
   Input: 25
   Output: 9
   Why?: 2, 12, 20, 21, 22, 23, 24, 25
- 
+
 Part A:
   Assume n < 10000. How fast can you go?
   
@@ -237,13 +237,13 @@ Example 3:
   Input: [[0,0,0],[0,0,1],[1,1,0]]
   Output: 2
   Explanation: After flipping values in the first two columns, the last two rows have equal values.
- 
+
 # Problem 1: (Last seen 2020-02-27)
 
 Write code to partition a linked list around a value X s.t. all nodes less than
 X come before all nodes greater than or equal to X. The two partitions should
 preserve their order.
- 
+
  Example:
    Input:  3->5->8->5->10->2->1
    Parititon on: 5
@@ -255,7 +255,7 @@ Given a circular linked list, implement an algorithm that returns the node at
 the begining of the loop. A circular linked list is a corrupted linked list in
 which a node's next pointer points to an earlier node in the linked list as to
 make a loop.
- 
+
  Example:
   Input:  a->b->c->d->e-+
                 ^       |
