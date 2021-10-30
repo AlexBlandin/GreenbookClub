@@ -392,7 +392,7 @@ starting with programming in Java and you need some help let us know! If you are
 confident with programming, look out for others you can help :-)
 
 
-# Legally Distinct Minty Hill Problem (Last seen 2020-11-03)
+# The Legally Distinct Minty Hill Problem (Last seen 2020-11-03)
 
 You're on a game show and there are 3 doors, which are all shut.
 
