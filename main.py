@@ -369,9 +369,26 @@ class Greenbook(Cmd):
   def do_water_trap(self, arg):
     """
     Water Trap!
+
+    Imagine a histogram (bar graph). Design an algorithm to compute the volume
+    of water it could hold if someone poured water across the top. You can
+    assume that each histogram bar has width 1. (Says "volume" but really it's
+    area since 2D.)
+
+      ? {0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0}
+      = 26
     
+    Can visualise the problem if you wish, the above example looks like:
     
-    """ # TODO: fill in
+         █
+         █~~~~█
+      █~~█    █
+      █  █  █ █
+      █  █  █ █
+      █  █  █ █~█
+    ---------------- (height=0) █ = solid, "~" = waterline
+    0040060030501000
+    """
     
     # n is the number of samples, height is ints>=0, max used for sample generation
     n, max_height = parse(arg, 1000000), 255 # use 10,8 for plot demo
