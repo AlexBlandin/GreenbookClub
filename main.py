@@ -5,6 +5,7 @@ from cmd import Cmd
 import os
 
 from BalancedTernary import BalancedTernary as tern
+from num2words import num2words
 
 def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
   if blocky: return "".join(["█" if a else " " for a in arr])
@@ -14,7 +15,6 @@ def name(p: callable): return p.__doc__.splitlines()[0]
 
 def pprintout(p: callable, example_text: str, example: str, *result):
   """Standard interactive printout for a problem"""
-  print()
   print(name(p))
   print(example_text)
   print(f" {example}")
@@ -61,6 +61,14 @@ class Greenbook(Cmd):
   make a messy printout with large n.
   """
   prompt = "📗 " if os.name != "nt" else "📗  "
+  
+  def default(self, args):
+    args = args.split()
+    for i in range(1, len(args)+1):
+      as_arg = "_".join(["do"]+args[:i])
+      if hasattr(self, as_arg):
+        f = getattr(self, as_arg)
+        if callable(f): f(" ".join(args[i:])) # just guard against "prompt" etc
   
   def do_exit(self, *_):
     """What do you think it does?"""
@@ -423,7 +431,7 @@ class Greenbook(Cmd):
     """
     
     # n is the number of samples, height is ints>=0, max used for sample generation
-    n, max_height = parse(arg, 1000000), 255 # use 10,8 for plot demo
+    n, max_height = parse(arg, 10), 8 # or parse(arg, 1000000), 255
 
     s = [randint(0, max_height) for i in range(n)] # our heightmap
     t = [0]*n # minimum of the tallest on either side of a point
@@ -445,7 +453,6 @@ class Greenbook(Cmd):
               f"Trapped {r} water"
     )
   
-  # from num2words import num2words
   def do_say_a_word(self, arg):
     """
     Say a word, any word!
@@ -454,10 +461,10 @@ class Greenbook(Cmd):
     written/spoken English.
     
       ? 1234
-      = one thousand, two hundred, and thirty-four
+      = one thousand, two hundred and thirty-four
       
       ? -92435
-      = minus ninety-two thousand, four hundred, and thirty-five
+      = minus ninety-two thousand, four hundred and thirty-five
     """
     
     n = parse(arg, 0)
@@ -466,7 +473,7 @@ class Greenbook(Cmd):
     
     pprintout(self.do_say_a_word,
               f"For example, given: ", n,
-              "Sorry, this is still on my TODO list" # TODO: this
+              num2words(n)
     )
   
   def do_calculate(self, arg):
