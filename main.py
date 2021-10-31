@@ -330,7 +330,7 @@ class Greenbook(Cmd):
     b = randint(n, 2**(n+10))
     pprintoutplus(self.do_deadly_soda, "generalised",
                   f"For example, with only {n} test strips, we might have", f"{b} bottles",
-                  f"{max(1,floor(log2(b)-n+1))*7} days"
+                  f"{max(1,ceil(log2(b)-n+1))*7} days"
     )
   
   def do_sorted_stacking(self, arg):
