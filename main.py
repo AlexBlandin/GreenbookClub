@@ -12,7 +12,7 @@ def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
 
 def name(p: callable): return p.__doc__.splitlines()[0]
 
-def printout(p: callable, example_text: str, example: str, *result):
+def pprintout(p: callable, example_text: str, example: str, *result):
   """Standard interactive printout for a problem"""
   print()
   print(name(p))
@@ -23,7 +23,7 @@ def printout(p: callable, example_text: str, example: str, *result):
   print("", *result)
   print()
 
-def ext_printout(p: callable, extension: str, example_text: str, example: str, *result):
+def pprintoutplus(p: callable, extension: str, example_text: str, example: str, *result):
   """Standard interactive printout for an extended problem"""
   input(f"Press enter/return to see the extended problem: ")
   print(name(p), extension)
@@ -92,7 +92,7 @@ class Greenbook(Cmd):
     odd, even = lambda x: not x%2, lambda x: x%2
     odds, evens = filter(odd, numbers), filter(even, numbers)
     
-    printout(self.do_odds_and_evens,
+    pprintout(self.do_odds_and_evens,
               f"For example, a list of {n} elements might be: ", join(numbers),
               join(evens), join(odds)
     )
@@ -107,7 +107,7 @@ class Greenbook(Cmd):
     # 0.7) gives O(n log nr).
     odds, evens = sorted(odds, reverse=True), sorted(evens)
     
-    ext_printout(self.do_odds_and_evens, "extended",
+    pprintoutplus(self.do_odds_and_evens, "extended",
                   f"For example, a list of {n} elements might be: ", join(numbers),
                   join(evens), join(odds)
     )
@@ -166,7 +166,7 @@ class Greenbook(Cmd):
     else:
       results.append("No pairs in the list")
     
-    printout(self.do_zerosum_game,
+    pprintout(self.do_zerosum_game,
               f"For example, a list of {n} elements might be: ", join(numbers),
               join(results)
     )
@@ -174,7 +174,7 @@ class Greenbook(Cmd):
     matches = [f"({a}, {b}, {c})" for a, b, c in [tuple(combo) for combo in combinations(sorted(list(set(numbers))), 3)] if a + b + c == 0]
     if numbers.count(0) > 3: matches.append("(0, 0, 0)")
     
-    ext_printout(self.do_zerosum_game, "extended",
+    pprintoutplus(self.do_zerosum_game, "extended",
                   f"For example, a list of {n} elements might be: ", join(numbers),
                   join(matches)
     )
@@ -272,7 +272,7 @@ class Greenbook(Cmd):
         matching = False
         break
     
-    printout(self.do_lispy_business,
+    pprintout(self.do_lispy_business,
               f"An example string with {n} lexical units", s,
               "Yes" if stack == 0 and matching else "No"
     )
@@ -290,15 +290,47 @@ class Greenbook(Cmd):
     """
     
     n = parse(arg, 1000)
-    printout(self.do_door_problem,
+    pprintout(self.do_door_problem,
               f"For this problem, we start with exactly:", "100 doors",
               f"{floor(sqrt(100))} left open"
     )
     
     number = randint(1, n)
-    ext_printout(self.do_door_problem, "extended",
+    pprintoutplus(self.do_door_problem, "extended",
                   f"For example, with doors <= {n}, we can have exactly:", f"{number} doors",
                   f"{floor(sqrt(number))} left open"
+    )
+  
+  def do_deadly_soda(self, arg):
+    """
+    Deadly Soda!
+    
+    You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
+    strips which can be used to detect poison.
+
+    A single drop of poison will turn the test strip positive permanently. 
+
+    You can put any number of drops on a test strip at once, and you can reuse a
+    test strip as many times as you'd like (as long as the results are
+    negative). However, you can only run tests once per day, and it takes seven
+    days to return a result.
+
+    How would you figure out the poisoned bottle in as few days as possible?
+    
+    Now, does this generalise? How few days can you guarantee it will take?
+    """
+    
+    n = parse(arg, 10)
+    
+    pprintout(self.do_deadly_soda,
+              f"For example, with only 10 test strips, we might have:", "1000 bottles",
+              "7 days"
+    )
+    
+    b = randint(n, 2**(n+10))
+    pprintoutplus(self.do_deadly_soda, "generalised",
+                  f"For example, with only {n} test strips, we might have", f"{b} bottles",
+                  f"{max(1,floor(log2(b)-n+1))*7} days"
     )
   
   def do_sorted_stacking(self, arg):
@@ -318,7 +350,7 @@ class Greenbook(Cmd):
     numbers = [randint(0, biggest_number) for _ in range(n)]
     numbers = sample(numbers, n)
     
-    printout(self.do_sorted_stacking,
+    pprintout(self.do_sorted_stacking,
               f"For example, a stack of {n} items might be: ", numbers,
               sorted(numbers, reverse=True)
     )
@@ -345,7 +377,7 @@ class Greenbook(Cmd):
     higher = lambda x: ((x | (x-1))+1) | x ^ (x & -x)
     lower = lambda x: ((x&-x)^x)|((x&-x)>>1)
     
-    printout(self.do_binary_pals,
+    pprintout(self.do_binary_pals,
               f"For example, a number with {n} true/1 bits might be: ", f"{number} ({number:b})",
               f"{lower(number)} < {number} < {higher(number)} ({lower(number):b} < {number:b} < {higher(number):b})"
     )
@@ -355,13 +387,13 @@ class Greenbook(Cmd):
     # higher is the same!
     lower = lambda x: ((x&-x)^x)|((x&-x)>>1) if not (x & 1) else ((x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))))) | (((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1))
     
-    ext_printout(self.do_binary_pals, "extended",
+    pprintoutplus(self.do_binary_pals, "extended",
                   f"For example, a number with {n} true/1 bits might be: ", f"{number} ({number:b})",
                   f"{lower(number)} < {number} < {higher(number)} ({lower(number):b} < {number:b} < {higher(number):b})"
     )
     
     # Do Arctic Terns prefer Balanced Ternary? I hope so.
-    ext_printout(self.do_binary_pals, "extra extended!",
+    pprintoutplus(self.do_binary_pals, "extra extended!",
                   f"For example, a number with {n} 1 trits might be: ", f"{number} ({tern(number)}, balanced)",
                   "" # TODO: this
     )
@@ -408,7 +440,7 @@ class Greenbook(Cmd):
       if h > peak: peak = h
       if h < t[i]: r += t[i] - h # add any water trapped "above" this point
 
-    printout(self.do_water_trap,
+    pprintout(self.do_water_trap,
               f"For example, a water trap {n} long with heights:", join(s),
               f"Trapped {r} water"
     )
@@ -432,7 +464,7 @@ class Greenbook(Cmd):
     if not len(arg.strip()):
       n = randint(-2 * 10**9, 2 * 10**9)
     
-    printout(self.do_say_a_word,
+    pprintout(self.do_say_a_word,
               f"For example, given: ", n,
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -456,7 +488,7 @@ class Greenbook(Cmd):
     if not len(arg.strip()):
       pass # generate our own equation string
     
-    printout(self.do_calculate,
+    pprintout(self.do_calculate,
               f"Sorry, this is still on my TODO list", "",
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -472,7 +504,7 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 10)
-    printout(self.do_magic_indices,
+    pprintout(self.do_magic_indices,
               f"Sorry, this is still on my TODO list", "",
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -503,7 +535,7 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 5)
-    printout(self.do_zero_the_matrix,
+    pprintout(self.do_zero_the_matrix,
               f"Sorry, this is still on my TODO list", "",
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -534,7 +566,7 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 5)
-    printout(self.do_matrix_search,
+    pprintout(self.do_matrix_search,
               f"Sorry, this is still on my TODO list", "",
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -557,7 +589,7 @@ class Greenbook(Cmd):
     """# the rotate 90 degrees / transpose one
     
     # n = parse(arg, 5)
-    printout(self.do_matrix_revolve,
+    pprintout(self.do_matrix_revolve,
               f"Sorry, this is still on my TODO list", "",
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -576,7 +608,7 @@ class Greenbook(Cmd):
     """ # TODO: uhhh what is this even
     
     # n = parse(arg, 5)
-    printout(self.do_too_many_twos,
+    pprintout(self.do_too_many_twos,
               f"Sorry, this is still on my TODO list", "",
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -613,7 +645,7 @@ class Greenbook(Cmd):
       mrs[t] = i
       tbs |= 2**t
     
-    printout(self.do_top_temps,
+    pprintout(self.do_top_temps,
               f"For example, a list of {n} elements might be: ", join(sam),
               join(out)
     )
@@ -645,7 +677,7 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 5)
-    printout(self.do_matrix_flip,
+    pprintout(self.do_matrix_flip,
               f"Sorry, this is still on my TODO list", "",
               "Sorry, this is still on my TODO list" # TODO: this
     )
@@ -756,7 +788,7 @@ class Greenbook(Cmd):
     else:
       results.append("There was nothing in the matrix")
     
-    printout(self.do_submatrix,
+    pprintout(self.do_submatrix,
               f"For example, a matrix of size {n}*{n} might be: ", "\n".join(example),
               "\n".join(results)
     )
