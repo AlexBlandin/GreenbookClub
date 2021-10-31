@@ -599,18 +599,20 @@ Imagine a histogram (bar graph). Design an algorithm to compute the volume of
 water it could hold if someone poured water across the top. You can assume that
 each histogram bar has width 1. (Says "volume" but really it's area since 2D.)
 
-  Input: {0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0}
-  Output: 26
+    Input: {0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 0, 0}
+    Output: 26
 
 Can visualise the problem if you wish, the above example looks like:
-    
-         █
-         █~~~~█
-      █~~█    █
-      █  █  █ █
-      █  █  █ █
-      █  █  █ █~█
-    ---------------- (height=0) █ = solid, "~" = waterline
-    0040060030501000
+
+```
+     #
+     #~~~~#
+  #~~#    #
+  #  #  # #
+  #  #  # #
+  #  #  # #~#
+---------------- (height=0) # = solid, "~" = waterline
+0040060030501000
+```
 
 (Green book page 189)
