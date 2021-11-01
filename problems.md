@@ -63,29 +63,20 @@ respective closing parenthesis and vice-versa.
     Output: true
 
 
-# The Legendary Door Problem (Last Seen 2019-10-31)
+# The Legendary Door Problem (Last Seen 2021-11-01)
 
-There are 100 doors in a dungeon. A prisoner, to survive, must execute the
-following algorithm:
+There are 100 closed lockers in a hallway. Behind the lockers are monsters. On
+round 1, you go through the lockers and open every single one. On round 2, you
+go through the lockers and shut every second. On round 3, you go through the
+lockers and toggle every third. On round N, you go through the lockers and
+toggle every Nth. After 100 rounds, the monsters will exit the open lockers and
+attack. How many monsters will there be attacking you?
 
-1. They open all doors. 
-2. They close every second door. 
-3. They toggle every third door, 
+Extension 1: Instead of 100 lockers, you now have N lockers and N rounds. Solve
+the same problem :-)
 
-The process continues, for 100 passes, such that for each pass n, the prisoner
-toggles every nth door. When the algorithm completes, the evil genius releases
-her monsters. The monsters will come out of every open door.
-
-## Part A:
-
-How many monsters attack her poor prisoner?
-
-## Part B:
-
-Our evil genius likes to make abstract maths a reality. She instead creates d
-many doors (where `d` is any natural number she pleases). Given `d` many doors,
-and d many passes of the algorithm, express the number of monsters that attack
-their poor prisoner as a function `f(d)`.
+Extension 2: Now, you have N lockers and M rounds, where N and M are not
+necessarily the same number. Solve the same problem once more.
 
 
 # Sorted Stacking (Last Seen 2019-10-31)
@@ -341,19 +332,15 @@ in it.
     Output: 1
 
 
-# Deadly Soda (Last seen 2020-10-20)
+# Deadly Soda (Last seen 2021-11-01)
 
 You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
-strips which can be used to detect poison.
-
-A single drop of poison will turn the test strip positive permanently. 
-
-You can put any number of drops on a test strip at once, and you can reuse a
-test strip as many times as you'd like (as long as the results are negative).
-However, you can only run tests once per day, and it takes seven days to return
-a result.
-
-How would you figure out the poisoned bottle in as few days as possible? 
+strips which can be used to detect poison. A single drop of poison will turn the
+test strip positive permanently. You can put any number of drops on a test strip
+at once, and you can reuse a test strip as many times as you'd like (as long as
+the results are negative). However, you can only run tests once per day, and it
+takes seven days to return a result. How would you figure out the poisoned
+bottle in as few days as possible?
 
 
 # Island of Paradise (Last seen 2020-10-27)
