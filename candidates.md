@@ -81,3 +81,42 @@ formats.
 
 ([Inspired by this fun trick](https://lucb1e.com/randomprojects/php/funnip.php)
 & [`inet_aton(3)` shenanigans.](https://www.netmeister.org/blog/inet_aton.html))
+
+
+# Playing Tag
+
+Hierarchical directories are out! Down with the caste (file)system!
+
+Welcome to the 21st century, we have #tags! And your task is to wrangle them!
+
+See, some very clever clogs came up with an AI that can create tags from videos,
+identifying both general themes from the videos and multiple highlights within.
+The only problem is that none of them thought about how best to use them! Well,
+that's not the half of it, they didn't even realise it was outputting tags that
+are actually the same thing, just in a different language or phrasing!
+
+So, you have to come up with a way to filter a list of videos based on a tag,
+knowing that the tag you were provided is "incomplete"! For example, if a person
+searched for "puppy" videos, then you'd also need to return "pup" videos that
+didn't get the "puppy" tag assigned (because the AI obviously isn't perfect).
+
+Rather than deal with a massive list of tags, for the purposes of demonstrating
+your method and testing it, you can assume they are numeric IDs (so perhaps 5 is
+"puppy" and 9 is "pup"). Each video can also be identified numerically, so we
+can return a list of videos like `[43,27,90,72]`. Each video can have any number
+of tags (because variable content, lengths, and numbers of highlights, etc.) and
+may have multiple "equivalent" tags (i.e., video 90 above has both tags 5 and 9)
+so account for that, we don't want to see the same video pop up twice (or more)!
+
+As a final thing, don't worry about things being sorted or whatever, your task
+is simply to retrieve these videos such that we can sort them in any number of
+ways (relevance, age, length, etc).
+
+As an extension, consider what happens if this is a "live algorithm", as in it
+is expected to run for multiple queries, rather than one-off. In other words,
+without knowing anything about the possible queries, can you pre-organise this
+to optimise lookup? Factor in space considerations to your thinking if you can.
+(We typically call such "setup" as an "amortised cost", as it's spread over the
+subsequent queries. For example, dynamic arrays have O(1) amortised resizing!)
+
+([Inspired by Google Hash Code 2019!](https://codingcompetitions.withgoogle.com/hashcode/archive))
