@@ -116,7 +116,7 @@ As an extension, consider what happens if this is a "live algorithm", as in it
 is expected to run for multiple queries, rather than one-off. In other words,
 without knowing anything about the possible queries, can you pre-organise this
 to optimise lookup? Factor in space considerations to your thinking if you can.
-(We typically call such "setup" as an "amortised cost", as it's spread over the
+(We typically say such "setup" has an "amortised cost", as it's spread over the
 subsequent queries. For example, dynamic arrays have O(1) amortised resizing!)
 
 ([Inspired by Google Hash Code 2019!](https://codingcompetitions.withgoogle.com/hashcode/archive))
