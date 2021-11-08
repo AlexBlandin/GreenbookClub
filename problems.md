@@ -47,7 +47,7 @@ Extend this such that you find triples that sum to zero :-)
     Output: [[-1, 0, 1],[-2, 0, 2], [-4, 2, 2]] 
 
 
-# Lispy Business (Last seen 2019-10-24)
+# Lispy Business (Last seen 2021-11-08)
 
 Given an input containing parentheses, write a function to decide if the
 parentheses are matched. That is, for every opening parenthesis there must be a
@@ -138,9 +138,9 @@ can't go faster than `O(_)`)
 The list of integers is now sorted in the array. How fast can you go?
 
 
-# Zero the Matrix (Last seen 2021-03-09)
+# Zero the Matrix (Last seen 2021-11-08)
 
-Write an algorithm such that if an element is in an `N x M` matrix is zero, the
+Write an algorithm such that if an element in an `N x M` matrix is zero, the
 entire row and column of that element are set to zero.
 
 Given an `N x M` matrix of random integers, some of which will be zero, zero-out
