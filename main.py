@@ -521,7 +521,7 @@ class Greenbook(Cmd):
     spec, so nothing stored looks like IP addresses!
 
     For example, Swansea's IP is normally 137.44.1.20, however this system has
-    it stored as `"5mZtBU"`! That's right, it's a mnemonic IP system! Completely
+    it stored as `5mZtBU`! That's right, it's a mnemonic IP system! Completely
     out of spec, but Tucker wants us to convert these old "Swansea IP" addresses
     into normal IPv4. Handily, there's an old comment left that you can read.
     
