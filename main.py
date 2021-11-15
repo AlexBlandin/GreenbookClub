@@ -542,7 +542,6 @@ class Greenbook(Cmd):
     """
     
     ip = ".".join([str(randint(0,255)) for _ in range(4)])
-    dotted = randint(0,1)==1
     z_a = ord("z")-ord("a")
     sip = []
     for byte in ip.split("."):
@@ -569,9 +568,8 @@ class Greenbook(Cmd):
       else:
         sip.append(chr(b))
     
-    sipj = ".".join if dotted else "".join
     pprintout(self.do_ip_misaddress,
-              f"For example, the SIP: ", sipj(sip),
+              f"For example, the SIP: ", ".".join(sip),
               ip
     )
   

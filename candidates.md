@@ -66,20 +66,17 @@ normal IPv4. Handily, there's an old comment left that you can read.
  * would mean that we get a large string of 'z' characters in many cases. For *
  * this reason, we first convert these 'z' characters into decimal digits in  *
  * the range 48-57 (0-9) such that, if there is more than one 'z', we produce *
- * the decimal representation of how many were required. Hence, a byte=146 is *
- * the lowest byte with this behaviour, and so contributes the char '2'. If   *
- * the byte is lower than 97, we consider the first Z offset, so for a byte = *
- * 49, which is expanded up to 146 in our a-z interpretation, but we do force *
- * the first of these to be represented as a 'Z' since this is needed so we   *
- * can disambiguate the process. Following this would be a normal 'z', as no  *
+ * the decimal representation of how many were required. If the byte is lower *
+ * than 97, we consider the first Z offset, so for a byte = 49, which is then *
+ * expanded up to 146 in our a-z interpretation, but we do force the first of *
+ * these to be represented as a 'Z' since this is needed so that we can now   *
+ * disambiguate the process. Following this would be a normal 'z', as no      *
  * further characters are required. Once we reach the byte = 74 and above, we *
  * resume our compression scheme and produce the code "Z2" or greater. Due to *
  * the limitations of a single byte, this should not exceed 10. Hence 255 is  *
- * converted to "10f". This is repeated for each byte. We now do not need to  *
- * use a '.' delimiting each byte, since this is unambigious, however it can  *
- * be included to produce "phonetic groupings" or such to ease readability.   *
+ * converted to "10f". This is repeated for each byte.                        *
  *                                                                            *
- * Examples: 137.44.1.20 = 5m.Zt.B.U, 255.0.0.1 = 10fAAB, 48.8.9.72 = ZxIJZ5t *
+ * Ex: 137.44.1.20 = 5m.Zt.B.U, 255.0.0.1 = 10f.A.A.B, 48.8.9.72 = Zx.I.J.Z5t *
  *                                                                            *
  * To convert back to IPv4, we simply invert this process.                    *
  * This is left as an exercise for the reader / unwitting CS-115 student...   *
