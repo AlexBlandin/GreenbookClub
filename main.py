@@ -567,7 +567,7 @@ class Greenbook(Cmd):
         s.append(chr(b+ord("a")))
         sip.append("".join(s))
       else:
-        sip.append(str(b))
+        sip.append(chr(b))
     
     sipj = ".".join if dotted else "".join
     pprintout(self.do_ip_misaddress,
