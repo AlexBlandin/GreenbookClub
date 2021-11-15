@@ -1,5 +1,5 @@
 from math import log10, log2, ceil, floor, sqrt
-from random import randint, sample, randbytes
+from random import randint, sample
 from itertools import combinations
 from cmd import Cmd
 import os
@@ -541,7 +541,7 @@ class Greenbook(Cmd):
     different formats.
     """
     
-    ip = ".".join([str(b) for b in randbytes(4)])
+    ip = ".".join([str(randint(0,255)) for _ in range(4)])
     dotted = randint(0,1)==1
     z_a = ord("z")-ord("a")
     sip = []
