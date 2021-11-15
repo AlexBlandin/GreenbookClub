@@ -1,5 +1,5 @@
 from math import log10, log2, ceil, floor, sqrt
-from random import randint, sample
+from random import randint, sample, randbytes
 from itertools import combinations
 from cmd import Cmd
 import os
@@ -382,8 +382,26 @@ class Greenbook(Cmd):
     number = "".join([str(c) for c in (sample(number, len(number)) + [0])])
     number = int(number, 2) # base-2
     
+    is_pow2 = lambda x: x and not (x & (x - 1)) # example to get people thinking
+    assert not is_pow2(0) # 0 is not a power of 2 (2**-inf=0.0, but not bitwise)
+    assert not is_pow2(3) # 3 is not a power of 2
+    assert is_pow2(8)     # 8 is the 4th power of 2
+    
     higher = lambda x: ((x | (x-1))+1) | x ^ (x & -x)
     lower = lambda x: ((x&-x)^x)|((x&-x)>>1)
+    
+    def lower_even(x):
+      bit = x & -x     # the smallest bit
+      sft = bit >> 1   # even smaller
+      rid = x ^ bit    # get rid of original bit
+      return rid | sft # place in shifted bit
+
+    def higher_even(x):
+      tgt = x | (x - 1)  # set all before first 1 to 1s
+      tgt = tgt + 1      # +1 carries to lowest 0, makes it 1, 0s all lower
+      iso = tgt & -tgt   # isolate the tgt (redundant, doing to "simplify")
+      rid = x ^ (x & -x) # get rid of original bit (inlined from lower)
+      return iso | rid   # place in isolated bit (it's "jumped" to the left)
     
     pprintout(self.do_binary_pals,
               f"For example, a number with {n} true/1 bits might be: ", f"{number} ({number:b})",
@@ -392,8 +410,25 @@ class Greenbook(Cmd):
     
     number = number // 2 # since we added a 0 to number, this always works!
     
-    # higher is the same!
+    higher = lambda x: ((x | (x-1))+1) | x ^ (x & -x) # higher is the same!
     lower = lambda x: ((x&-x)^x)|((x&-x)>>1) if not (x & 1) else ((x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))))) | (((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1))
+    
+    def higher_than(x):
+      return higher_even(x) # that simple
+    
+    def lower_than(x): 
+      if not ( x & 1 ):         # is even
+        return lower_even(x)    # already done the work
+      tgt = (x | (x - 1)) + 1   # we're going to zero them again
+      new = tgt & ~(tgt & -tgt) # restart from that zero
+      iso = new & -new          # because we wanted the actual next 1
+      sft = iso >> 1            # move that down
+      return (x ^ iso) | sft    # tldr, as above, we just ignored a bunch
+    
+    ordered_clean = lambda x: f"{higher_than(x):b} > {x:b} > {lower_than(x):b}"
+    ordered_inline = lambda x: f"{((x | (x-1))+1) | x ^ (x & -x):b} > {x:b} > {((x&-x)^x)|((x&-x)>>1) if not (x & 1) else ((x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))))) | (((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1)):b}"
+    
+    assert ordered_clean(number) == ordered_inline(number)
     
     pprintoutplus(self.do_binary_pals, "extended",
                   f"For example, a number with {n} true/1 bits might be: ", f"{number} ({number:b})",
@@ -474,6 +509,62 @@ class Greenbook(Cmd):
     pprintout(self.do_say_a_word,
               f"For example, given: ", n,
               num2words(n)
+    )
+  
+  def do_ip_misaddress(self, arg):
+    """
+    IP Misaddress!
+
+    Greenbook Club has come into possession of an old IPv4 networking system
+    made by Swansea Uni researchers in the 80s (don't ask us how, John Tucker
+    has his ways). The only problem is, some bright spark decided to break the
+    spec, so nothing stored looks like IP addresses!
+
+    For example, Swansea's IP is normally 137.44.1.20, however this system has
+    it stored as `"5m.Zt.B.U"`! That's right, it's a mnemonic IP system!
+    Completely out of spec, but Tucker wants us to convert these old "Swansea
+    IP" addresses into normal IPv4. Handily, there's an old comment left that
+    you can read.
+
+    As an extension, some IP addresses in our modern table aren't in the normal
+    "quad" format (like 137.44.1.20), but instead are other compatible (in-spec)
+    formats! So, in order to make matching easier (because who on earth
+    canonises anything) Tucker wants you to produce each address in a range of
+    different formats.
+    """
+    
+    ip = ".".join([str(b) for b in randbytes(4)])
+    dotted = randint(0,1)==1
+    z_a = ord("z")-ord("a")
+    sip = []
+    for byte in ip.split("."):
+      b, s = int(byte), []
+      if b < ord("a"):
+        b += ord("a")
+        if b > ord("z"):
+          s.append("Z")
+          b -= z_a
+          if b > ord("z"):
+            z,b = divmod(b, z_a)
+            s.append(str(z))
+            s.append(chr(b+ord("a")))
+          else:
+            s.append(chr(b))
+        else:
+          s.append(chr(b).upper())
+        sip.append("".join(s))
+      elif b > ord("z"):
+        z,b = divmod(b, z_a)
+        s.append(str(z))
+        s.append(chr(b+ord("a")))
+        sip.append("".join(s))
+      else:
+        sip.append(str(b))
+    
+    sipj = ".".join if dotted else "".join
+    pprintout(self.do_ip_misaddress,
+              f"For example, the SIP: ", sipj(sip),
+              ip
     )
   
   def do_calculate(self, arg):

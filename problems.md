@@ -62,6 +62,9 @@ respective closing parenthesis and vice-versa.
     Input:  "()()()()()()()123()()()()))(("
     Output: true
 
+Extension: As you see, the third example matched, despite there being "opening"
+parenthesis AFTER their "closing" pair. Tighten your system such that this is no
+longer true, such that each opening `(` comes before its paired closing `)`.
 
 # The Legendary Door Problem (Last Seen 2021-11-01)
 
