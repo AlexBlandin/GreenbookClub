@@ -521,10 +521,18 @@ class Greenbook(Cmd):
     spec, so nothing stored looks like IP addresses!
 
     For example, Swansea's IP is normally 137.44.1.20, however this system has
-    it stored as `"5m.Zt.B.U"`! That's right, it's a mnemonic IP system!
-    Completely out of spec, but Tucker wants us to convert these old "Swansea
-    IP" addresses into normal IPv4. Handily, there's an old comment left that
-    you can read.
+    it stored as `"5mZtBU"`! That's right, it's a mnemonic IP system! Completely
+    out of spec, but Tucker wants us to convert these old "Swansea IP" addresses
+    into normal IPv4. Handily, there's an old comment left that you can read.
+    
+      ? 137.44.1.20
+      = 5mZtBU
+      
+      ? 255.0.0.1
+      = 10f.A.A.B
+      
+      ? 48.8.9.72
+      = ZxIJZ5t
 
     As an extension, some IP addresses in our modern table aren't in the normal
     "quad" format (like 137.44.1.20), but instead are other compatible (in-spec)
