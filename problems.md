@@ -121,25 +121,42 @@ can turn -4 to 4 and 4 to -4). Do each of these in turn:
 Hint: You may not need all available operations for each part.
 
 
-# Magic Indices (Last seen 2020-11-24)
+# Magic Indices (Last seen 2021-11-22)
 
 A magic index in an array of `n` integers (index from `0` to `n-1`) is defined
 to be an index such that `array[i] == i`.
 
 ## Part A:
 
-The array is unsorted, what is the most efficient algorithm that can be written
+The array is sorted, what is the most efficient algorithm that can be written
 (i.e. write an algorithm that takes `O(_)` time, and provide an argument why you
 can't go faster than `O(_)` time)
 
-The array is unsorted, what is the most efficient algorithm that can be written
-(i.e. write an algorithm that takes `O(_)` time, and provide an argument why you
-can't go faster than `O(_)`)
+    Input: {0, 1, 2, 3}
+    Output: true
+
+    Input: {0, 0, 0, 2, 4}
+    Output: true
+
+    Input: {1, 2, 3, 5}
+    Output: false
 
 ## Part B:
 
-The list of integers is now sorted in the array. How fast can you go?
+The array of integers is now unsorted. How fast can you go?
 
+# Something Similar (Last seen 2021-11-22)
+
+Given two strings, write a method to decide if one is a permutation of the other.
+
+    Input: "abc", "bca"
+    Output: true
+    
+    Input: "abcd", "abc"
+    Output: false
+    
+    Input: "The quick brown fox jumps over the lazy dog", "ty oduohmq ruwebe v czeprf iaht jolsxn o gk"
+    Output: false -- This is case sensitive!
 
 # Zero the Matrix (Last seen 2021-11-08)
 
