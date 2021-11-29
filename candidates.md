@@ -1,37 +1,3 @@
-# Swan Ponds
-
-You have an integer matrix representing a plot of land, where the value at that
-loca­tion represents the height above sea level. A value of zero indicates
-water. A pond is a region of water connected vertically, horizontally, or
-diagonally. The size of the pond is the total number of connected water cells.
-Write a method to compute the sizes of all ponds in the matrix.
-
-    Input: 0 2 1 0
-           0 1 0 1
-           1 1 0 1
-           0 1 0 1
-    
-    Output: 2, 4, 1 (in any order)
-    
-    Input: 0 1 0
-           1 0 1
-           0 1 0
-    
-    Output: 5 (observe they're all connected diagonally)
-
-Extension: consider the maximum volume of trapped water in these ponds! Assume
-that the water drains outside the plot of land, and so if the pond is not
-surrounded at least vertically and horizontally, it drains to 0.
-
-    Input: 0 1 0
-           1 0 1
-           0 1 0
-    
-    Output: 1
-
-(Green book page 184)
-
-
 # IP Misaddress
 
 Greenbook Club has come into possession of an old IPv4 networking system made by

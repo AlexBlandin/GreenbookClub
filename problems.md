@@ -481,7 +481,7 @@ The strings `s1` and `s2` do not share any characters.
 The strings `s1` and `s2` can contain any characters (i.e. `s1 = "aabc"`, `s2 = "aabf"`).
 
 
-# Say a Word, Any Word (Last seen 2020-11-17)
+# Say a Word, Any Word (Last seen 2021-11-29)
 
 Given any integer `n` in range (-2000000000,2000000000) (That is -2 billion to
 +2 billion), produce a string that represents it in natural English language. 
@@ -600,7 +600,7 @@ Given an array of integers, find the smallest missing integer greater than 0.
     Output: 1
 
 
-# Water Trap (Last seen before 2020-04-02)
+# Water Trap (Last seen 2021-11-29)
 
 Imagine a histogram (bar graph). Design an algorithm to compute the volume of
 water it could hold if someone poured water across the top. You can assume that
@@ -623,3 +623,25 @@ Can visualise the problem if you wish, the above example looks like:
 ```
 
 (Green book page 189)
+
+## Extension:
+
+Extend this a dimension! (Only after you've done the original problem. Concentrate on that first!)
+
+# Swan Ponds (Last seen 2021-11-29)
+
+You have an integer matrix representing a plot of land, where the value at that location represents the height above sea level. A value of zero indicates water.
+A pond is a region of water connected vertically, horizontally, or diagonally. The size of the pond is the total number of connected water cells.
+
+Write a method to compute the sizes of all ponds in the matrix.
+
+    Input:  0 2 1 0
+            0 1 0 1
+            1 1 0 1
+            0 1 0 1
+    Output: 2, 4, 1 (in any order)
+
+    Input:  0 1 0
+            1 0 1
+            0 1 0
+    Output: 5 (observe they're all connected diagonally)
