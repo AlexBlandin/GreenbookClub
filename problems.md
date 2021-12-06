@@ -524,7 +524,7 @@ as few operations as possible.
     Output: 0111111000
 
 
-# Minesweeper (Last seen 2020-12-08)
+# Minesweeper (Last seen 2021-12-06)
 
 Design and implement a text-based Minesweeper game. Minesweeper is the classic
 single-player computer game with an `N x N` grid and `B` mines (or bombs)
@@ -540,9 +540,33 @@ The player wins when all non-bomb cells are exposed.
 
 The player can also flag certain places as potential bombs. This doesn't affect
 gameplay, other than to block the user from accidentally clicking a cell that is
-thought to have a bomb. (Tip: if you're not familiar with this game, please play
-a few rounds online first.)
+thought to have a bomb.
 
+Tip: If you're not familiar with this game, you can play a few rounds online
+https://minesweeperonline.com/
+
+Extension:
+
+Have fun with this! Here's a few ideas:
+
+- Give this a non-text-based GUI
+  - Mouse controls
+  - Sound effects
+- Different rulesets?
+  - Logical/no-guess/pure-skill minesweeper
+  - Difficulty settings (more mines?)
+  - "Fair" minesweeper (safe first click)
+  - "Tentaizu" unique solution + only partially uncovered
+- Different boards
+  - Board sizes
+  - Hexagonal cells
+  - 3D minesweeper (can play a first-person one here https://krzyhau.itch.io/mine-shaft)
+- Different algorithms!
+  - Flood clear safe tiles
+  - Tighter/wider clusters of mines
+- Multiplayer (doesn't have to be online, as that's a lot more effort) 
+  - Various examples to look at, such as https://minesweeper-multiplayer.dk/about
+  - Mix in above, such as hexagonal tiles https://www.multisweeper.com
 
 # Word Sort (Last seen 2021-03-09)
 
