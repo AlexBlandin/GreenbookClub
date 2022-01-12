@@ -14,14 +14,14 @@ def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
   if blocky: return "".join(["█" if a else " " for a in arr])
   else: return sep.join([str(a) for a in arr])
 
-def name(p: callable): return p.__doc__.splitlines()[0]
+def name(p: callable) -> str: return next(filter(None, p.__doc__.splitlines())).strip()
 
 history = defaultdict(dict)
 
 def pprintout(p: callable, example_text: str, example: str, *result):
   """Standard interactive printout for a problem"""
   global history
-  history[name(p)][example] = result
+  history[name(p).replace("!","")][example] = result
   print(name(p))
   print(example_text)
   print("", example)
@@ -33,7 +33,7 @@ def pprintout(p: callable, example_text: str, example: str, *result):
 def pprintoutplus(p: callable, extension: str, example_text: str, example: str, *result):
   """Standard interactive printout for an extended problem"""
   global history
-  history[f"{name(p)} {extension}"][example] = result
+  history[f"{name(p)} {extension}".replace("!","")][example] = result
   input(f"Press enter/return to see the extended problem: ")
   print(name(p), extension)
   print(example_text)
@@ -88,7 +88,7 @@ class Greenbook(Cmd):
     """Prints the history of examples to problem-specific output .json files (extensions are counted as separate)"""
     global history
     if not Path("./examples/").exists(): Path("./examples/").mkdir() # os.mkdir("./examples/")
-    for prob, pairs in history:
+    for prob, pairs in history.items():
       with open(f"examples/{prob}.json", "w+", encoding="utf8") as f:
         dump(pairs, f, ensure_ascii=False)
   
