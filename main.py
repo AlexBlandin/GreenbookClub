@@ -1,10 +1,11 @@
 from math import log10, log2, ceil, floor, sqrt
+from collections import defaultdict
 from random import randint, sample
 from itertools import combinations
+from pathlib import Path
 from json import dump
 from cmd import Cmd
 import os
-from collections import defaultdict
 
 from BalancedTernary import BalancedTernary as tern
 from num2words import num2words
@@ -86,8 +87,9 @@ class Greenbook(Cmd):
   def do_history(self, *_):
     """Prints the history of examples to problem-specific output .json files (extensions are counted as separate)"""
     global history
+    if not Path("./examples/").exists(): Path("./examples/").mkdir() # os.mkdir("./examples/")
     for prob, pairs in history:
-      with open(f"{prob}.json", "w+", encoding="utf8") as f:
+      with open(f"examples/{prob}.json", "w+", encoding="utf8") as f:
         dump(pairs, f, ensure_ascii=False)
   
   def do_odds_and_evens(self, arg):
