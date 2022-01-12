@@ -38,8 +38,6 @@ class Num2Word:
       if div == 1:
         out.append((self.cards[1], 1))
       else:
-        # if div == value:  # The system tallies, eg Roman Numerals
-        #   return [(div * self.cards[elem], div*elem)]
         out.append(self.splitnum(div))
       
       out.append((self.cards[elem], elem))
