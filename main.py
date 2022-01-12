@@ -116,7 +116,7 @@ class Greenbook(Cmd):
     numbers = [randint(0, biggest_number) for _ in range(n)]
     
     odd, even = lambda x: not x%2, lambda x: x%2
-    odds, evens = filter(odd, numbers), filter(even, numbers)
+    odds, evens = list(filter(odd, numbers)), list(filter(even, numbers))
     
     pprintout(self.do_odds_and_evens,
               f"For example, a list of {n} elements might be: ", join(numbers),
