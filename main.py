@@ -3,6 +3,7 @@ from random import randint, sample
 from itertools import combinations
 from cmd import Cmd
 import os
+from collections import defaultdict
 
 from BalancedTernary import BalancedTernary as tern
 from num2words import num2words
@@ -13,26 +14,37 @@ def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
 
 def name(p: callable): return p.__doc__.splitlines()[0]
 
+FILEOUT = False
+FILEDICT = defaultdict(dict)
+
 def pprintout(p: callable, example_text: str, example: str, *result):
   """Standard interactive printout for a problem"""
-  print(name(p))
-  print(example_text)
-  print(f" {example}")
-  print()
-  input("Press enter/return to see the result: ")
-  print("", *result)
-  print()
+  global FILEOUT, FILEDICT
+  if FILEOUT:
+    FILEDICT[name(p)][example] = result
+  else:
+    print(name(p))
+    print(example_text)
+    print("", example)
+    print()
+    input("Press enter/return to see the result: ")
+    print("", *result)
+    print()
 
 def pprintoutplus(p: callable, extension: str, example_text: str, example: str, *result):
   """Standard interactive printout for an extended problem"""
-  input(f"Press enter/return to see the extended problem: ")
-  print(name(p), extension)
-  print(example_text)
-  print(f" {example}")
-  print()
-  input("Press enter/return to see the result: ")
-  print("", *result)
-  print()
+  global FILEOUT, FILEDICT
+  if FILEOUT:
+    FILEDICT[f"{name(p)} {extension}"][example] = result
+  else:
+    input(f"Press enter/return to see the extended problem: ")
+    print(name(p), extension)
+    print(example_text)
+    print("", example)
+    print()
+    input("Press enter/return to see the result: ")
+    print("", *result)
+    print()
 
 def parse(arg: str, default: int): return int(arg) if arg.isdecimal() else default
 
