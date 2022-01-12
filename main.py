@@ -93,6 +93,7 @@ class Greenbook(Cmd):
           f.write(f"? {k}\n")
           print("=", *v, file=f)
           f.write("\n")
+  
   def do_odds_and_evens(self, arg):
     """
     Odds and Evens!
