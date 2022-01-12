@@ -3,7 +3,6 @@ from collections import defaultdict
 from random import randint, sample
 from itertools import combinations
 from pathlib import Path
-from json import dump
 from cmd import Cmd
 import os
 
@@ -85,13 +84,15 @@ class Greenbook(Cmd):
     return True
   
   def do_history(self, *_):
-    """Prints the history of examples to problem-specific output .json files (extensions are counted as separate)"""
+    """Prints the history of examples to problem-specific output files (extensions are counted as separate)"""
     global history
     if not Path("./examples/").exists(): Path("./examples/").mkdir() # os.mkdir("./examples/")
     for prob, pairs in history.items():
-      with open(f"examples/{prob}.json", "w+", encoding="utf8") as f:
-        dump(pairs, f, ensure_ascii=False)
-  
+      with open(f"examples/{prob}.txt", "w+", encoding="utf8") as f:
+        for k,v in pairs.items():
+          f.write(f"? {k}\n")
+          print("=", *v, file=f)
+          f.write("\n")
   def do_odds_and_evens(self, arg):
     """
     Odds and Evens!
