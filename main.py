@@ -1,6 +1,7 @@
 from math import log10, log2, ceil, floor, sqrt
 from random import randint, sample
 from itertools import combinations
+from json import dump
 from cmd import Cmd
 import os
 from collections import defaultdict
@@ -14,37 +15,32 @@ def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
 
 def name(p: callable): return p.__doc__.splitlines()[0]
 
-FILEOUT = False
-FILEDICT = defaultdict(dict)
+history = defaultdict(dict)
 
 def pprintout(p: callable, example_text: str, example: str, *result):
   """Standard interactive printout for a problem"""
-  global FILEOUT, FILEDICT
-  if FILEOUT:
-    FILEDICT[name(p)][example] = result
-  else:
-    print(name(p))
-    print(example_text)
-    print("", example)
-    print()
-    input("Press enter/return to see the result: ")
-    print("", *result)
-    print()
+  global history
+  history[name(p)][example] = result
+  print(name(p))
+  print(example_text)
+  print("", example)
+  print()
+  input("Press enter/return to see the result: ")
+  print("", *result)
+  print()
 
 def pprintoutplus(p: callable, extension: str, example_text: str, example: str, *result):
   """Standard interactive printout for an extended problem"""
-  global FILEOUT, FILEDICT
-  if FILEOUT:
-    FILEDICT[f"{name(p)} {extension}"][example] = result
-  else:
-    input(f"Press enter/return to see the extended problem: ")
-    print(name(p), extension)
-    print(example_text)
-    print("", example)
-    print()
-    input("Press enter/return to see the result: ")
-    print("", *result)
-    print()
+  global history
+  history[f"{name(p)} {extension}"][example] = result
+  input(f"Press enter/return to see the extended problem: ")
+  print(name(p), extension)
+  print(example_text)
+  print("", example)
+  print()
+  input("Press enter/return to see the result: ")
+  print("", *result)
+  print()
 
 def parse(arg: str, default: int): return int(arg) if arg.isdecimal() else default
 
@@ -70,7 +66,8 @@ class Greenbook(Cmd):
   problems, or type "help problem" for a specific problem to get its description
   and any examples. You can add a value n for the size of the problem, such as
   "problem 15"... I recommend you don't go too large, since terminals tend to
-  make a messy printout with large n.
+  make a messy printout with large n. Type "history" to get all previous example
+  and answer pairs as per-problem .json files.
   """
   prompt = "📗 " if os.name != "nt" else "📗  "
   
@@ -85,6 +82,13 @@ class Greenbook(Cmd):
   def do_exit(self, *_):
     """What do you think it does?"""
     return True
+  
+  def do_history(self, *_):
+    """Prints the history of examples to problem-specific output .json files (extensions are counted as separate)"""
+    global history
+    for prob, pairs in history:
+      with open(f"{prob}.json", "w+", encoding="utf8") as f:
+        dump(pairs, f, ensure_ascii=False)
   
   def do_odds_and_evens(self, arg):
     """
