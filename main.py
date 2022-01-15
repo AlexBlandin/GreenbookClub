@@ -17,10 +17,12 @@ def name(p: callable) -> str: return next(filter(None, p.__doc__.splitlines())).
 
 history = defaultdict(dict)
 
+def clean(s: str) -> str: return s.replace("!","").replace(",","").replace(":","")
+
 def pprintout(p: callable, example_text: str, example: str, *result):
   """Standard interactive printout for a problem"""
   global history
-  history[name(p).replace("!","")][example] = result
+  history[clean(name(p))][example] = result
   print(name(p))
   print(example_text)
   print("", example)
@@ -32,7 +34,7 @@ def pprintout(p: callable, example_text: str, example: str, *result):
 def pprintoutplus(p: callable, extension: str, example_text: str, example: str, *result):
   """Standard interactive printout for an extended problem"""
   global history
-  history[f"{name(p)} {extension}".replace("!","")][example] = result
+  history[clean(f"{name(p)} {extension}")][example] = result
   input(f"Press enter/return to see the extended problem: ")
   print(name(p), extension)
   print(example_text)
@@ -363,7 +365,8 @@ class Greenbook(Cmd):
   
   def do_sorted_stacking(self, arg):
     """
-    Stacking Sorted! Wait, other way around...
+    Stacking Sorted!
+    Wait, other way around...
     
     Given a full stack and an empty stack, how can you sort the first stack
     (smallest items on top) using only standard operations and the second stack?
@@ -510,7 +513,8 @@ class Greenbook(Cmd):
   
   def do_say_a_word(self, arg):
     """
-    Say a word, any word!
+    Say a word!
+    Any word!
     
     Given any number in the range ±2 Billion, return it as a string of natural
     written/spoken English.
@@ -635,7 +639,8 @@ class Greenbook(Cmd):
   
   def do_zero_the_matrix(self, arg):
     """
-    (Zero) The Matrix!
+    Zero The Matrix!
+    The Prequel?
     
     Given a matrix of sizes NxM, create a new matrix of the same size where all
     rows and columns containing a 0 in the original matrix are themselves now all
@@ -666,7 +671,8 @@ class Greenbook(Cmd):
   
   def do_matrix_search(self, arg):
     """
-    The Matrix: Searchurrections!
+    The Matrix: Search!
+    (For Neo)
     
     Given an NxM matrix, describe an algorithm to search for a given value. The
     following properties hold for the matrix:
@@ -776,7 +782,7 @@ class Greenbook(Cmd):
   
   def do_matrix_flip(self, arg):
     """
-    The Matrix: Flipurrections
+    The Matrix: Flip!
     
     Given a matrix consisting of 0s and 1s, we may choose any number of columns in
     the matrix and flip every cell in that column.
@@ -808,7 +814,7 @@ class Greenbook(Cmd):
   
   def do_submatrix(self, arg):
     """
-    The Submatrix
+    The Submatrix!
     
     Given a matrix of size n*n, where the elements are either 1 or 0, find the
     largest rectangle within (submatrix) where every element is 1.
