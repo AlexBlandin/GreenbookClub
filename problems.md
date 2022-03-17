@@ -32,7 +32,7 @@ largest rectangle containing only `1`s and return its area.
     in row 2 column 4.
 
 
-# Zero-Sum Game (Last seen 2019-10-24)
+# Zero-Sum Game (Last seen 2022-03-17)
 
 Given an array of `n` integers, find all pairs that sum to zero.
 
@@ -46,6 +46,9 @@ Extend this such that you find triples that sum to zero :-)
     Input:  [-1, 0, 1, 2, -2, 2, -4]
     Output: [[-1, 0, 1],[-2, 0, 2], [-4, 2, 2]] 
 
+# Countdown Numbers Game (Last seen 2022-03-17)
+
+Given an array of `n` integers, find all equations using `+`, `-`, `×`, and `÷` over `k` elements (no using the same element twice in the equation, same values are okay) that `= 24`.
 
 # Lispy Business (Last seen 2021-11-08)
 
@@ -512,7 +515,7 @@ Given an `N x N` matrix, write a method to rotate the matrix by 90 degrees.
 How fast can you go? Can you do this with `O(1)` space?
 
 
-# Odd Bitswap Even (Last seen 2020-11-24)
+# Odd Bitswap Even (Last seen 2022-03-17)
 
 Write a program to swap sequential pairs of odd and even bits in an integer with
 as few operations as possible.
