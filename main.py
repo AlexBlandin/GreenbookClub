@@ -391,23 +391,30 @@ class Greenbook(Cmd):
     """
     Letterful Substring!
     
-    Given the string S of length N, determine the length of the longest substring in which the number of occurrences of each letter in that substring are equal.
+    Given the string S of length N, determine the length of the longest
+    substring in which the number of occurrences of each letter in that
+    substring are equal.
     """
     
     n = parse(arg, 10)
     alphabet = ascii_lowercase[:randint(1, min(n//2.5, len(ascii_lowercase)))]
     string = "".join(sample(alphabet, n))
     
-    for w in range(len(string), 0, -1): # window size
-      for i in range(len(string)-w+1): # window's first index
-        window = string[i:i+w]
-        counts = Counter(window) # occurences of each letter
-        target = counts[window[0]] # how many occurences we need
-        if all(c == target for c in counts.values()):
-          return w # the window is the size of the longest substring
+    def letterful_substring(string):
+      for w in range(len(string), 0, -1):
+        for i in range(len(string)-w+1):
+          window = string[i:i+w]
+          counts = Counter(window)
+          target = counts[window[0]]
+          if all(c == target for c in counts.values()):
+            return w
+      
+      return 0
     
-    return 0 # empty string
-
+    pprintout(self.do_letterful_substring(),
+              f"For example, an {n} character string might be: ", string,
+              letterful_substring(string)
+    )
   
   def do_binary_pals(self, arg):
     """
