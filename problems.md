@@ -627,6 +627,23 @@ Given an array of integers, find the smallest missing integer greater than 0.
     Output: 1
 
 
+# Letterful Substring
+
+Given the string S of length N, determine the length of the longest substring in which the number of occurrences of each letter in that substring are equal.
+
+    Input: "ababbcbc"
+    Output: 4
+    
+    Input: "aabcde"
+    Output: 5
+    
+    Input: "aaaa"
+    Output: 4
+    
+    Input: "daababbd"
+    Output: 6
+
+
 # Water Trap (Last seen 2021-11-29)
 
 Imagine a histogram (bar graph). Design an algorithm to compute the volume of
