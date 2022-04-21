@@ -1,5 +1,5 @@
 ips = ["127.0.0.1", "255.0.0.1", "137.44.1.20", "48.8.9.72", ".".join(str(x) for x in range(256))]
-z_a = ord("z")-ord("a") # apparently I find it hard to remember az is 26 letters
+z_a = ord("z") - ord("a") # apparently I find it hard to remember az is 26 letters
 
 for ip in ips:
   sip = []
@@ -11,24 +11,22 @@ for ip in ips:
         s.append("Z")
         b -= z_a
         if b > ord("z"):
-          z,b = divmod(b, z_a)
+          z, b = divmod(b, z_a)
           s.append(str(z))
-          s.append(chr(b+ord("a")))
+          s.append(chr(b + ord("a")))
         else:
           s.append(chr(b))
       else:
         s.append(chr(b).upper())
       sip.append("".join(s))
     elif b > ord("z"):
-      z,b = divmod(b, z_a)
+      z, b = divmod(b, z_a)
       s.append(str(z))
-      s.append(chr(b+ord("a")))
+      s.append(chr(b + ord("a")))
       sip.append("".join(s))
     else:
       sip.append(chr(b))
   print(ip, "=", ".".join(sip))
-
-
 
 table = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H',
          8: 'I', 9: 'J', 10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O', 15: 'P',
@@ -61,4 +59,4 @@ table = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H',
         224: '8y', 225: '9a', 226: '9b', 227: '9c', 228: '9d', 229: '9e', 230: '9f', 231: '9g',
         232: '9h', 233: '9i', 234: '9j', 235: '9k', 236: '9l', 237: '9m', 238: '9n', 239: '9o',
         240: '9p', 241: '9q', 242: '9r', 243: '9s', 244: '9t', 245: '9u', 246: '9v', 247: '9w',
-        248: '9x', 249: '9y', 250: '10a', 251: '10b', 252: '10c', 253: '10d', 254: '10e', 255: '10f'}
+        248: '9x', 249: '9y', 250: '10a', 251: '10b', 252: '10c', 253: '10d', 254: '10e', 255: '10f'} # yapf: disable

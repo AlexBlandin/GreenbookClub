@@ -10,15 +10,17 @@ import os
 from BalancedTernary import BalancedTernary as tern
 from num2words import num2words
 
-def join(arr, sep=" ", blocky=False): # str.join only takes list[str]
+def join(arr, sep = " ", blocky = False): # str.join only takes list[str]
   if blocky: return "".join(["█" if a else " " for a in arr])
   else: return sep.join([str(a) for a in arr])
 
-def name(p: callable) -> str: return next(filter(None, p.__doc__.splitlines())).strip()
+def name(p: callable) -> str:
+  return next(filter(None, p.__doc__.splitlines())).strip()
 
 history = defaultdict(dict)
 
-def clean(s: str) -> str: return s.replace("!","").replace(",","").replace(":","")
+def clean(s: str) -> str:
+  return s.replace("!", "").replace(",", "").replace(":", "")
 
 def pprintout(p: callable, example_text: str, example: str, *result):
   """Standard interactive printout for a problem"""
@@ -45,7 +47,8 @@ def pprintoutplus(p: callable, extension: str, example_text: str, example: str, 
   print("", *result)
   print()
 
-def parse(arg: str, default: int): return int(arg) if arg.isdecimal() else default
+def parse(arg: str, default: int):
+  return int(arg) if arg.isdecimal() else default
 
 class Greenbook(Cmd):
   intro = """
@@ -76,8 +79,8 @@ class Greenbook(Cmd):
   
   def default(self, args):
     args = args.split()
-    for i in range(1, len(args)+1):
-      as_arg = "_".join(["do"]+args[:i])
+    for i in range(1, len(args) + 1):
+      as_arg = "_".join(["do"] + args[:i])
       if hasattr(self, as_arg):
         f = getattr(self, as_arg)
         if callable(f): f(" ".join(args[i:])) # just guard against "prompt" etc
@@ -91,10 +94,10 @@ class Greenbook(Cmd):
     global history
     if not Path("./examples/").exists(): Path("./examples/").mkdir() # os.mkdir("./examples/")
     for prob, pairs in history.items():
-      with open(f"examples/{prob}.txt", "w+", encoding="utf8") as f:
-        for k,v in pairs.items():
+      with open(f"examples/{prob}.txt", "w+", encoding = "utf8") as f:
+        for k, v in pairs.items():
           f.write(f"? {k}\n")
-          print("=", *v, file=f)
+          print("=", *v, file = f)
           f.write("\n")
   
   def do_odds_and_evens(self, arg):
@@ -120,12 +123,11 @@ class Greenbook(Cmd):
     biggest_number = 99 # random, so might not see
     numbers = [randint(0, biggest_number) for _ in range(n)]
     
-    odd, even = lambda x: not x%2, lambda x: x%2
+    odd, even = lambda x: not x % 2, lambda x: x % 2
     odds, evens = list(filter(odd, numbers)), list(filter(even, numbers))
     
-    pprintout(self.do_odds_and_evens,
-              f"For example, a list of {n} elements might be: ", join(numbers),
-              join(evens), join(odds)
+    pprintout(
+      self.do_odds_and_evens, f"For example, a list of {n} elements might be: ", join(numbers), join(evens), join(odds)
     )
     
     # Timsort is O(n log n) at worst (merge), O(n) at best (insertion/reverse)
@@ -136,11 +138,11 @@ class Greenbook(Cmd):
     # average. Otherwise, we are bound to the larger of the two, so the
     # "significant portion" of the ratio between odds and evens (the 7 of 7:3 as
     # 0.7) gives O(n log nr).
-    odds, evens = sorted(odds, reverse=True), sorted(evens)
+    odds, evens = sorted(odds, reverse = True), sorted(evens)
     
-    pprintoutplus(self.do_odds_and_evens, "extended",
-                  f"For example, a list of {n} elements might be: ", join(numbers),
-                  join(evens), join(odds)
+    pprintoutplus(
+      self.do_odds_and_evens, "extended", f"For example, a list of {n} elements might be: ", join(numbers), join(evens),
+      join(odds)
     )
   
   def do_zerosum_game(self, arg):
@@ -167,8 +169,8 @@ class Greenbook(Cmd):
     n = parse(arg, 10)
     biggest_number = 9
     numbers = [randint(-biggest_number, biggest_number) for _ in range(n)]
-    numbers = numbers + [-x for x in numbers] + [0]*randint(0,3) # bias for more 0s
-    numbers = sample(sample(numbers, 2*n), n)
+    numbers = numbers + [-x for x in numbers] + [0] * randint(0, 3) # bias for more 0s
+    numbers = sample(sample(numbers, 2 * n), n)
     
     results = []
     includes = {} # each number and its negative
@@ -188,26 +190,25 @@ class Greenbook(Cmd):
     
     if zeroes > 0 or len(includes) > 0:
       if zeroes > 1:
-        results.append(join(["(0, 0)"]*min(int(zeroes/2), 1)))
+        results.append(join(["(0, 0)"] * min(int(zeroes / 2), 1)))
       
       for x, d in includes.items():
         m = min(d["+"], d["-"])
         if m > 0:
-          results.append(join([f"({x}, {-x})"]*m))
+          results.append(join([f"({x}, {-x})"] * m))
     else:
       results.append("No pairs in the list")
     
-    pprintout(self.do_zerosum_game,
-              f"For example, a list of {n} elements might be: ", join(numbers),
-              join(results)
-    )
+    pprintout(self.do_zerosum_game, f"For example, a list of {n} elements might be: ", join(numbers), join(results))
     
-    matches = [f"({a}, {b}, {c})" for a, b, c in [tuple(combo) for combo in combinations(sorted(list(set(numbers))), 3)] if a + b + c == 0]
+    matches = [
+      f"({a}, {b}, {c})" for a, b, c in [tuple(combo) for combo in combinations(sorted(list(set(numbers))), 3)]
+      if a + b + c == 0
+    ]
     if numbers.count(0) > 3: matches.append("(0, 0, 0)")
     
-    pprintoutplus(self.do_zerosum_game, "extended",
-                  f"For example, a list of {n} elements might be: ", join(numbers),
-                  join(matches)
+    pprintoutplus(
+      self.do_zerosum_game, "extended", f"For example, a list of {n} elements might be: ", join(numbers), join(matches)
     )
   
   def do_lispy_business(self, arg):
@@ -275,7 +276,7 @@ class Greenbook(Cmd):
       if c + x <= n and c + x <= o:
         s += ")" * x
         c += x
-    if c < o: s += ")" * (o-c)
+    if c < o: s += ")" * (o - c)
     
     if randint(1, 3) == 1 and len(s) > 1: # corrupt that string
       if randint(1, 4) == 1: # generate a real garbled string
@@ -285,10 +286,10 @@ class Greenbook(Cmd):
         s = list(s)
         if what_to_do in [0, 1]: # drop
           for _ in range(1, min(3, len(s))): # how many to drop
-            del s[randint(0, len(s)-1)]
+            del s[randint(0, len(s) - 1)]
         if what_to_do in [1, 2, 4]: # add
           for _ in range(1, min(3, len(s))): # how many to add
-            s.insert(randint(0, len(s)-1), "(" if randint(0,1) == 1 else ")")
+            s.insert(randint(0, len(s) - 1), "(" if randint(0, 1) == 1 else ")")
         s = "".join(s)
     
     stack, matching = 0, True
@@ -303,9 +304,8 @@ class Greenbook(Cmd):
         matching = False
         break
     
-    pprintout(self.do_lispy_business,
-              f"An example string with {n} lexical units", s,
-              "Yes" if stack == 0 and matching else "No"
+    pprintout(
+      self.do_lispy_business, f"An example string with {n} lexical units", s, "Yes" if stack == 0 and matching else "No"
     )
   
   def do_door_problem(self, arg):
@@ -321,15 +321,14 @@ class Greenbook(Cmd):
     """
     
     n = parse(arg, 1000)
-    pprintout(self.do_door_problem,
-              f"For this problem, we start with exactly:", "100 doors",
-              f"{floor(sqrt(100))} left open"
+    pprintout(
+      self.do_door_problem, f"For this problem, we start with exactly:", "100 doors", f"{floor(sqrt(100))} left open"
     )
     
     number = randint(1, n)
-    pprintoutplus(self.do_door_problem, "extended",
-                  f"For example, with doors <= {n}, we can have exactly:", f"{number} doors",
-                  f"{floor(sqrt(number))} left open"
+    pprintoutplus(
+      self.do_door_problem, "extended", f"For example, with doors <= {n}, we can have exactly:", f"{number} doors",
+      f"{floor(sqrt(number))} left open"
     )
   
   def do_deadly_soda(self, arg):
@@ -353,15 +352,12 @@ class Greenbook(Cmd):
     
     n = parse(arg, 10)
     
-    pprintout(self.do_deadly_soda,
-              f"For example, with only 10 test strips, we might have:", "1000 bottles",
-              "7 days"
-    )
+    pprintout(self.do_deadly_soda, f"For example, with only 10 test strips, we might have:", "1000 bottles", "7 days")
     
-    b = randint(n, 2**(n+10))
-    pprintoutplus(self.do_deadly_soda, "generalised",
-                  f"For example, with only {n} test strips, we might have:", f"{b} bottles",
-                  f"{max(1,ceil(log2(b)-n+1))*7} days"
+    b = randint(n, 2**(n + 10))
+    pprintoutplus(
+      self.do_deadly_soda, "generalised", f"For example, with only {n} test strips, we might have:", f"{b} bottles",
+      f"{max(1,ceil(log2(b)-n+1))*7} days"
     )
   
   def do_sorted_stacking(self, arg):
@@ -382,9 +378,9 @@ class Greenbook(Cmd):
     numbers = [randint(0, biggest_number) for _ in range(n)]
     numbers = sample(numbers, n)
     
-    pprintout(self.do_sorted_stacking,
-              f"For example, a stack of {n} items might be: ", numbers,
-              sorted(numbers, reverse=True)
+    pprintout(
+      self.do_sorted_stacking, f"For example, a stack of {n} items might be: ", numbers,
+      sorted(numbers, reverse = True)
     )
   
   def do_letterful_substring(self, arg):
@@ -397,13 +393,13 @@ class Greenbook(Cmd):
     """
     
     n = parse(arg, 10)
-    alphabet = ascii_lowercase[:randint(1, min(n//2.5, len(ascii_lowercase)))]
+    alphabet = ascii_lowercase[:randint(1, min(n // 2.5, len(ascii_lowercase)))]
     string = "".join(sample(alphabet, n))
     
     def letterful_substring(string):
       for w in range(len(string), 0, -1):
-        for i in range(len(string)-w+1):
-          window = string[i:i+w]
+        for i in range(len(string) - w + 1):
+          window = string[i:i + w]
           counts = Counter(window)
           target = counts[window[0]]
           if all(c == target for c in counts.values()):
@@ -411,9 +407,9 @@ class Greenbook(Cmd):
       
       return 0
     
-    pprintout(self.do_letterful_substring(),
-              f"For example, an {n} character string might be: ", string,
-              letterful_substring(string)
+    pprintout(
+      self.do_letterful_substring(), f"For example, an {n} character string might be: ", string,
+      letterful_substring(string)
     )
   
   def do_binary_pals(self, arg):
@@ -431,67 +427,75 @@ class Greenbook(Cmd):
     """
     
     n = parse(arg, 5)
-    number = [1]*n + [0]*int(n*0.5) # optional fudge factor for num 0s != 1s
+    number = [1] * n + [0] * int(n * 0.5) # optional fudge factor for num 0s != 1s
     number = "".join([str(c) for c in (sample(number, len(number)) + [0])])
     number = int(number, 2) # base-2
     
     is_pow2 = lambda x: x and not (x & (x - 1)) # example to get people thinking
     assert not is_pow2(0) # 0 is not a power of 2 (2**-inf=0.0, but not bitwise)
     assert not is_pow2(3) # 3 is not a power of 2
-    assert is_pow2(8)     # 8 is the 4th power of 2
+    assert is_pow2(8) # 8 is the 4th power of 2
     
-    higher = lambda x: ((x | (x-1))+1) | x ^ (x & -x)
-    lower = lambda x: ((x&-x)^x)|((x&-x)>>1)
+    higher = lambda x: ((x | (x - 1)) + 1) | x ^ (x & -x)
+    lower = lambda x: ((x & -x) ^ x) | ((x & -x) >> 1)
     
     def lower_even(x):
-      bit = x & -x     # the smallest bit
-      sft = bit >> 1   # even smaller
-      rid = x ^ bit    # get rid of original bit
+      bit = x & -x # the smallest bit
+      sft = bit >> 1 # even smaller
+      rid = x ^ bit # get rid of original bit
       return rid | sft # place in shifted bit
-
-    def higher_even(x):
-      tgt = x | (x - 1)  # set all before first 1 to 1s
-      tgt = tgt + 1      # +1 carries to lowest 0, makes it 1, 0s all lower
-      iso = tgt & -tgt   # isolate the tgt (redundant, doing to "simplify")
-      rid = x ^ (x & -x) # get rid of original bit (inlined from lower)
-      return iso | rid   # place in isolated bit (it's "jumped" to the left)
     
-    pprintout(self.do_binary_pals,
-              f"For example, a number with {n} true/1 bits might be: ", f"{number} ({number:b})",
-              f"{lower(number)} < {number} < {higher(number)} ({lower(number):b} < {number:b} < {higher(number):b})"
+    def higher_even(x):
+      tgt = x | (x - 1) # set all before first 1 to 1s
+      tgt = tgt + 1 # +1 carries to lowest 0, makes it 1, 0s all lower
+      iso = tgt & -tgt # isolate the tgt (redundant, doing to "simplify")
+      rid = x ^ (x & -x) # get rid of original bit (inlined from lower)
+      return iso | rid # place in isolated bit (it's "jumped" to the left)
+    
+    pprintout(
+      self.do_binary_pals, f"For example, a number with {n} true/1 bits might be: ", f"{number} ({number:b})",
+      f"{lower(number)} < {number} < {higher(number)} ({lower(number):b} < {number:b} < {higher(number):b})"
     )
     
     number = number // 2 # since we added a 0 to number, this always works!
     
-    higher = lambda x: ((x | (x-1))+1) | x ^ (x & -x) # higher is the same!
-    lower = lambda x: ((x&-x)^x)|((x&-x)>>1) if not (x & 1) else ((x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))))) | (((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1))
+    higher = lambda x: ((x | (x - 1)) + 1) | x ^ (x & -x) # higher is the same!
+    lower = lambda x: ((x & -x) ^ x) | ((x & -x) >> 1) if not (x & 1) else ((
+      x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) &
+           -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))))
+    ) | (((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) &
+          -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1))
     
     def higher_than(x):
       return higher_even(x) # that simple
     
-    def lower_than(x): 
-      if not ( x & 1 ):         # is even
-        return lower_even(x)    # already done the work
-      tgt = (x | (x - 1)) + 1   # we're going to zero them again
+    def lower_than(x):
+      if not (x & 1): # is even
+        return lower_even(x) # already done the work
+      tgt = (x | (x - 1)) + 1 # we're going to zero them again
       new = tgt & ~(tgt & -tgt) # restart from that zero
-      iso = new & -new          # because we wanted the actual next 1
-      sft = iso >> 1            # move that down
-      return (x ^ iso) | sft    # tldr, as above, we just ignored a bunch
+      iso = new & -new # because we wanted the actual next 1
+      sft = iso >> 1 # move that down
+      return (x ^ iso) | sft # tldr, as above, we just ignored a bunch
     
     ordered_clean = lambda x: f"{higher_than(x):b} > {x:b} > {lower_than(x):b}"
     ordered_inline = lambda x: f"{((x | (x-1))+1) | x ^ (x & -x):b} > {x:b} > {((x&-x)^x)|((x&-x)>>1) if not (x & 1) else ((x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))))) | (((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1)):b}"
     
     assert ordered_clean(number) == ordered_inline(number)
     
-    pprintoutplus(self.do_binary_pals, "extended",
-                  f"For example, a number with {n} true/1 bits might be: ", f"{number} ({number:b})",
-                  f"{lower(number)} < {number} < {higher(number)} ({lower(number):b} < {number:b} < {higher(number):b})"
+    pprintoutplus(
+      self.do_binary_pals, "extended", f"For example, a number with {n} true/1 bits might be: ",
+      f"{number} ({number:b})",
+      f"{lower(number)} < {number} < {higher(number)} ({lower(number):b} < {number:b} < {higher(number):b})"
     )
     
     # Do Arctic Terns prefer Balanced Ternary? I hope so.
-    pprintoutplus(self.do_binary_pals, "extra extended!",
-                  f"For example, a number with {n} 1 trits might be: ", f"{number} ({tern(number)}, balanced)",
-                  "" # TODO: this
+    pprintoutplus(
+      self.do_binary_pals,
+      "extra extended!",
+      f"For example, a number with {n} 1 trits might be: ",
+      f"{number} ({tern(number)}, balanced)",
+      "" # TODO: this
     )
   
   def do_water_trap(self, arg):
@@ -520,26 +524,23 @@ class Greenbook(Cmd):
     
     # n is the number of samples, height is ints>=0, max used for sample generation
     n, max_height = parse(arg, 10), 8 # or parse(arg, 1000000), 255
-
+    
     s = [randint(0, max_height) for i in range(n)] # our heightmap
-    t = [0]*n # minimum of the tallest on either side of a point
+    t = [0] * n # minimum of the tallest on either side of a point
     r = 0 # how much water we trap
     peak = 0 # highest point we've seen so far
-
+    
     for i, h in enumerate(s): # go over forwards
       t[i] = peak
       if h > peak: peak = h
-
+    
     peak = 0 # resetting because now we're going the other way
     for i, h in enumerate(s[::-1]): # go over backwards
       if t[i] > peak: t[i] = peak
       if h > peak: peak = h
       if h < t[i]: r += t[i] - h # add any water trapped "above" this point
-
-    pprintout(self.do_water_trap,
-              f"For example, a water trap {n} long with heights:", join(s),
-              f"Trapped {r} water"
-    )
+    
+    pprintout(self.do_water_trap, f"For example, a water trap {n} long with heights:", join(s), f"Trapped {r} water")
   
   def do_say_a_word(self, arg):
     """
@@ -560,10 +561,7 @@ class Greenbook(Cmd):
     if not len(arg.strip()):
       n = randint(-2 * 10**9, 2 * 10**9)
     
-    pprintout(self.do_say_a_word,
-              f"For example, given: ", n,
-              num2words(n)
-    )
+    pprintout(self.do_say_a_word, f"For example, given: ", n, num2words(n))
   
   def do_ip_misaddress(self, arg):
     """
@@ -595,8 +593,8 @@ class Greenbook(Cmd):
     different formats.
     """
     
-    ip = ".".join([str(randint(0,255)) for _ in range(4)])
-    z_a = ord("z")-ord("a")
+    ip = ".".join([str(randint(0, 255)) for _ in range(4)])
+    z_a = ord("z") - ord("a")
     sip = []
     for byte in ip.split("."):
       b, s = int(byte), []
@@ -606,26 +604,23 @@ class Greenbook(Cmd):
           s.append("Z")
           b -= z_a
           if b > ord("z"):
-            z,b = divmod(b, z_a)
+            z, b = divmod(b, z_a)
             s.append(str(z))
-            s.append(chr(b+ord("a")))
+            s.append(chr(b + ord("a")))
           else:
             s.append(chr(b))
         else:
           s.append(chr(b).upper())
         sip.append("".join(s))
       elif b > ord("z"):
-        z,b = divmod(b, z_a)
+        z, b = divmod(b, z_a)
         s.append(str(z))
-        s.append(chr(b+ord("a")))
+        s.append(chr(b + ord("a")))
         sip.append("".join(s))
       else:
         sip.append(chr(b))
     
-    pprintout(self.do_ip_misaddress,
-              f"For example, the SIP: ", ".".join(sip),
-              ip
-    )
+    pprintout(self.do_ip_misaddress, f"For example, the SIP: ", ".".join(sip), ip)
   
   def do_calculate(self, arg):
     """
@@ -646,9 +641,11 @@ class Greenbook(Cmd):
     if not len(arg.strip()):
       pass # generate our own equation string
     
-    pprintout(self.do_calculate,
-              f"Sorry, this is still on my TODO list", "",
-              "Sorry, this is still on my TODO list" # TODO: this
+    pprintout(
+      self.do_calculate,
+      f"Sorry, this is still on my TODO list",
+      "",
+      "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_magic_indices(self, arg):
@@ -662,9 +659,11 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 10)
-    pprintout(self.do_magic_indices,
-              f"Sorry, this is still on my TODO list", "",
-              "Sorry, this is still on my TODO list" # TODO: this
+    pprintout(
+      self.do_magic_indices,
+      f"Sorry, this is still on my TODO list",
+      "",
+      "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_zero_the_matrix(self, arg):
@@ -694,9 +693,11 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 5)
-    pprintout(self.do_zero_the_matrix,
-              f"Sorry, this is still on my TODO list", "",
-              "Sorry, this is still on my TODO list" # TODO: this
+    pprintout(
+      self.do_zero_the_matrix,
+      f"Sorry, this is still on my TODO list",
+      "",
+      "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_matrix_search(self, arg):
@@ -726,9 +727,11 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 5)
-    pprintout(self.do_matrix_search,
-              f"Sorry, this is still on my TODO list", "",
-              "Sorry, this is still on my TODO list" # TODO: this
+    pprintout(
+      self.do_matrix_search,
+      f"Sorry, this is still on my TODO list",
+      "",
+      "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_matrix_revolve(self, arg):
@@ -749,9 +752,11 @@ class Greenbook(Cmd):
     """# the rotate 90 degrees / transpose one
     
     # n = parse(arg, 5)
-    pprintout(self.do_matrix_revolve,
-              f"Sorry, this is still on my TODO list", "",
-              "Sorry, this is still on my TODO list" # TODO: this
+    pprintout(
+      self.do_matrix_revolve,
+      f"Sorry, this is still on my TODO list",
+      "",
+      "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_too_many_twos(self, arg):
@@ -768,9 +773,11 @@ class Greenbook(Cmd):
     """ # TODO: uhhh what is this even
     
     # n = parse(arg, 5)
-    pprintout(self.do_too_many_twos,
-              f"Sorry, this is still on my TODO list", "",
-              "Sorry, this is still on my TODO list" # TODO: this
+    pprintout(
+      self.do_too_many_twos,
+      f"Sorry, this is still on my TODO list",
+      "",
+      "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_top_temps(self, arg):
@@ -793,22 +800,19 @@ class Greenbook(Cmd):
     # temperature is in Kelvin (max necessary for randint gen.)
     max_temp = 100
     
-    out, mrs, tbs = [0]*n, {}, 0
+    out, mrs, tbs = [0] * n, {}, 0
     sam = [randint(0, max_temp) for _ in range(n)] # our temperature samples
     
     # the actual algo, linear, only goes over once with constant time lookups
     for i, t in enumerate(sam[::-1]):
       t = int(t)
-      tbs &= ~(2**(t+1) - 1)
+      tbs &= ~(2**(t + 1) - 1)
       bit = tbs & -tbs
       if bit: out[n - i - 1] = i - mrs[int(log2(bit))]
       mrs[t] = i
       tbs |= 2**t
     
-    pprintout(self.do_top_temps,
-              f"For example, a list of {n} elements might be: ", join(sam),
-              join(out)
-    )
+    pprintout(self.do_top_temps, f"For example, a list of {n} elements might be: ", join(sam), join(out))
   
   def do_matrix_flip(self, arg):
     """
@@ -837,9 +841,11 @@ class Greenbook(Cmd):
     """
     
     # n = parse(arg, 5)
-    pprintout(self.do_matrix_flip,
-              f"Sorry, this is still on my TODO list", "",
-              "Sorry, this is still on my TODO list" # TODO: this
+    pprintout(
+      self.do_matrix_flip,
+      f"Sorry, this is still on my TODO list",
+      "",
+      "Sorry, this is still on my TODO list" # TODO: this
     )
   
   def do_submatrix(self, arg):
@@ -859,17 +865,17 @@ class Greenbook(Cmd):
     def size(rect):
       l, t = rect["left"], rect["top"]
       r, b = rect["right"], rect["bottom"]
-      return (abs(l-r)+1)*(abs(t-b)+1)
+      return (abs(l - r) + 1) * (abs(t - b) + 1)
     
     def coords(rect):
       return (rect["left"], rect["top"]), (rect["right"], rect["bottom"])
     
     def valid(rect):
       (left, top), (right, bottom) = coords(rect)
-      return all([all([cell == 1 for cell in row[left:right+1]]) for row in matrix[top:bottom+1]])
+      return all([all([cell == 1 for cell in row[left:right + 1]]) for row in matrix[top:bottom + 1]])
     
     def no_point(i, j):
-      return largest_size != None and abs((n-i)*(n-j)) <= largest_size
+      return largest_size != None and abs((n - i) * (n - j)) <= largest_size
     
     example = [f" #{''.join(str(i) for i in range(n))}"]
     above, rects, graveyard = [set() for _ in range(n)], {}, set()
@@ -882,7 +888,8 @@ class Greenbook(Cmd):
         for rect_id in set(s): # clear backwards
           if rect_id in graveyard:
             s.discard(rect_id)
-      for rect_id in graveyard: del rects[rect_id]
+      for rect_id in graveyard:
+        del rects[rect_id]
       graveyard.clear()
       
       # 1st pass, invalidate and trim
@@ -900,7 +907,8 @@ class Greenbook(Cmd):
                 new_id = counter # we make a new one so that we can get rid of the old
                 rects[new_id] = dict(rects[rect_id])
                 rects[new_id]["right"] = i - 1
-                for c in range(left, i - 1): above[c].add(new_id)
+                for c in range(left, i - 1):
+                  above[c].add(new_id)
               graveyard.add(rect_id) # we're killing it, so don't forget
       
       # 2nd pass, generate and preserve
@@ -914,7 +922,8 @@ class Greenbook(Cmd):
               new_id = counter # make a new one that "inherits" the above rect
               rects[new_id] = dict(rects[rect_id])
               rects[new_id]["left"] = i
-              for c in range(left, rects[new_id]["right"]+1): above[c].add(new_id)
+              for c in range(left, rects[new_id]["right"] + 1):
+                above[c].add(new_id)
               graveyard.add(rect_id)
           if largest != None and no_point(left, j): break # stop early
           if len(above[i] - graveyard) == 0 and rect == None: rect = {"left": left, "top": j} # new rect
@@ -925,7 +934,8 @@ class Greenbook(Cmd):
             counter += 1
             rect_id = counter
             rects[rect_id] = dict(rect)
-            for c in range(left, i): above[c].add(rect_id)
+            for c in range(left, i):
+              above[c].add(rect_id)
             rect, left = None, None
       
       # Ended 2nd pass with a rect
@@ -934,7 +944,8 @@ class Greenbook(Cmd):
         counter += 1
         rect_id = counter
         rects[rect_id] = rect
-        for c in range(left, n - 1): above[c].add(rect_id)
+        for c in range(left, n - 1):
+          above[c].add(rect_id)
         rect, left = None, None
     
     results = []
@@ -942,15 +953,16 @@ class Greenbook(Cmd):
       start, finish = coords(largest)
       results.append(f"The largest rectangle is from {start} to {finish}, with size {largest_size}")
       results.append("")
-      results.append("  #" + "".join([str(i) for i in range(start[0],finish[0]+1)]))
-      for i, row in enumerate(matrix[start[1]:finish[1]+1], start=start[1]): # just to make sure we're not crazy
-        results.append(f"  {str(i).zfill(ceil(log10(max(finish[1], 1))))}{join(row[start[0]:finish[0]+1], blocky=True)}")
+      results.append("  #" + "".join([str(i) for i in range(start[0], finish[0] + 1)]))
+      for i, row in enumerate(matrix[start[1]:finish[1] + 1], start = start[1]): # just to make sure we're not crazy
+        results.append(
+          f"  {str(i).zfill(ceil(log10(max(finish[1], 1))))}{join(row[start[0]:finish[0]+1], blocky=True)}"
+        )
     else:
       results.append("There was nothing in the matrix")
     
-    pprintout(self.do_submatrix,
-              f"For example, a matrix of size {n}*{n} might be: ", "\n".join(example),
-              "\n".join(results)
+    pprintout(
+      self.do_submatrix, f"For example, a matrix of size {n}*{n} might be: ", "\n".join(example), "\n".join(results)
     )
 
 if __name__ == "__main__":

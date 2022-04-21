@@ -15,8 +15,8 @@ def solution(string: str) -> int:
   """
   
   for w in range(len(string), 0, -1): # window size
-    for i in range(len(string)-w+1): # window's first index
-      window = string[i:i+w]
+    for i in range(len(string) - w + 1): # window's first index
+      window = string[i:i + w]
       counts = Counter(window) # occurences of each letter
       target = counts[window[0]] # how many occurences we need
       if all(c == target for c in counts.values()):

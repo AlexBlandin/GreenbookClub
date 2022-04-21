@@ -1,23 +1,26 @@
 # Based on the num2words package, I just simplified it https://pypi.org/project/num2words/
 class Num2Word:
-  high_numwords = ["cent"] + list(reversed([u + t for t in ["dec", "vigint", "trigint", "quadragint", "quinquagint", "sexagint", "septuagint", "octogint", "nonagint"] for u in ["", "un", "duo", "tre", "quattuor", "quin", "sex", "sept", "octo", "novem"]])) + ["non", "oct", "sept", "sext", "quint", "quadr", "tr", "b", "m"]
-
-  mid_numwords = [(1000, "thousand"), (100, "hundred"),
-                  (90, "ninety"), (80, "eighty"), (70, "seventy"),
-                  (60, "sixty"), (50, "fifty"), (40, "forty"),
-                  (30, "thirty")]
+  high_numwords = ["cent"] + list(
+    reversed([
+      u + t for t in
+      ["dec", "vigint", "trigint", "quadragint", "quinquagint", "sexagint", "septuagint", "octogint", "nonagint"]
+      for u in ["", "un", "duo", "tre", "quattuor", "quin", "sex", "sept", "octo", "novem"]
+    ])
+  ) + ["non", "oct", "sept", "sext", "quint", "quadr", "tr", "b", "m"]
+  
+  mid_numwords = [(1000, "thousand"), (100, "hundred"), (90, "ninety"), (80, "eighty"), (70, "seventy"), (60, "sixty"),
+                  (50, "fifty"), (40, "forty"), (30, "thirty")]
   low_numwords = [(20, "twenty"), (19, "nineteen"), (18, "eighteen"), (17, "seventeen"),
-                  (16, "sixteen"), (15, "fifteen"), (14, "fourteen"), (13, "thirteen"),
-                  (12, "twelve"), (11, "eleven"), (10, "ten"), (9, "nine"), (8, "eight"),
-                  (7, "seven"), (6, "six"), (5, "five"), (4, "four"), (3, "three"), (2, "two"),
-                  (1, "one"), (0, "zero")]
+                  (16, "sixteen"), (15, "fifteen"), (14, "fourteen"), (13, "thirteen"), (12, "twelve"), (11, "eleven"),
+                  (10, "ten"), (9, "nine"), (8, "eight"), (7, "seven"), (6, "six"), (5, "five"), (4, "four"),
+                  (3, "three"), (2, "two"), (1, "one"), (0, "zero")]
   cards = {}
   
   def __init__(self):
     if not len(Num2Word.cards):
       mx = 3 + 3 * len(Num2Word.high_numwords)
       for n, word in zip(range(mx, 3, -3), Num2Word.high_numwords):
-        Num2Word.cards[10 ** n] = word + "illion"
+        Num2Word.cards[10**n] = word + "illion"
       for n, word in Num2Word.mid_numwords:
         Num2Word.cards[n] = word
       for n, word in Num2Word.low_numwords:
