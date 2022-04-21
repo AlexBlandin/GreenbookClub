@@ -396,16 +396,22 @@ class Greenbook(Cmd):
     alphabet = ascii_lowercase[:randint(1, min(n // 2.5, len(ascii_lowercase)))]
     string = "".join(sample(alphabet, n))
     
-    def letterful_substring(string):
-      for w in range(len(string), 0, -1):
-        for i in range(len(string) - w + 1):
+    def letterful_substring(string: str) -> int:
+      """
+      The approach is to use a sliding window, which starts with the full string
+      and halts on a window of size 1 (aka, a single character). This will work
+      for all strings from size N to size 1. We finish early on windows of size 1
+      as we match against the first character, which is sufficient. Empty strings
+      are skipped over by the window (range(x, x) == []) so we return 0 after it.
+      """
+      for w in range(len(string), 0, -1): # window size
+        for i in range(len(string) - w + 1): # window's first index
           window = string[i:i + w]
-          counts = Counter(window)
-          target = counts[window[0]]
+          counts = Counter(window) # occurences of each letter
+          target = counts[window[0]] # how many occurences we need
           if all(c == target for c in counts.values()):
-            return w
-      
-      return 0
+            return w # the window is the size of the longest substring
+      return 0 # empty string
     
     pprintout(
       self.do_letterful_substring(), f"For example, an {n} character string might be: ", string,
