@@ -629,7 +629,8 @@ Given an array of integers, find the smallest missing integer greater than 0.
 
 # Letterful Substring
 
-Given the string S of length N, determine the length of the longest substring in which the number of occurrences of each letter in that substring are equal.
+Given the string S of length N, determine the length of the longest substring in
+which the number of occurrences of each letter in that substring are equal.
 
     Input: "ababbcbc"
     Output: 4
