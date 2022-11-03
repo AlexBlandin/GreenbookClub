@@ -158,7 +158,8 @@ Given two strings, write a method to decide if one is a permutation of the other
     Input: "abcd", "abc"
     Output: false
     
-    Input: "The quick brown fox jumps over the lazy dog", "ty oduohmq ruwebe v czeprf iaht jolsxn o gk"
+    Input: "The quick brown fox jumps over the lazy dog",
+           "ty oduohmq ruwebe v czeprf iaht jolsxn o gk"
     Output: false -- This is case sensitive!
 
 # Zero the Matrix (Last seen 2021-11-08)
