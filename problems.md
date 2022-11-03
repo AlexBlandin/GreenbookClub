@@ -69,7 +69,7 @@ Extension: As you see, the third example matched, despite there being "opening"
 parenthesis AFTER their "closing" pair. Tighten your system such that this is no
 longer true, such that each opening `(` comes before its paired closing `)`.
 
-# The Legendary Door Problem (Last Seen 2021-11-01)
+# The Legendary Door Problem (Last Seen 2022-10-31)
 
 There are 100 closed lockers in a hallway. Behind the lockers are monsters. On
 round 1, you go through the lockers and open every single one. On round 2, you
@@ -355,7 +355,7 @@ in it.
     Output: 1
 
 
-# Deadly Soda (Last seen 2021-11-01)
+# Deadly Soda (Last seen 2022-10-31)
 
 You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
 strips which can be used to detect poison. A single drop of poison will turn the
