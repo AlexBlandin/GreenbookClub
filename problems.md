@@ -269,13 +269,15 @@ of rows that have all values equal after some number of flips.
     Input: [[0,1],
             [1,0]]
     Output: 2
-    Explanation: After flipping values in the first column, both rows have equal values.
+    Explanation: After flipping values in the first column, both rows
+                 have equal values.
 
     Input: [[0,0,0],
             [0,0,1],
             [1,1,0]]
     Output: 2
-    Explanation: After flipping values in the first two columns, the last two rows have equal values.
+    Explanation: After flipping values in the first two columns,
+                 the last two rows have equal values.
 
 
 # Partition Petition (Last seen 2020-02-27)
@@ -439,14 +441,14 @@ dictator and your philosophy is: if something doesn't follow your rules, kill
 it! Let's introduce Stalin Sort:
 
 1. You have an array of random positive integers. 
-2. In this array, if a number is "out of order" it shall be deleted (killed).
+2. In this array, if a number is "out of order" it shall be killed.
 3. At the end of the algorithm, all numbers should appear consecutively with any
    open spaces appearing at the end of the array.
 
 What's the fast implementation of Stalin Sort? **Automatic weapons are not
 allowed and since cloning technology is not available, you must perform it
 in-place. Stalin is merciful, and allows you to place a tombstone value of `-1`
-for each dead number.**
+for each dead number. Tombstones let you know a number was killed.**
 
     Input:  [4, 17, 5, 6, 12, 1, 9]
     Output: [4, 5, 6, 9, -1, -1, -1]
@@ -455,14 +457,14 @@ for each dead number.**
 # Substring (Last seen 2020-11-10)
 
 Given two strings `s1` and `s2`, where `length(s1) < length(s2)`, find the index
-of the first instance where s1 is a substring of s2.
+of the first instance where `s1` is a substring of `s2`.
 
     Input: s1 = "abCd", s2 = "ffffabCdCefg"
     Output: 4
 
 ## Extension:
 
-Return the index of all substrings of s1 in s2.
+Return the index of all substrings of `s1` in `s2`.
 
 
 # Interleaved Intermission (Last seen 2020-11-10)
