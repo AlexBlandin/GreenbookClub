@@ -406,7 +406,7 @@ starting with programming in Java and you need some help let us know! If you are
 confident with programming, look out for others you can help :-)
 
 
-# The Legally Distinct Minty Hill Problem (Last seen 2020-11-03)
+# The Legally Distinct Minty Hill Problem (Last seen 2022-11-07)
 
 You're on a game show and there are 3 doors, which are all shut.
 
@@ -434,7 +434,7 @@ allowed to play with the light switches as much as you like.
 Your task is to determine which light switch corresponds to which lamp.
 
 
-# Array Sort You! (Last seen 2020-11-03)
+# Array Sort You! (Last seen 2022-11-07)
 
 You want to sort an array of numbers. However, you have a problem. You are a
 dictator and your philosophy is: if something doesn't follow your rules, kill
@@ -442,19 +442,23 @@ it! Let's introduce Stalin Sort:
 
 1. You have an array of random positive integers. 
 2. In this array, if a number is "out of order" it shall be killed.
-3. At the end of the algorithm, all numbers should appear consecutively with any
-   open spaces appearing at the end of the array.
+3. At the end of the algorithm, all numbers should appear consecutively. Any
+   open spaces (if any) can only appear at the end of the array.
 
-What's the fast implementation of Stalin Sort? **Automatic weapons are not
-allowed and since cloning technology is not available, you must perform it
-in-place. Stalin is merciful, and allows you to place a tombstone value of `-1`
-for each dead number. Tombstones let you know a number was killed.**
+What's the fast implementation of Stalin Sort? **Automatic weapons are not allowed.**
+
+    Input:  [4, 17, 5, 6, 12, 1, 9]
+    Output: [4, 5, 6, 9]
+
+## Extension:
+
+Since cloning technology is not available, you must perform it in-place. **Stalin is merciful, and allows you to place a tombstone for each dead number.** Tombstones let you know a number was killed, and represent the empty spaces at the end of the array. However, tombstones must be compliant with state law on standardised cemetary supplies, so better make those tombstones the value -1.
 
     Input:  [4, 17, 5, 6, 12, 1, 9]
     Output: [4, 5, 6, 9, -1, -1, -1]
 
 
-# Substring (Last seen 2020-11-10)
+# Substring (Last seen 2022-11-07)
 
 Given two strings `s1` and `s2`, where `length(s1) < length(s2)`, find the index
 of the first instance where `s1` is a substring of `s2`.
