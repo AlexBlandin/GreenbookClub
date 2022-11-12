@@ -387,25 +387,6 @@ yourself" or "Invent a machine that tells you your eye colour" are not
 acceptable. This is a logic puzzle!
 
 
-# Baby Boom (Last seen 2020-10-27)
-
-In the new post-apocalyptic world, the world queen is desperately concerned
-about the birth rate. Therefore, she decrees that all families should ensure
-that they have one girl or else they face massive fines. If all families abide
-by this policy -that is, they continue to have children until they have one
-girl, at which point they immediately stop- what will the sex ratio of the new
-generation be? (Assume that the odds of someone having a boy or a girl on any
-given pregnancy is equal.) 
-
-Note: This problem can be solved logically, and by computer simulation. It is up
-to you to decide how you choose to solve it, but we recommend you try writing
-the simulation first, and then try to logically reason about the result. 
-
-Side-note: If you are unsure how to program the simulation, or if you are just
-starting with programming in Java and you need some help let us know! If you are
-confident with programming, look out for others you can help :-)
-
-
 # The Legally Distinct Minty Hill Problem (Last seen 2022-11-07)
 
 You're on a game show and there are 3 doors, which are all shut.
