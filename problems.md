@@ -502,6 +502,20 @@ Given an `N x N` matrix, write a method to rotate the matrix by 90 degrees (a "t
 
 How fast can you go? Can you do this with `O(1)` space?
 
+## Extension Reloaded:
+
+How fast can you transpose the matrix (flip it over a diagonal)?
+
+    Input: [[1,2,3],
+            [4,5,6],
+            [7,8,9]]
+
+    Output: [[1,4,7],
+             [2,5,8],
+             [3,6,9]]
+
+Can you do this in `O(1)` space?
+
 
 # Odd Bitswap Even (Last seen 2022-03-17)
 
