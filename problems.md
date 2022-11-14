@@ -18,7 +18,7 @@ the odd array in descending order.
     Output: [2,4,4,8,3,3,1,1]
 
 
-# Submatrix (Last seen 2019-10-17)
+# Submatrix (Last seen 2022-11-14)
 
 Given a 2-dimension array filled with `0`s and `1`s (a binary matrix), find the
 largest rectangle containing only `1`s and return its area.
@@ -486,7 +486,7 @@ Note: The "and" is optional but preferred.
     Output: Minus Ninety-two Thousand Four Hundred (and) Thirty Five
 
 
-# Matrix Revolutions (Last seen 2020-11-17)
+# Matrix Revolutions (Last seen 2022-11-14)
 
 Given an `N x N` matrix, write a method to rotate the matrix by 90 degrees.
 
