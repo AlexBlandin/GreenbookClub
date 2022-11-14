@@ -20,7 +20,7 @@ the odd array in descending order.
 
 # Submatrix (Last seen 2022-11-14)
 
-Given a 2-dimension array filled with `0`s and `1`s (a binary matrix), find the
+Given a 2-dimensional array filled with `0`s and `1`s (a binary matrix), find the
 largest rectangle containing only `1`s and return its area.
 
     Input: [[1,0,1,0,0],
@@ -488,15 +488,15 @@ Note: The "and" is optional but preferred.
 
 # Matrix Revolutions (Last seen 2022-11-14)
 
-Given an `N x N` matrix, write a method to rotate the matrix by 90 degrees.
+Given an `N x N` matrix, write a method to rotate the matrix by 90 degrees (a "transpose").
 
     Input: [[1,2,3],
             [4,5,6],
             [7,8,9]]
 
-    Output: [[7,4,1],
-             [8,5,2],
-             [9,6,3]]
+    Output: [[1,4,7],
+             [2,5,8],
+             [3,6,9]]
 
 ## Extension:
 
