@@ -87,8 +87,7 @@ necessarily the same number. Solve the same problem once more.
 
 # Sorted Stacking (Last Seen 2019-10-31)
 
-Mix up in groups of first, second, and third years (where possible) and write a
-program to sort a stack with the smallest items on top.
+Write a program to sort a stack with the smallest items on top.
 
 Recall that the allowed operations on a stack are: `push`, `pop`, `peek` and
 `is_empty`. 
@@ -101,7 +100,7 @@ You are allowed to use as many additional stacks as you like. How fast can you
 go?
 
 
-# Binary Neighbours (Last seen 2019-11-07)
+# Binary Neighbours (Last seen 2022-11-21)
 
 Given a positive integer, print the next smallest and next largest numbers that
 have the same number of 1 bits in their binary representation. Assume it is
@@ -254,7 +253,7 @@ instead.
 Can you do this in linear time?
 
 
-# Matrix Flipper (Last seen 2019-12-05)
+# Matrix Flipper (Last seen 2022-11-21)
 
 Given a matrix consisting of `0`s and `1`s, we may choose any number of columns
 in the matrix and flip every cell in that column. Flipping a cell changes the
@@ -494,9 +493,9 @@ Given an `N x N` matrix, write a method to rotate the matrix by 90 degrees (a "t
             [4,5,6],
             [7,8,9]]
 
-    Output: [[1,4,7],
-             [2,5,8],
-             [3,6,9]]
+    Output: [[7,4,1],
+             [8,5,2],
+             [9,6,3]]
 
 ## Extension:
 
@@ -561,7 +560,7 @@ Have fun with this! Here's a few ideas:
   - Logical/no-guess/pure-skill minesweeper
   - Difficulty settings (more mines?)
   - "Fair" minesweeper (safe first click)
-  - "Tentaizu" unique solution + only partially uncovered
+  - "Tentaizu" minesweeper (unique solution + only partially uncovered)
 - Different boards
   - Board sizes
   - Hexagonal cells
@@ -615,7 +614,7 @@ a function to compute the sum of the array.
 Can you solve this problem in less than O(n) time?
 
 
-# A Little Missing Something (Last seen 2021-03-16)
+# A Little Missing Something (Last seen 2022-11-21)
 
 Given an array of integers, find the smallest missing integer greater than 0.
 
