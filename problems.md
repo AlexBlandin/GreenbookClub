@@ -220,7 +220,7 @@ signifying it was not found (`None`, `Nothing`, `null`, etc.)
 How fast can you go, and why?
 
 
-# Too Many Twos (Last seen 2019-11-28)
+# Too Many Twos (Last seen 2022-11-28)
 
 Write a method to count the number of twos (`2`) that appear between the number
 `0` and `n` (for a given `n`).
@@ -229,16 +229,7 @@ Write a method to count the number of twos (`2`) that appear between the number
     Output: 9
     Why?: 2, 12, 20, 21, 22, 23, 24, 25
 
-## Part A:
-
-Assume `n` < 10000. How fast can you go?
-
-## Part B:
-
-Now there are no restrictions on the value of `n`. How fast can you go?
-
-
-# Top Temperatures (Last seen 2020-12-01)
+# Top Temperatures (Last seen 2022-11-28)
 
 Given a list of daily temperatures, return a list such that, for each day in the
 input, tells you how many days you would have to wait until a warmer
@@ -451,7 +442,7 @@ of the first instance where `s1` is a substring of `s2`.
 Return the index of all substrings of `s1` in `s2`.
 
 
-# Interleaved Intermission (Last seen 2020-11-10)
+# Interleaved Intermission (Last seen 2022-11-28)
 
 Given strings `s1`, `s2`, and `s3`, where `length(s1) + length(s2) = length(s3)`,
 determine if you can interleave the characters in `s1` and `s2` to get `s3`.
