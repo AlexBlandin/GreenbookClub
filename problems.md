@@ -198,7 +198,7 @@ What is the time and space complexity of your algorithm?
 Can you do this in `O(1)` space and `O(N x M)` time?
 
 
-# Matrix Search (Last seen 2019-11-28)
+# Matrix Search (Last seen 2022-12-05)
 
 Write an efficient algorithm that searches for a value `x` in an `N x M` matrix.
 This matrix has the following properties:
@@ -519,7 +519,7 @@ as few operations as possible.
     Output: 0111111000
 
 
-# Minesweeper (Last seen 2021-12-06)
+# Minesweeper (Last seen 2022-12-12)
 
 Design and implement a text-based Minesweeper game. Minesweeper is the classic
 single-player computer game with an `N x N` grid and `B` mines (or bombs)
