@@ -19,7 +19,7 @@ class BalancedTernary:
     elif isinstance(inp, BalancedTernary):
       self.digits = list(inp.digits)  # type: ignore
     elif isinstance(inp, list):
-      if all(d in (0, 1, -1) for d in inp):
+      if all(d in {0, 1, -1} for d in inp):
         self.digits = list(inp)
       else:
         raise ValueError("BalancedTernary: Wrong input digits.")  # noqa: TRY003
