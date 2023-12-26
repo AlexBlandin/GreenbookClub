@@ -1,13 +1,14 @@
-from collections import defaultdict, Counter
-from itertools import combinations
-from pathlib import Path
-from string import ascii_lowercase
-from random import randint, sample
-from math import log10, floor, sqrt, log2, ceil
-from cmd import Cmd
 import os
+from cmd import Cmd
+from collections import Counter, defaultdict
+from collections.abc import Callable
+from itertools import combinations
+from math import ceil, floor, log2, log10, sqrt
+from pathlib import Path
+from random import randint, sample
+from string import ascii_lowercase
 
-from BalancedTernary import BalancedTernary as tern
+from BalancedTernary import BalancedTernary
 from num2words import num2words
 
 
@@ -18,8 +19,8 @@ def join(arr, sep=" ", blocky=False):  # str.join only takes list[str]
     return sep.join([str(a) for a in arr])
 
 
-def name(p: callable) -> str:
-  return next(filter(None, p.__doc__.splitlines())).strip()
+def name(p: Callable) -> str:
+  return next(filter(None, (p.__doc__ or "Undocumented callable").splitlines())).strip()
 
 
 history = defaultdict(dict)
@@ -29,9 +30,8 @@ def clean(s: str) -> str:
   return s.replace("!", "").replace(",", "").replace(":", "")
 
 
-def pprintout(p: callable, example_text: str, example: str, *result):
+def pprintout(p: Callable, example_text, example, *result):
   """Standard interactive printout for a problem"""
-  global history
   history[clean(name(p))][example] = result
   print(name(p))
   print(example_text)
@@ -42,9 +42,8 @@ def pprintout(p: callable, example_text: str, example: str, *result):
   print()
 
 
-def pprintoutplus(p: callable, extension: str, example_text: str, example: str, *result):
+def pprintoutplus(p: Callable, extension, example_text, example, *result):
   """Standard interactive printout for an extended problem"""
-  global history
   history[clean(f"{name(p)} {extension}")][example] = result
   input("Press enter/return to see the extended problem: ")
   print(name(p), extension)
@@ -60,7 +59,8 @@ def parse(arg: str, default: int):
   return int(arg) if arg.isdecimal() else default
 
 
-class Greenbook(Cmd):
+# ruff: noqa: PLR6301
+class Greenbook(Cmd):  # noqa: PLR0904
   intro = """
    ██████╗ ██████╗ ███████╗███████╗███╗   ██╗  ██████╗  ██████╗  ██████╗ ██╗  ██╗
   ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║  ██╔══██╗██╔═══██╗██╔═══██╗██║ ██╔╝
@@ -102,7 +102,6 @@ class Greenbook(Cmd):
 
   def do_history(self, *_):
     """Prints the history of examples to problem-specific output files (extensions are counted as separate)"""
-    global history
     if not Path("./examples/").exists():
       Path("./examples/").mkdir()  # os.mkdir("./examples/")
     for prob, pairs in history.items():
@@ -189,7 +188,7 @@ class Greenbook(Cmd):
         includes[x]["+"] += 1
 
       if x < 0:
-        x = -int(x)  # just to shut up the linter
+        x = -x  # noqa: PLW2901
         if x not in includes:
           includes[x] = {"+": 0, "-": 0}
         includes[x]["-"] += 1
@@ -216,7 +215,7 @@ class Greenbook(Cmd):
 
     pprintoutplus(self.do_zerosum_game, "extended", f"For example, a list of {n} elements might be: ", join(numbers), join(matches))
 
-  def do_lispy_business(self, arg):
+  def do_lispy_business(self, arg):  # noqa: PLR0915
     """
     Lispy Business!
 
@@ -269,8 +268,8 @@ class Greenbook(Cmd):
       if o + x <= n:
         s += "(" * x
         o += x
-      for l in sample(lexicon, randint(0, 1)):
-        s += l
+      for w in sample(lexicon, randint(0, 1)):
+        s += w
       if i > n:
         x = randint(1, 2)
       x = randint(0, 2)
@@ -290,10 +289,10 @@ class Greenbook(Cmd):
       else:  # drop some random parens and/or add new ones in
         what_to_do = randint(0, 4)
         s = list(s)
-        if what_to_do in [0, 1]:  # drop
+        if what_to_do in {0, 1}:  # drop
           for _ in range(1, min(3, len(s))):  # how many to drop
             del s[randint(0, len(s) - 1)]
-        if what_to_do in [1, 2, 4]:  # add
+        if what_to_do in {1, 2, 4}:  # add
           for _ in range(1, min(3, len(s))):  # how many to add
             s.insert(randint(0, len(s) - 1), "(" if randint(0, 1) == 1 else ")")
         s = "".join(s)
@@ -304,7 +303,7 @@ class Greenbook(Cmd):
         stack += 1
       elif c == ")" and stack > 0:
         stack -= 1
-      elif c != "(" and c != ")":
+      elif c not in {"(", ")"}:
         continue
       else:
         matching = False
@@ -390,7 +389,7 @@ class Greenbook(Cmd):
     """
 
     n = parse(arg, 10)
-    alphabet = ascii_lowercase[: randint(1, min(n // 2.5, len(ascii_lowercase)))]
+    alphabet = ascii_lowercase[: randint(1, min(n // 2.5, len(ascii_lowercase)))]  # type: ignore
     string = "".join(sample(alphabet, n))
 
     def letterful_substring(string: str) -> int:
@@ -403,14 +402,14 @@ class Greenbook(Cmd):
       """
       for w in range(len(string), 0, -1):  # window size
         for i in range(len(string) - w + 1):  # window's first index
-          window = string[i: i + w]
+          window = string[i : i + w]
           counts = Counter(window)  # occurences of each letter
           target = counts[window[0]]  # how many occurences we need
           if all(c == target for c in counts.values()):
             return w  # the window is the size of the longest substring
       return 0  # empty string
 
-    pprintout(self.do_letterful_substring(), f"For example, an {n} character string might be: ", string, letterful_substring(string))
+    pprintout(self.do_letterful_substring, f"For example, an {n} character string might be: ", string, letterful_substring(string))
 
   def do_binary_pals(self, arg):
     """
@@ -428,16 +427,21 @@ class Greenbook(Cmd):
 
     n = parse(arg, 5)
     number = [1] * n + [0] * int(n * 0.5)  # optional fudge factor for num 0s != 1s
-    number = "".join([str(c) for c in (sample(number, len(number)) + [0])])
+    number = "".join([str(c) for c in ([*sample(number, len(number)), 0])])
     number = int(number, 2)  # base-2
 
-    is_pow2 = lambda x: x and not (x & (x - 1))  # example to get people thinking
+    def is_pow2(x):
+      return x and not x & x - 1  # example to get people thinking
+
     assert not is_pow2(0)  # 0 is not a power of 2 (2**-inf=0.0, but not bitwise)
     assert not is_pow2(3)  # 3 is not a power of 2
     assert is_pow2(8)  # 8 is the 4th power of 2
 
-    higher = lambda x: ((x | (x - 1)) + 1) | x ^ (x & -x)
-    lower = lambda x: ((x & -x) ^ x) | ((x & -x) >> 1)
+    def higher(x):
+      return (x | x - 1) + 1 | x ^ x & -x
+
+    def lower(x):
+      return x & -x ^ x | (x & -x) >> 1
 
     def lower_even(x):
       bit = x & -x  # the smallest bit
@@ -461,17 +465,15 @@ class Greenbook(Cmd):
 
     number = number // 2  # since we added a 0 to number, this always works!
 
-    higher = lambda x: ((x | (x - 1)) + 1) | x ^ (x & -x)  # higher is the same!
-    lower = (
-      lambda x: ((x & -x) ^ x) | ((x & -x) >> 1)
-      if not (x & 1)
-      else (
-        (x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))))
-        | (
-          ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1
-        )
+    # higher is the same!
+
+    def lower2(x):
+      return (
+        x & -x ^ x | (x & -x) >> 1
+        if not x & 1
+        else x ^ (x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1)) & -((x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1)))
+        | ((x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1)) & -((x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1)))) >> 1
       )
-    )
 
     def higher_than(x):
       return higher_even(x)  # that simple
@@ -485,10 +487,11 @@ class Greenbook(Cmd):
       sft = iso >> 1  # move that down
       return (x ^ iso) | sft  # tldr, as above, we just ignored a bunch
 
-    ordered_clean = lambda x: f"{higher_than(x):b} > {x:b} > {lower_than(x):b}"
-    ordered_inline = (
-      lambda x: f"{((x | (x - 1)) + 1) | x ^ (x & -x):b} > {x:b} > {((x & -x) ^ x) | ((x & -x) >> 1) if not (x & 1) else ((x ^ ((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))))) | (((((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1))) & -(((x | (x - 1)) + 1) & ~(((x | (x - 1)) + 1) & -((x | (x - 1)) + 1)))) >> 1)):b}"
-    )
+    def ordered_clean(x):
+      return f"{higher_than(x):b} > {x:b} > {lower_than(x):b}"
+
+    def ordered_inline(x):
+      return f"{(x | x - 1) + 1 | x ^ x & -x:b} > {x:b} > {x & -x ^ x | (x & -x) >> 1 if not x & 1 else x ^ (x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1)) & -((x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1))) | ((x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1)) & -((x | x - 1) + 1 & ~((x | x - 1) + 1 & -((x | x - 1) + 1)))) >> 1:b}"  # noqa: E501
 
     assert ordered_clean(number) == ordered_inline(number)
 
@@ -497,7 +500,7 @@ class Greenbook(Cmd):
       "extended",
       f"For example, a number with {n} true/1 bits might be: ",
       f"{number} ({number:b})",
-      f"{lower(number)} < {number} < {higher(number)} ({lower(number):b} < {number:b} < {higher(number):b})",
+      f"{lower2(number)} < {number} < {higher(number)} ({lower2(number):b} < {number:b} < {higher(number):b})",
     )
 
     # Do Arctic Terns prefer Balanced Ternary? I hope so.
@@ -505,7 +508,7 @@ class Greenbook(Cmd):
       self.do_binary_pals,
       "extra extended!",
       f"For example, a number with {n} 1 trits might be: ",
-      f"{number} ({tern(number)}, balanced)",
+      f"{number} ({BalancedTernary(number)}, balanced)",
       "",  # TODO: this
     )
 
@@ -819,8 +822,7 @@ class Greenbook(Cmd):
     sam = [randint(0, max_temp) for _ in range(n)]  # our temperature samples
 
     # the actual algo, linear, only goes over once with constant time lookups
-    for i, t in enumerate(sam[::-1]):
-      t = int(t)
+    for i, t in enumerate(map(int, sam[::-1])):
       tbs &= ~(2 ** (t + 1) - 1)
       bit = tbs & -tbs
       if bit:
@@ -864,7 +866,7 @@ class Greenbook(Cmd):
       "Sorry, this is still on my TODO list",  # TODO: this
     )
 
-  def do_submatrix(self, arg):
+  def do_submatrix(self, arg):  # noqa: PLR0915, PLR0914
     """
     The Submatrix!
 
@@ -879,19 +881,19 @@ class Greenbook(Cmd):
     largest, largest_size = None, None
 
     def size(rect):
-      l, t = rect["left"], rect["top"]
-      r, b = rect["right"], rect["bottom"]
-      return (abs(l - r) + 1) * (abs(t - b) + 1)
+      left, top = rect["left"], rect["top"]
+      right, bottom = rect["right"], rect["bottom"]
+      return (abs(left - right) + 1) * (abs(top - bottom) + 1)
 
     def coords(rect):
       return (rect["left"], rect["top"]), (rect["right"], rect["bottom"])
 
     def valid(rect):
       (left, top), (right, bottom) = coords(rect)
-      return all([all([cell == 1 for cell in row[left: right + 1]]) for row in matrix[top: bottom + 1]])
+      return all([all([cell == 1 for cell in row[left : right + 1]]) for row in matrix[top : bottom + 1]])
 
     def no_point(i, j):
-      return largest_size != None and abs((n - i) * (n - j)) <= largest_size
+      return largest_size is not None and abs((n - i) * (n - j)) <= largest_size
 
     example = [f" #{''.join(str(i) for i in range(n))}"]
     above, rects, graveyard = [set() for _ in range(n)], {}, set()
@@ -916,7 +918,7 @@ class Greenbook(Cmd):
             if rect_id not in graveyard:  # only die once
               rects[rect_id]["bottom"] = j - 1  # it ended before this row
               rect_size = size(rects[rect_id])
-              if valid(rects[rect_id]) and (largest == None or rect_size > largest_size):  # is it a candidate?
+              if valid(rects[rect_id]) and (largest is None or rect_size > largest_size):  # is it a candidate?
                 largest, largest_size = dict(rects[rect_id]), rect_size  # save a copy
               left = rects[rect_id]["left"]
               if i > left:  # if we can save it by walking backwards, let's try
@@ -932,7 +934,7 @@ class Greenbook(Cmd):
       rect, left = None, None
       for i, cell in enumerate(row):
         if cell == 1:
-          if left == None:
+          if left is None:
             left, fs = i, set(above[i])
             for rect_id in fs:
               counter += 1
@@ -942,14 +944,14 @@ class Greenbook(Cmd):
               for c in range(left, rects[new_id]["right"] + 1):
                 above[c].add(new_id)
               graveyard.add(rect_id)
-          if largest != None and no_point(left, j):
+          if largest is not None and no_point(left, j):
             break  # stop early
-          if len(above[i] - graveyard) == 0 and rect == None:
+          if len(above[i] - graveyard) == 0 and rect is None:
             rect = {"left": left, "top": j}  # new rect
         if cell == 0:  # we know the bounds of this rect
-          if rect == None or left == None:
+          if rect is None or left is None:
             rect, left = None, None
-          elif left != None:
+          elif left is not None:
             rect["right"] = i - 1  # the sequence of ones from the left
             counter += 1
             rect_id = counter
@@ -959,22 +961,24 @@ class Greenbook(Cmd):
             rect, left = None, None
 
       # Ended 2nd pass with a rect
-      if rect != None and row[-1] != 0:
+      if rect is not None and row[-1] != 0:
         rect["right"] = n - 1  # ended at edge
         counter += 1
         rect_id = counter
         rects[rect_id] = rect
-        for c in range(left, n - 1):
+        for c in range(left, n - 1):  # type: ignore
           above[c].add(rect_id)
         rect, left = None, None
 
     results = []
-    if largest != None:
+    if largest is not None:
       start, finish = coords(largest)
-      results.append(f"The largest rectangle is from {start} to {finish}, with size {largest_size}")
-      results.append("")
-      results.append("  #" + "".join([str(i) for i in range(start[0], finish[0] + 1)]))
-      for i, row in enumerate(matrix[start[1]: finish[1] + 1], start=start[1]):  # just to make sure we're not crazy
+      results.extend((
+        f"The largest rectangle is from {start} to {finish}, with size {largest_size}",
+        "",
+        "  #" + "".join([str(i) for i in range(start[0], finish[0] + 1)]),
+      ))
+      for i, row in enumerate(matrix[start[1] : finish[1] + 1], start=start[1]):  # just to make sure we're not crazy
         results.append(f"  {str(i).zfill(ceil(log10(max(finish[1], 1))))}{join(row[start[0]:finish[0] + 1], blocky=True)}")
     else:
       results.append("There was nothing in the matrix")

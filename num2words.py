@@ -1,18 +1,25 @@
 # Based on the num2words package, I just simplified it https://pypi.org/project/num2words/
+# ruff: noqa: RUF012
 class Num2Word:
-  high_numwords = (
-    ["cent"]
-    + list(
-      reversed(
-        [
-          u + t
-          for t in ["dec", "vigint", "trigint", "quadragint", "quinquagint", "sexagint", "septuagint", "octogint", "nonagint"]
-          for u in ["", "un", "duo", "tre", "quattuor", "quin", "sex", "sept", "octo", "novem"]
-        ]
-      )
-    )
-    + ["non", "oct", "sept", "sext", "quint", "quadr", "tr", "b", "m"]
-  )
+  high_numwords = [
+    "cent",
+    *list(
+      reversed([
+        u + t
+        for t in ["dec", "vigint", "trigint", "quadragint", "quinquagint", "sexagint", "septuagint", "octogint", "nonagint"]
+        for u in ["", "un", "duo", "tre", "quattuor", "quin", "sex", "sept", "octo", "novem"]
+      ])
+    ),
+    "non",
+    "oct",
+    "sept",
+    "sext",
+    "quint",
+    "quadr",
+    "tr",
+    "b",
+    "m",
+  ]
 
   mid_numwords = [
     (1000, "thousand"),
@@ -53,13 +60,13 @@ class Num2Word:
   def __init__(self):
     if not len(Num2Word.cards):
       mx = 3 + 3 * len(Num2Word.high_numwords)
-      for n, word in zip(range(mx, 3, -3), Num2Word.high_numwords):
+      for n, word in zip(range(mx, 3, -3), Num2Word.high_numwords, strict=False):
         Num2Word.cards[10**n] = word + "illion"
       for n, word in Num2Word.mid_numwords:
         Num2Word.cards[n] = word
       for n, word in Num2Word.low_numwords:
         Num2Word.cards[n] = word
-      Num2Word.MAXVAL = 1000 * list(self.cards.keys())[0]
+      Num2Word.MAXVAL = 1000 * next(iter(self.cards.keys()))
 
   def splitnum(self, value):
     for elem in self.cards:
@@ -121,7 +128,7 @@ class Num2Word:
       value, out = abs(value), "minus "
 
     if value >= self.MAXVAL:
-      raise OverflowError(f"abs({value}) must be less than {self.MAXVAL}.")
+      raise OverflowError(f"abs({value}) must be less than {self.MAXVAL}.")  # noqa: TRY003
 
     words, _ = self.clean(self.splitnum(value))
     return out + words

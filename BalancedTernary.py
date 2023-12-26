@@ -7,8 +7,8 @@ class BalancedTernary:
   From https://rosettacode.org/wiki/Balanced_ternary
   """
 
-  str2dig = {"1": 1, "T": -1, "0": 0}  # immutable
-  dig2str = {1: "1", -1: "T", 0: "0"}  # immutable
+  str2dig = {"1": 1, "T": -1, "0": 0}  # immutable  # noqa: RUF012
+  dig2str = {1: "1", -1: "T", 0: "0"}  # immutable  # noqa: RUF012
   table = ((0, -1), (1, -1), (-1, 0), (0, 0), (1, 0), (-1, 1), (0, 1))  # immutable
 
   def __init__(self, inp):
@@ -17,28 +17,28 @@ class BalancedTernary:
     elif isinstance(inp, int):
       self.digits = self._int2ternary(inp)
     elif isinstance(inp, BalancedTernary):
-      self.digits = list(inp.digits)
+      self.digits = list(inp.digits)  # type: ignore
     elif isinstance(inp, list):
       if all(d in (0, 1, -1) for d in inp):
         self.digits = list(inp)
       else:
-        raise ValueError("BalancedTernary: Wrong input digits.")
+        raise ValueError("BalancedTernary: Wrong input digits.")  # noqa: TRY003
     else:
-      raise TypeError("BalancedTernary: Wrong constructor input.")
+      raise TypeError("BalancedTernary: Wrong constructor input.")  # noqa: TRY003
 
   @staticmethod
   def _int2ternary(n):
     if n == 0:
       return []
     if (n % 3) == 0:
-      return [0] + BalancedTernary._int2ternary(n // 3)
+      return [0, *BalancedTernary._int2ternary(n // 3)]
     if (n % 3) == 1:
-      return [1] + BalancedTernary._int2ternary(n // 3)
+      return [1, *BalancedTernary._int2ternary(n // 3)]
     if (n % 3) == 2:
-      return [-1] + BalancedTernary._int2ternary((n + 1) // 3)
+      return [-1, *BalancedTernary._int2ternary((n + 1) // 3)]
 
   def to_int(self):
-    return reduce(lambda y, x: x + 3 * y, reversed(self.digits), 0)
+    return reduce(lambda y, x: x + 3 * y, reversed(self.digits), 0)  # type: ignore
 
   def __repr__(self):
     if not self.digits:
@@ -64,7 +64,7 @@ class BalancedTernary:
       res = BalancedTernary._add(a[1:], b[1:], c)
       # trim leading zeros
       if res or d != 0:
-        return [d] + res
+        return [d, *res]
       else:
         return res
 
@@ -86,8 +86,8 @@ class BalancedTernary:
       elif a[0] == 1:
         x = b
       else:
-        assert False
-      y = [0] + BalancedTernary._mul(a[1:], b)
+        raise AssertionError()
+      y = [0, *BalancedTernary._mul(a[1:], b)]
       return BalancedTernary._add(x, y)
 
   def __mul__(self, b):
