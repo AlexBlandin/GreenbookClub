@@ -500,7 +500,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
       "extra extended!",
       f"For example, a number with {n} 1 trits might be: ",
       f"{number} ({BalancedTernary(number)}, balanced)",
-      "",  # TODO: this
+      "",  # TODO(alex): this
     )
 
   def do_water_trap(self, arg):
@@ -646,7 +646,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
       self.do_calculate,
       "Sorry, this is still on my TODO list",
       "",
-      "Sorry, this is still on my TODO list",  # TODO: this
+      "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
   def do_magic_indices(self, arg):
@@ -662,7 +662,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
       self.do_magic_indices,
       "Sorry, this is still on my TODO list",
       "",
-      "Sorry, this is still on my TODO list",  # TODO: this
+      "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
   def do_zero_the_matrix(self, arg):
@@ -694,7 +694,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
       self.do_zero_the_matrix,
       "Sorry, this is still on my TODO list",
       "",
-      "Sorry, this is still on my TODO list",  # TODO: this
+      "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
   def do_matrix_search(self, arg):
@@ -726,7 +726,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
       self.do_matrix_search,
       "Sorry, this is still on my TODO list",
       "",
-      "Sorry, this is still on my TODO list",  # TODO: this
+      "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
   def do_matrix_revolve(self, arg):
@@ -749,7 +749,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
       self.do_matrix_revolve,
       "Sorry, this is still on my TODO list",
       "",
-      "Sorry, this is still on my TODO list",  # TODO: this
+      "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
   def do_too_many_twos(self, arg):
@@ -762,13 +762,13 @@ class Greenbook(Cmd):  # noqa: PLR0904
       = 9 (2, 12, 20, 21, 22, 23, 24, 25)
 
     Now, what if n is any positive integer? How fast can you go?
-    """  # TODO: uhhh what is this even
+    """  # TODO(alex): uhhh what is this even
     # n = parse(arg, 5)
     pprintout(
       self.do_too_many_twos,
       "Sorry, this is still on my TODO list",
       "",
-      "Sorry, this is still on my TODO list",  # TODO: this
+      "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
   def do_top_temps(self, arg):
@@ -832,7 +832,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
       self.do_matrix_flip,
       "Sorry, this is still on my TODO list",
       "",
-      "Sorry, this is still on my TODO list",  # TODO: this
+      "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
   def do_submatrix(self, arg):  # noqa: PLR0915
