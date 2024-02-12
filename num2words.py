@@ -4,11 +4,13 @@ class Num2Word:
   high_numwords = [
     "cent",
     *list(
-      reversed([
-        u + t
-        for t in ["dec", "vigint", "trigint", "quadragint", "quinquagint", "sexagint", "septuagint", "octogint", "nonagint"]
-        for u in ["", "un", "duo", "tre", "quattuor", "quin", "sex", "sept", "octo", "novem"]
-      ])
+      reversed(
+        [
+          u + t
+          for t in ["dec", "vigint", "trigint", "quadragint", "quinquagint", "sexagint", "septuagint", "octogint", "nonagint"]
+          for u in ["", "un", "duo", "tre", "quattuor", "quin", "sex", "sept", "octo", "novem"]
+        ],
+      ),
     ),
     "non",
     "oct",
@@ -57,7 +59,7 @@ class Num2Word:
   ]
   cards = {}
 
-  def __init__(self):
+  def __init__(self) -> None:
     if not len(Num2Word.cards):
       mx = 3 + 3 * len(Num2Word.high_numwords)
       for n, word in zip(range(mx, 3, -3), Num2Word.high_numwords, strict=False):
@@ -89,6 +91,7 @@ class Num2Word:
         out.append(self.splitnum(mod))
 
       return out
+    return None
 
   def clean(self, val):
     out = val
@@ -128,7 +131,8 @@ class Num2Word:
       value, out = abs(value), "minus "
 
     if value >= self.MAXVAL:
-      raise OverflowError(f"abs({value}) must be less than {self.MAXVAL}.")  # noqa: TRY003
+      msg = f"abs({value}) must be less than {self.MAXVAL}."
+      raise OverflowError(msg)
 
     words, _ = self.clean(self.splitnum(value))
     return out + words

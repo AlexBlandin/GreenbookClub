@@ -31,7 +31,7 @@ def clean(s: str) -> str:
 
 
 def pprintout(p: Callable, example_text, example, *result):
-  """Standard interactive printout for a problem"""
+  """Standard interactive printout for a problem."""
   history[clean(name(p))][example] = result
   print(name(p))
   print(example_text)
@@ -43,7 +43,7 @@ def pprintout(p: Callable, example_text, example, *result):
 
 
 def pprintoutplus(p: Callable, extension, example_text, example, *result):
-  """Standard interactive printout for an extended problem"""
+  """Standard interactive printout for an extended problem."""
   history[clean(f"{name(p)} {extension}")][example] = result
   input("Press enter/return to see the extended problem: ")
   print(name(p), extension)
@@ -68,16 +68,16 @@ class Greenbook(Cmd):  # noqa: PLR0904
   ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║  ██╔══██╗██║   ██║██║   ██║██╔═██╗
   ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║  ██████╔╝╚██████╔╝╚██████╔╝██║  ██╗
    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
-  
+
    ██████╗██╗     ██╗   ██╗██████╗
   ██╔════╝██║     ██║   ██║██╔══██╗
   ██║     ██║     ██║   ██║██████╔╝
   ██║     ██║     ██║   ██║██╔══██╗
   ╚██████╗███████╗╚██████╔╝██████╔╝
    ╚═════╝╚══════╝ ╚═════╝ ╚═════╝
-  
+
   Welcome to Greenbook Club!
-  
+
   Please select a problem by typing its name, type "help" or "?" for the list of
   problems, or type "help problem" for a specific problem to get its description
   and any examples. You can add a value n for the size of the problem, such as
@@ -101,7 +101,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     return True
 
   def do_history(self, *_):
-    """Prints the history of examples to problem-specific output files (extensions are counted as separate)"""
+    """Prints the history of examples to problem-specific output files (extensions are counted as separate)."""
     if not Path("./examples/").exists():
       Path("./examples/").mkdir()  # os.mkdir("./examples/")
     for prob, pairs in history.items():
@@ -112,8 +112,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
           f.write("\n")
 
   def do_odds_and_evens(self, arg):
-    """
-    Odds and Evens!
+    """Odds and Evens!
 
     Given a list of n numbers, return a new list containing all the even elements
     of the original list, followed by all the odd elements of the original list.
@@ -129,7 +128,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
       ? 51 42 43 67 46
       = 42 46 67 51 43
     """
-
     n = parse(arg, 20)
     biggest_number = 99  # random, so might not see
     numbers = [randint(0, biggest_number) for _ in range(n)]
@@ -152,8 +150,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintoutplus(self.do_odds_and_evens, "extended", f"For example, a list of {n} elements might be: ", join(numbers), join(evens), join(odds))
 
   def do_zerosum_game(self, arg):
-    """
-    Zero-Sum Game!
+    """Zero-Sum Game!
 
     Given a list of n integers, find all pairs that sum to zero.
 
@@ -171,7 +168,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
       ? -9 0 -3 -3 3 -5 0 0 5 2
       = (-5, 0, 5) (-5, 2, 3) (-3, 0, 3) (0, 0, 0)
     """
-
     n = parse(arg, 10)
     biggest_number = 9
     numbers = [randint(-biggest_number, biggest_number) for _ in range(n)]
@@ -209,15 +205,14 @@ class Greenbook(Cmd):  # noqa: PLR0904
 
     pprintout(self.do_zerosum_game, f"For example, a list of {n} elements might be: ", join(numbers), join(results))
 
-    matches = [f"({a}, {b}, {c})" for a, b, c in [tuple(combo) for combo in combinations(sorted(list(set(numbers))), 3)] if a + b + c == 0]
+    matches = [f"({a}, {b}, {c})" for a, b, c in [tuple(combo) for combo in combinations(sorted(set(numbers)), 3)] if a + b + c == 0]
     if numbers.count(0) > 3:
       matches.append("(0, 0, 0)")
 
     pprintoutplus(self.do_zerosum_game, "extended", f"For example, a list of {n} elements might be: ", join(numbers), join(matches))
 
   def do_lispy_business(self, arg):  # noqa: PLR0915
-    """
-    Lispy Business!
+    """Lispy Business!
 
     Given an input containing parenthesis, write a function to decide if the
     parenthesis are matched. That is, for every opening parenthesis `(` there must
@@ -247,7 +242,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
       ? ("Neaff" . ("Porth albot" . ("Brishtol Parkway" . ("Cardiff Shentral" . nil))))
       = Yes
     """
-
     n = parse(arg, 7)
     s = ""  # our lispy string
     lexicon = ["Hello", "world", "main", "int", "print", "lithp", "Google", "Green", "Book"]
@@ -312,8 +306,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintout(self.do_lispy_business, f"An example string with {n} lexical units", s, "Yes" if stack == 0 and matching else "No")
 
   def do_door_problem(self, arg):
-    """
-    The Legendary Door Problem!
+    """The Legendary Door Problem!
 
     Given 100 open doors, how many doors are left open if you were to close
     every other door, then open/close (toggle) every third door, then every
@@ -322,18 +315,20 @@ class Greenbook(Cmd):  # noqa: PLR0904
     Now, given any n doors, how many would be left open? Can you express this as
     an equation d(n) = ???
     """
-
     n = parse(arg, 1000)
     pprintout(self.do_door_problem, "For this problem, we start with exactly:", "100 doors", f"{floor(sqrt(100))} left open")
 
     number = randint(1, n)
     pprintoutplus(
-      self.do_door_problem, "extended", f"For example, with doors <= {n}, we can have exactly:", f"{number} doors", f"{floor(sqrt(number))} left open"
+      self.do_door_problem,
+      "extended",
+      f"For example, with doors <= {n}, we can have exactly:",
+      f"{number} doors",
+      f"{floor(sqrt(number))} left open",
     )
 
   def do_deadly_soda(self, arg):
-    """
-    Deadly Soda!
+    """Deadly Soda!
 
     You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
     strips which can be used to detect poison.
@@ -349,19 +344,21 @@ class Greenbook(Cmd):  # noqa: PLR0904
 
     Now, does this generalise? How few days can you guarantee it will take?
     """
-
     n = parse(arg, 10)
 
     pprintout(self.do_deadly_soda, "For example, with only 10 test strips, we might have:", "1000 bottles", "7 days")
 
     b = randint(n, 2 ** (n + 10))
     pprintoutplus(
-      self.do_deadly_soda, "generalised", f"For example, with only {n} test strips, we might have:", f"{b} bottles", f"{max(1, ceil(log2(b) - n + 1)) * 7} days"
+      self.do_deadly_soda,
+      "generalised",
+      f"For example, with only {n} test strips, we might have:",
+      f"{b} bottles",
+      f"{max(1, ceil(log2(b) - n + 1)) * 7} days",
     )
 
   def do_sorted_stacking(self, arg):
-    """
-    Stacking Sorted!
+    """Stacking Sorted!
     Wait, other way around...
 
     Given a full stack and an empty stack, how can you sort the first stack
@@ -371,7 +368,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
     Now, sort your full stack again, but this time you can have as many
     additional stacks as you want. Can you go faster?
     """
-
     n = parse(arg, 10)
     biggest_number = 9
     numbers = [randint(0, biggest_number) for _ in range(n)]
@@ -380,21 +376,18 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintout(self.do_sorted_stacking, f"For example, a stack of {n} items might be: ", numbers, sorted(numbers, reverse=True))
 
   def do_letterful_substring(self, arg):
-    """
-    Letterful Substring!
+    """Letterful Substring!
 
     Given the string S of length N, determine the length of the longest
     substring in which the number of occurrences of each letter in that
     substring are equal.
     """
-
     n = parse(arg, 10)
     alphabet = ascii_lowercase[: randint(1, min(n // 2.5, len(ascii_lowercase)))]  # type: ignore
     string = "".join(sample(alphabet, n))
 
     def letterful_substring(string: str) -> int:
-      """
-      The approach is to use a sliding window, which starts with the full string
+      """The approach is to use a sliding window, which starts with the full string
       and halts on a window of size 1 (aka, a single character). This will work
       for all strings from size N to size 1. We finish early on windows of size 1
       as we match against the first character, which is sufficient. Empty strings
@@ -412,8 +405,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintout(self.do_letterful_substring, f"For example, an {n} character string might be: ", string, letterful_substring(string))
 
   def do_binary_pals(self, arg):
-    """
-    (Non-)Binary Pals!
+    """(Non-)Binary Pals!
 
     Given an even positive integer, print the next smallest and next largest
     numbers that have the same number of 1 bits in their binary representation.
@@ -424,7 +416,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
     now you have 2s or -1s if you want --- balanced or unbalanced, you choose!
     (I recommend balanced, it's the nicer system...)
     """
-
     n = parse(arg, 5)
     number = [1] * n + [0] * int(n * 0.5)  # optional fudge factor for num 0s != 1s
     number = "".join([str(c) for c in ([*sample(number, len(number)), 0])])
@@ -513,8 +504,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     )
 
   def do_water_trap(self, arg):
-    """
-    Water Trap!
+    """Water Trap!
 
     Imagine a histogram (bar graph). Design an algorithm to compute the volume
     of water it could hold if someone poured water across the top. You can
@@ -535,7 +525,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
     ---------------- (height=0) █ = solid, "~" = waterline
     0040060030501000
     """
-
     # n is the number of samples, height is ints>=0, max used for sample generation
     n, max_height = parse(arg, 10), 8  # or parse(arg, 1000000), 255
 
@@ -561,8 +550,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintout(self.do_water_trap, f"For example, a water trap {n} long with heights:", join(s), f"Trapped {r} water")
 
   def do_say_a_word(self, arg):
-    """
-    Say a word!
+    """Say a word!
     Any word!
 
     Given any number in the range ±2 Billion, return it as a string of natural
@@ -574,7 +562,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
       ? -92435
       = minus ninety-two thousand, four hundred and thirty-five
     """
-
     n = parse(arg, 0)
     if not len(arg.strip()):
       n = randint(-2 * 10**9, 2 * 10**9)
@@ -582,8 +569,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintout(self.do_say_a_word, "For example, given: ", n, num2words(n))
 
   def do_ip_misaddress(self, arg):
-    """
-    IP Misaddress!
+    """IP Misaddress!
 
     Greenbook Club has come into possession of an old IPv4 networking system
     made by Swansea Uni researchers in the 80s (don't ask us how, John Tucker
@@ -610,7 +596,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
     canonises anything) Tucker wants you to produce each address in a range of
     different formats.
     """
-
     ip = ".".join([str(randint(0, 255)) for _ in range(4)])
     z_a = ord("z") - ord("a")
     sip = []
@@ -641,8 +626,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintout(self.do_ip_misaddress, "For example, the SIP: ", ".".join(sip), ip)
 
   def do_calculate(self, arg):
-    """
-    (Shut up and) Calculate!
+    """(Shut up and) Calculate!
 
     You have a calculator that only has working addition and negation buttons (not
     subtraction, as in 4 to -4, and -4 to 4).
@@ -655,7 +639,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
 
     (Hint, you may not need every available operations for each part.)
     """
-
     if not len(arg.strip()):
       pass  # generate our own equation string
 
@@ -667,15 +650,13 @@ class Greenbook(Cmd):  # noqa: PLR0904
     )
 
   def do_magic_indices(self, arg):
-    """
-    Magic Indices! (Not beans...)
+    """Magic Indices! (Not beans...).
 
     An array a[] might have "magix indices", which is when `a[i] == i`. If it is
     unsorted, what is the most efficient algorithm?
 
     Now, what if a[] was sorted?
     """
-
     # n = parse(arg, 10)
     pprintout(
       self.do_magic_indices,
@@ -685,8 +666,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     )
 
   def do_zero_the_matrix(self, arg):
-    """
-    Zero The Matrix!
+    """Zero The Matrix!
     The Prequel?
 
     Given a matrix of sizes NxM, create a new matrix of the same size where all
@@ -709,7 +689,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
         6,0,0,9
         1,0,0,4
     """
-
     # n = parse(arg, 5)
     pprintout(
       self.do_zero_the_matrix,
@@ -719,9 +698,8 @@ class Greenbook(Cmd):  # noqa: PLR0904
     )
 
   def do_matrix_search(self, arg):
-    """
-    The Matrix: Search!
-    (For Neo)
+    """The Matrix: Search!
+    (For Neo).
 
     Given an NxM matrix, describe an algorithm to search for a given value. The
     following properties hold for the matrix:
@@ -743,7 +721,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
 
     How fast can you go? Why?
     """
-
     # n = parse(arg, 5)
     pprintout(
       self.do_matrix_search,
@@ -753,8 +730,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     )
 
   def do_matrix_revolve(self, arg):
-    """
-    The Matrix: Revolutions!
+    """The Matrix: Revolutions!
 
     Given an N x N matrix, write a method to rotate the matrix by 90 degrees.
 
@@ -768,7 +744,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
 
     How fast can you go? Can you do this with O(1) space?
     """  # the rotate 90 degrees / transpose one
-
     # n = parse(arg, 5)
     pprintout(
       self.do_matrix_revolve,
@@ -778,8 +753,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     )
 
   def do_too_many_twos(self, arg):
-    """
-    Too Many Twos!
+    """Too Many Twos!
 
     Given the positive integer n < 10000, determine how many 2s appear in the
     numbers between 0 and n.
@@ -789,7 +763,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
 
     Now, what if n is any positive integer? How fast can you go?
     """  # TODO: uhhh what is this even
-
     # n = parse(arg, 5)
     pprintout(
       self.do_too_many_twos,
@@ -799,8 +772,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     )
 
   def do_top_temps(self, arg):
-    """
-    Top Temperatures!
+    """Top Temperatures!
 
     Given a list of daily temperatures, return a list that, for each day in the
     input, tells you how many days you would have to wait until a warmer
@@ -813,7 +785,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
     Now, can you do this in linear time? How much space does this require? Can
     you reduce that asymptotically?
     """
-
     n = parse(arg, 15)
     # temperature is in Kelvin (max necessary for randint gen.)
     max_temp = 100
@@ -833,8 +804,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
     pprintout(self.do_top_temps, f"For example, a list of {n} elements might be: ", join(sam), join(out))
 
   def do_matrix_flip(self, arg):
-    """
-    The Matrix: Flip!
+    """The Matrix: Flip!
 
     Given a matrix consisting of 0s and 1s, we may choose any number of columns in
     the matrix and flip every cell in that column.
@@ -857,7 +827,6 @@ class Greenbook(Cmd):  # noqa: PLR0904
         1, 1, 0
       = 2 (Flip the first two columns, the last two rows now are consistent.)
     """
-
     # n = parse(arg, 5)
     pprintout(
       self.do_matrix_flip,
@@ -866,14 +835,12 @@ class Greenbook(Cmd):  # noqa: PLR0904
       "Sorry, this is still on my TODO list",  # TODO: this
     )
 
-  def do_submatrix(self, arg):  # noqa: PLR0915, PLR0914
-    """
-    The Submatrix!
+  def do_submatrix(self, arg):  # noqa: PLR0915
+    """The Submatrix!
 
     Given a matrix of size n*n, where the elements are either 1 or 0, find the
     largest rectangle within (submatrix) where every element is 1.
     """
-
     n = parse(arg, 10)
     matrix = [[randint(0, 1) for _ in range(n)] for _ in range(n)]
     counter = 0
@@ -890,7 +857,7 @@ class Greenbook(Cmd):  # noqa: PLR0904
 
     def valid(rect):
       (left, top), (right, bottom) = coords(rect)
-      return all([all([cell == 1 for cell in row[left : right + 1]]) for row in matrix[top : bottom + 1]])
+      return all(all(cell == 1 for cell in row[left : right + 1]) for row in matrix[top : bottom + 1])
 
     def no_point(i, j):
       return largest_size is not None and abs((n - i) * (n - j)) <= largest_size
@@ -973,11 +940,13 @@ class Greenbook(Cmd):  # noqa: PLR0904
     results = []
     if largest is not None:
       start, finish = coords(largest)
-      results.extend((
-        f"The largest rectangle is from {start} to {finish}, with size {largest_size}",
-        "",
-        "  #" + "".join([str(i) for i in range(start[0], finish[0] + 1)]),
-      ))
+      results.extend(
+        (
+          f"The largest rectangle is from {start} to {finish}, with size {largest_size}",
+          "",
+          "  #" + "".join([str(i) for i in range(start[0], finish[0] + 1)]),
+        ),
+      )
       for i, row in enumerate(matrix[start[1] : finish[1] + 1], start=start[1]):  # just to make sure we're not crazy
         results.append(f"  {str(i).zfill(ceil(log10(max(finish[1], 1))))}{join(row[start[0]:finish[0] + 1], blocky=True)}")
     else:

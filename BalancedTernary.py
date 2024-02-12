@@ -2,16 +2,15 @@ from functools import reduce
 
 
 class BalancedTernary:
-  """
-  Represented as a list of 0, 1 or -1s, with least significant digit first.
-  From https://rosettacode.org/wiki/Balanced_ternary
+  """Represented as a list of 0, 1 or -1s, with least significant digit first.
+  From https://rosettacode.org/wiki/Balanced_ternary.
   """
 
   str2dig = {"1": 1, "T": -1, "0": 0}  # immutable  # noqa: RUF012
   dig2str = {1: "1", -1: "T", 0: "0"}  # immutable  # noqa: RUF012
   table = ((0, -1), (1, -1), (-1, 0), (0, 0), (1, 0), (-1, 1), (0, 1))  # immutable
 
-  def __init__(self, inp):
+  def __init__(self, inp) -> None:
     if isinstance(inp, str):
       self.digits = [BalancedTernary.str2dig[c] for c in reversed(inp)]
     elif isinstance(inp, int):
@@ -22,9 +21,11 @@ class BalancedTernary:
       if all(d in {0, 1, -1} for d in inp):
         self.digits = list(inp)
       else:
-        raise ValueError("BalancedTernary: Wrong input digits.")  # noqa: TRY003
+        msg = "BalancedTernary: Wrong input digits."
+        raise ValueError(msg)
     else:
-      raise TypeError("BalancedTernary: Wrong constructor input.")  # noqa: TRY003
+      msg = "BalancedTernary: Wrong constructor input."
+      raise TypeError(msg)
 
   @staticmethod
   def _int2ternary(n):
@@ -36,11 +37,12 @@ class BalancedTernary:
       return [1, *BalancedTernary._int2ternary(n // 3)]
     if (n % 3) == 2:
       return [-1, *BalancedTernary._int2ternary((n + 1) // 3)]
+    return None
 
   def to_int(self):
     return reduce(lambda y, x: x + 3 * y, reversed(self.digits), 0)  # type: ignore
 
-  def __repr__(self):
+  def __repr__(self) -> str:
     if not self.digits:
       return "0"
     return "".join(BalancedTernary.dig2str[d] for d in reversed(self.digits))
@@ -86,7 +88,7 @@ class BalancedTernary:
       elif a[0] == 1:
         x = b
       else:
-        raise AssertionError()
+        raise AssertionError
       y = [0, *BalancedTernary._mul(a[1:], b)]
       return BalancedTernary._add(x, y)
 
