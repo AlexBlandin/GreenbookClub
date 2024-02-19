@@ -1,3 +1,9 @@
+"""
+Swansea IP Protocol!
+
+Copyright 2022 Alex Blandin
+"""
+
 ips = ["127.0.0.1", "255.0.0.1", "137.44.1.20", "48.8.9.72", ".".join(str(x) for x in range(256))]
 z_a = ord("z") - ord("a")  # apparently I find it hard to remember az is 26 letters
 

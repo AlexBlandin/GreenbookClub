@@ -1,13 +1,29 @@
-# Based on the num2words package, I just simplified it https://pypi.org/project/num2words/
+"""
+Based on the num2words package https://pypi.org/project/num2words/.
+
+Copyright 2021 Alex Blandin
+"""
+
+
 # ruff: noqa: RUF012
-class Num2Word:
+class Num2Word:  # noqa: D101
   high_numwords = [
     "cent",
     *list(
       reversed(
         [
           u + t
-          for t in ["dec", "vigint", "trigint", "quadragint", "quinquagint", "sexagint", "septuagint", "octogint", "nonagint"]
+          for t in [
+            "dec",
+            "vigint",
+            "trigint",
+            "quadragint",
+            "quinquagint",
+            "sexagint",
+            "septuagint",
+            "octogint",
+            "nonagint",
+          ]
           for u in ["", "un", "duo", "tre", "quattuor", "quin", "sex", "sept", "octo", "novem"]
         ],
       ),
@@ -59,7 +75,7 @@ class Num2Word:
   ]
   cards = {}
 
-  def __init__(self) -> None:
+  def __init__(self) -> None:  # noqa: ANN101, D107
     if not len(Num2Word.cards):
       mx = 3 + 3 * len(Num2Word.high_numwords)
       for n, word in zip(range(mx, 3, -3), Num2Word.high_numwords, strict=False):
@@ -70,7 +86,7 @@ class Num2Word:
         Num2Word.cards[n] = word
       Num2Word.MAXVAL = 1000 * next(iter(self.cards.keys()))
 
-  def splitnum(self, value):
+  def splitnum(self, value):  # noqa: ANN001, ANN101, ANN201, D102
     for elem in self.cards:
       if elem > value:
         continue
@@ -93,7 +109,7 @@ class Num2Word:
       return out
     return None
 
-  def clean(self, val):
+  def clean(self, val):  # noqa: ANN001, ANN101, ANN201, C901, D102, PLR0912
     out = val
     while len(val) != 1:
       out = []
@@ -101,11 +117,11 @@ class Num2Word:
       if isinstance(left, tuple) and isinstance(right, tuple):
         ltext, lnum = left
         rtext, rnum = right
-        if lnum == 1 and rnum < 100:
+        if lnum == 1 and rnum < 100:  # noqa: PLR2004
           out.append((rtext, rnum))
-        elif 100 > lnum > rnum:
+        elif 100 > lnum > rnum:  # noqa: PLR2004
           out.append((f"{ltext}-{rtext}", lnum + rnum))
-        elif lnum >= 100 > rnum:
+        elif lnum >= 100 > rnum:  # noqa: PLR2004
           out.append((f"{ltext} and {rtext}", lnum + rnum))
         elif rnum > lnum:
           out.append((f"{ltext} {rtext}", lnum * rnum))
@@ -125,7 +141,7 @@ class Num2Word:
       val = out
     return out[0]
 
-  def to_cardinal(self, value):
+  def to_cardinal(self, value):  # noqa: ANN001, ANN101, ANN201, D102
     out = ""
     if value < 0:
       value, out = abs(value), "minus "
@@ -138,7 +154,7 @@ class Num2Word:
     return out + words
 
 
-def num2words(number):
+def num2words(number):  # noqa: ANN001, ANN201, D103
   return Num2Word().to_cardinal(number)
 
 
