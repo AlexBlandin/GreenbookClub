@@ -3,6 +3,7 @@ name = "Greenbook Club!"
 version = "1.0.0"
 description = "An unofficial official example generator and solver for Greenbook Club problems!"
 authors = ["AlexBlandin"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
