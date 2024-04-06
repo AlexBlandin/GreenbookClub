@@ -14,8 +14,8 @@ from pathlib import Path
 from random import randint, sample
 from string import ascii_lowercase
 
-from BalancedTernary import BalancedTernary
 from num2words import num2words
+from ternary import BalancedTernary
 
 
 def join(arr, sep=" ", blocky=False):  # str.join only takes list[str]  # noqa: ANN001, ANN201, FBT002, D103
