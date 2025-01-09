@@ -39,26 +39,26 @@ def clean(s: str) -> str:  # noqa: D103
 def pprintout(p: Callable, example_text, example, *result) -> None:  # noqa: ANN001, ANN002
   """Standard interactive printout for a problem."""
   history[clean(name(p))][example] = result
-  print(name(p))
-  print(example_text)
-  print("", example)
-  print()
+  print(name(p))  # noqa: T201
+  print(example_text)  # noqa: T201
+  print("", example)  # noqa: T201
+  print()  # noqa: T201
   input("Press enter/return to see the result: ")
-  print("", *result)
-  print()
+  print("", *result)  # noqa: T201
+  print()  # noqa: T201
 
 
 def pprintoutplus(p: Callable, extension, example_text, example, *result) -> None:  # noqa: ANN001, ANN002
   """Standard interactive printout for an extended problem."""
   history[clean(f"{name(p)} {extension}")][example] = result
   input("Press enter/return to see the extended problem: ")
-  print(name(p), extension)
-  print(example_text)
-  print("", example)
-  print()
+  print(name(p), extension)  # noqa: T201
+  print(example_text)  # noqa: T201
+  print("", example)  # noqa: T201
+  print()  # noqa: T201
   input("Press enter/return to see the result: ")
-  print("", *result)
-  print()
+  print("", *result)  # noqa: T201
+  print()  # noqa: T201
 
 
 def parse(arg: str, default: int):  # noqa: ANN201, D103
@@ -93,7 +93,7 @@ class Greenbook(Cmd):  # noqa: D101
   """
   prompt = "📗 " if os.name != "nt" else "📗  "
 
-  def default(self, args) -> None:  # noqa: ANN001, ANN101, D102
+  def default(self, args) -> None:  # noqa: ANN001, D102
     args = args.split()
     for i in range(1, len(args) + 1):
       as_arg = "_".join(["do"] + args[:i])
@@ -102,11 +102,11 @@ class Greenbook(Cmd):  # noqa: D101
         if callable(f):
           f(" ".join(args[i:]))  # just guard against "prompt" etc
 
-  def do_exit(self, *_) -> bool:  # noqa: ANN002, ANN101
+  def do_exit(self, *_) -> bool:  # noqa: ANN002
     """What do you think it does?"""
     return True
 
-  def do_history(self, *_) -> None:  # noqa: ANN002, ANN101
+  def do_history(self, *_) -> None:  # noqa: ANN002
     """Prints the history of examples to problem-specific output files (extensions are counted as separate)."""
     examples = Path("examples/")
     if not examples.exists():
@@ -118,7 +118,7 @@ class Greenbook(Cmd):  # noqa: D101
           print("=", *v, file=f)
           f.write("\n")
 
-  def do_odds_and_evens(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_odds_and_evens(self, arg) -> None:  # noqa: ANN001
     """Odds and Evens!
 
     Given a list of n numbers, return a new list containing all the even elements
@@ -165,7 +165,7 @@ class Greenbook(Cmd):  # noqa: D101
       join(odds),
     )
 
-  def do_zerosum_game(self, arg) -> None:  # noqa: ANN001, ANN101, C901
+  def do_zerosum_game(self, arg) -> None:  # noqa: ANN001, C901
     """Zero-Sum Game!
 
     Given a list of n integers, find all pairs that sum to zero.
@@ -233,7 +233,7 @@ class Greenbook(Cmd):  # noqa: D101
       self.do_zerosum_game, "extended", f"For example, a list of {n} elements might be: ", join(numbers), join(matches)
     )
 
-  def do_lispy_business(self, arg) -> None:  # noqa: ANN001, ANN101, C901, PLR0912, PLR0915
+  def do_lispy_business(self, arg) -> None:  # noqa: ANN001, C901, PLR0912, PLR0915
     """Lispy Business!
 
     Given an input containing parenthesis, write a function to decide if the
@@ -329,7 +329,7 @@ class Greenbook(Cmd):  # noqa: D101
       self.do_lispy_business, f"An example string with {n} lexical units", s, "Yes" if stack == 0 and matching else "No"
     )
 
-  def do_door_problem(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_door_problem(self, arg) -> None:  # noqa: ANN001
     """The Legendary Door Problem!
 
     Given 100 open doors, how many doors are left open if you were to close
@@ -353,7 +353,7 @@ class Greenbook(Cmd):  # noqa: D101
       f"{floor(sqrt(number))} left open",
     )
 
-  def do_deadly_soda(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_deadly_soda(self, arg) -> None:  # noqa: ANN001
     """Deadly Soda!
 
     You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
@@ -383,7 +383,7 @@ class Greenbook(Cmd):  # noqa: D101
       f"{max(1, ceil(log2(b) - n + 1)) * 7} days",
     )
 
-  def do_sorted_stacking(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_sorted_stacking(self, arg) -> None:  # noqa: ANN001
     """Stacking Sorted!
     Wait, other way around...
 
@@ -403,7 +403,7 @@ class Greenbook(Cmd):  # noqa: D101
       self.do_sorted_stacking, f"For example, a stack of {n} items might be: ", numbers, sorted(numbers, reverse=True)
     )
 
-  def do_letterful_substring(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_letterful_substring(self, arg) -> None:  # noqa: ANN001
     """Letterful Substring!
 
     Given the string S of length N, determine the length of the longest
@@ -411,7 +411,7 @@ class Greenbook(Cmd):  # noqa: D101
     substring are equal.
     """
     n = parse(arg, 10)
-    alphabet = ascii_lowercase[: randint(1, min(n // 2.5, len(ascii_lowercase)))]  # type: ignore  # noqa: PGH003
+    alphabet = ascii_lowercase[: randint(1, min(n // 2.5, len(ascii_lowercase)))]
     string = "".join(sample(alphabet, n))
 
     def letterful_substring(string: str) -> int:
@@ -437,7 +437,7 @@ class Greenbook(Cmd):  # noqa: D101
       letterful_substring(string),
     )
 
-  def do_binary_pals(self, arg) -> None:  # noqa: ANN001, ANN101, C901
+  def do_binary_pals(self, arg) -> None:  # noqa: ANN001, C901
     """(Non-)Binary Pals!
 
     Given an even positive integer, print the next smallest and next largest
@@ -544,7 +544,7 @@ class Greenbook(Cmd):  # noqa: D101
       "",  # TODO(alex): this
     )
 
-  def do_water_trap(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_water_trap(self, arg) -> None:  # noqa: ANN001
     """Water Trap!
 
     Imagine a histogram (bar graph). Design an algorithm to compute the volume
@@ -576,21 +576,18 @@ class Greenbook(Cmd):  # noqa: D101
 
     for i, h in enumerate(s):  # go over forwards
       t[i] = peak
-      if h > peak:
-        peak = h
+      peak = max(h, peak)
 
     peak = 0  # resetting because now we're going the other way
     for i, h in enumerate(s[::-1]):  # go over backwards
-      if t[i] > peak:
-        t[i] = peak
-      if h > peak:
-        peak = h
+      t[i] = min(t[i], peak)
+      peak = max(h, peak)
       if h < t[i]:
         r += t[i] - h  # add any water trapped "above" this point
 
     pprintout(self.do_water_trap, f"For example, a water trap {n} long with heights:", join(s), f"Trapped {r} water")
 
-  def do_say_a_word(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_say_a_word(self, arg) -> None:  # noqa: ANN001
     """Say a word!
     Any word!
 
@@ -609,7 +606,7 @@ class Greenbook(Cmd):  # noqa: D101
 
     pprintout(self.do_say_a_word, "For example, given: ", n, num2words(n))
 
-  def do_ip_misaddress(self, arg) -> None:  # noqa: ANN001, ANN101, ARG002
+  def do_ip_misaddress(self, arg) -> None:  # noqa: ANN001, ARG002
     """IP Misaddress!
 
     Greenbook Club has come into possession of an old IPv4 networking system
@@ -666,7 +663,7 @@ class Greenbook(Cmd):  # noqa: D101
 
     pprintout(self.do_ip_misaddress, "For example, the SIP: ", ".".join(sip), ip)
 
-  def do_calculate(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_calculate(self, arg) -> None:  # noqa: ANN001
     """(Shut up and) Calculate!
 
     You have a calculator that only has working addition and negation buttons (not
@@ -690,7 +687,7 @@ class Greenbook(Cmd):  # noqa: D101
       "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
-  def do_magic_indices(self, arg) -> None:  # noqa: ANN001, ANN101, ARG002
+  def do_magic_indices(self, arg) -> None:  # noqa: ANN001, ARG002
     """Magic Indices! (Not beans...).
 
     An array a[] might have "magix indices", which is when `a[i] == i`. If it is
@@ -706,7 +703,7 @@ class Greenbook(Cmd):  # noqa: D101
       "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
-  def do_zero_the_matrix(self, arg) -> None:  # noqa: ANN001, ANN101, ARG002
+  def do_zero_the_matrix(self, arg) -> None:  # noqa: ANN001, ARG002
     """Zero The Matrix!
     The Prequel?
 
@@ -738,7 +735,7 @@ class Greenbook(Cmd):  # noqa: D101
       "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
-  def do_matrix_search(self, arg) -> None:  # noqa: ANN001, ANN101, ARG002
+  def do_matrix_search(self, arg) -> None:  # noqa: ANN001, ARG002
     """The Matrix: Search!
     (For Neo).
 
@@ -770,7 +767,7 @@ class Greenbook(Cmd):  # noqa: D101
       "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
-  def do_matrix_revolve(self, arg) -> None:  # noqa: ANN001, ANN101, ARG002
+  def do_matrix_revolve(self, arg) -> None:  # noqa: ANN001, ARG002
     """The Matrix: Revolutions!
 
     Given an N x N matrix, write a method to rotate the matrix by 90 degrees.
@@ -793,7 +790,7 @@ class Greenbook(Cmd):  # noqa: D101
       "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
-  def do_too_many_twos(self, arg) -> None:  # noqa: ANN001, ANN101, ARG002
+  def do_too_many_twos(self, arg) -> None:  # noqa: ANN001, ARG002
     """Too Many Twos!
 
     Given the positive integer n < 10000, determine how many 2s appear in the
@@ -812,7 +809,7 @@ class Greenbook(Cmd):  # noqa: D101
       "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
-  def do_top_temps(self, arg) -> None:  # noqa: ANN001, ANN101
+  def do_top_temps(self, arg) -> None:  # noqa: ANN001
     """Top Temperatures!
 
     Given a list of daily temperatures, return a list that, for each day in the
@@ -844,7 +841,7 @@ class Greenbook(Cmd):  # noqa: D101
 
     pprintout(self.do_top_temps, f"For example, a list of {n} elements might be: ", join(sam), join(out))
 
-  def do_matrix_flip(self, arg) -> None:  # noqa: ANN001, ANN101, ARG002
+  def do_matrix_flip(self, arg) -> None:  # noqa: ANN001, ARG002
     """The Matrix: Flip!
 
     Given a matrix consisting of 0s and 1s, we may choose any number of columns in
@@ -876,7 +873,7 @@ class Greenbook(Cmd):  # noqa: D101
       "Sorry, this is still on my TODO list",  # TODO(alex): this
     )
 
-  def do_submatrix(self, arg) -> None:  # noqa: ANN001, ANN101, C901, PLR0912, PLR0915
+  def do_submatrix(self, arg) -> None:  # noqa: ANN001, C901, PLR0912, PLR0915
     """The Submatrix!
 
     Given a matrix of size n*n, where the elements are either 1 or 0, find the
@@ -974,7 +971,7 @@ class Greenbook(Cmd):  # noqa: D101
         counter += 1
         rect_id = counter
         rects[rect_id] = rect
-        for c in range(left, n - 1):  # type: ignore  # noqa: PGH003
+        for c in range(left, n - 1):
           above[c].add(rect_id)
         rect, left = None, None
 
@@ -990,7 +987,7 @@ class Greenbook(Cmd):  # noqa: D101
       )
       for i, row in enumerate(matrix[start[1] : finish[1] + 1], start=start[1]):  # just to make sure we're not crazy
         results.append(
-          f"  {str(i).zfill(ceil(log10(max(finish[1], 1))))}{join(row[start[0]:finish[0] + 1], blocky=True)}"
+          f"  {str(i).zfill(ceil(log10(max(finish[1], 1))))}{join(row[start[0] : finish[0] + 1], blocky=True)}"
         )
     else:
       results.append("There was nothing in the matrix")

@@ -20,13 +20,13 @@ class BalancedTernary:
   dig2str = {1: "1", -1: "T", 0: "0"}  # immutable  # noqa: RUF012
   table = ((0, -1), (1, -1), (-1, 0), (0, 0), (1, 0), (-1, 1), (0, 1))  # immutable
 
-  def __init__(self, inp) -> None:  # noqa: ANN001, ANN101, D107
+  def __init__(self, inp) -> None:  # noqa: ANN001, D107
     if isinstance(inp, str):
       self.digits = [BalancedTernary.str2dig[c] for c in reversed(inp)]
     elif isinstance(inp, int):
       self.digits = self._int2ternary(inp)
     elif isinstance(inp, BalancedTernary):
-      self.digits = list(inp.digits)  # type: ignore  # noqa: PGH003
+      self.digits = list(inp.digits)
     elif isinstance(inp, list):
       if all(d in {0, 1, -1} for d in inp):
         self.digits = list(inp)
@@ -49,10 +49,10 @@ class BalancedTernary:
       return [-1, *BalancedTernary._int2ternary((n + 1) // 3)]
     return None
 
-  def to_int(self):  # noqa: ANN101, ANN201, D102
-    return reduce(lambda y, x: x + 3 * y, reversed(self.digits), 0)  # type: ignore  # noqa: PGH003
+  def to_int(self):  # noqa: ANN201, D102
+    return reduce(lambda y, x: x + 3 * y, reversed(self.digits), 0)
 
-  def __repr__(self) -> str:  # noqa: ANN101, D105
+  def __repr__(self) -> str:  # noqa: D105
     if not self.digits:
       return "0"
     return "".join(BalancedTernary.dig2str[d] for d in reversed(self.digits))
@@ -61,7 +61,7 @@ class BalancedTernary:
   def _neg(digs):  # noqa: ANN001, ANN205
     return [-d for d in digs]
 
-  def __neg__(self):  # noqa: ANN101, ANN204, D105
+  def __neg__(self):  # noqa: ANN204, D105
     return BalancedTernary(BalancedTernary._neg(self.digits))
 
   @staticmethod
@@ -80,10 +80,10 @@ class BalancedTernary:
       else:  # noqa: RET505
         return res
 
-  def __add__(self, b):  # noqa: ANN001, ANN101, ANN204, D105
+  def __add__(self, b):  # noqa: ANN001, ANN204, D105
     return BalancedTernary(BalancedTernary._add(self.digits, b.digits))
 
-  def __sub__(self, b):  # noqa: ANN001, ANN101, ANN204, D105
+  def __sub__(self, b):  # noqa: ANN001, ANN204, D105
     return self + (-b)
 
   @staticmethod
@@ -102,22 +102,22 @@ class BalancedTernary:
       y = [0, *BalancedTernary._mul(a[1:], b)]
       return BalancedTernary._add(x, y)
 
-  def __mul__(self, b):  # noqa: ANN001, ANN101, ANN204, D105
+  def __mul__(self, b):  # noqa: ANN001, ANN204, D105
     return BalancedTernary(BalancedTernary._mul(self.digits, b.digits))
 
 
 def main() -> None:  # noqa: D103
   a = BalancedTernary("1T01101")
-  print("a:", a.to_int(), a)
+  print("a:", a.to_int(), a)  # noqa: T201
 
   b = BalancedTernary(-436)
-  print("b:", b.to_int(), b)
+  print("b:", b.to_int(), b)  # noqa: T201
 
   c = BalancedTernary("1T11T")
-  print("c:", c.to_int(), c)
+  print("c:", c.to_int(), c)  # noqa: T201
 
   r = a * (b - c)
-  print("a * (b - c):", r.to_int(), r)
+  print("a * (b - c):", r.to_int(), r)  # noqa: T201
 
 
 if __name__ == "__main__":

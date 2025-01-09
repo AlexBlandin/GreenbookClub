@@ -75,7 +75,7 @@ class Num2Word:  # noqa: D101
   ]
   cards = {}
 
-  def __init__(self) -> None:  # noqa: ANN101, D107
+  def __init__(self) -> None:  # noqa: D107
     if not len(Num2Word.cards):
       mx = 3 + 3 * len(Num2Word.high_numwords)
       for n, word in zip(range(mx, 3, -3), Num2Word.high_numwords, strict=False):
@@ -86,7 +86,7 @@ class Num2Word:  # noqa: D101
         Num2Word.cards[n] = word
       Num2Word.MAXVAL = 1000 * next(iter(self.cards.keys()))
 
-  def splitnum(self, value):  # noqa: ANN001, ANN101, ANN201, D102
+  def splitnum(self, value):  # noqa: ANN001, ANN201, D102
     for elem in self.cards:
       if elem > value:
         continue
@@ -109,7 +109,7 @@ class Num2Word:  # noqa: D101
       return out
     return None
 
-  def clean(self, val):  # noqa: ANN001, ANN101, ANN201, C901, D102, PLR0912
+  def clean(self, val):  # noqa: ANN001, ANN201, C901, D102, PLR0912
     out = val
     while len(val) != 1:
       out = []
@@ -141,7 +141,7 @@ class Num2Word:  # noqa: D101
       val = out
     return out[0]
 
-  def to_cardinal(self, value):  # noqa: ANN001, ANN101, ANN201, D102
+  def to_cardinal(self, value):  # noqa: ANN001, ANN201, D102
     out = ""
     if value < 0:
       value, out = abs(value), "minus "
@@ -159,5 +159,5 @@ def num2words(number):  # noqa: ANN001, ANN201, D103
 
 
 if __name__ == "__main__":
-  print(num2words(127486))
-  print(num2words(-127486))
+  print(num2words(127486))  # noqa: T201
+  print(num2words(-127486))  # noqa: T201
