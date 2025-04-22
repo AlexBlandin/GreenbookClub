@@ -3,7 +3,7 @@ name = "GreenbookClub"
 description = "An unofficial official example generator and solver for Greenbook Club problems!"
 version = "1.0.0"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "MIT"
 authors = [{ name = "AlexBlandin" }]
 dependencies = []
@@ -18,7 +18,7 @@ Source = "https://github.com/alexblandin/GreenbookClub"
 
 [tool.ruff]
 indent-width = 2
-target-version = "py310"
+target-version = "py311"
 line-length = 120
 
 [tool.ruff.lint]
