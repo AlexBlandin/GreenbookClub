@@ -65,7 +65,6 @@ def parse(arg: str, default: int):  # noqa: ANN201, D103
   return int(arg) if arg.isdecimal() else default
 
 
-# ruff: noqa: PLR6301
 class Greenbook(Cmd):  # noqa: D101
   intro = """
    ██████╗ ██████╗ ███████╗███████╗███╗   ██╗  ██████╗  ██████╗  ██████╗ ██╗  ██╗
