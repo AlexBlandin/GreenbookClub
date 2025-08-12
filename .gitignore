@@ -3,6 +3,8 @@
 Greenbook.pdf
 Deep-Learning-Interviews.pdf
 
+*.code-workspace
+
 # ---> Python
 requirements.txt
 requirements-*.txt
